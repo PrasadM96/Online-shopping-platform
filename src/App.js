@@ -1,23 +1,37 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Layout from "./components/Layout";
 import { Button } from "react-bootstrap";
+// import Carousel from "./components/Carousel";
 
 class App extends Component {
   render() {
+    const mystyle = {
+      padding: "2px 10px",
+      width: "80%",
+      height: "100%",
+      border: "1px solid black",
+      borderRadius: "7px",
+      marginRight: "8px"
+    };
     return (
-      <div>
+      <Layout>
+        <div
+          style={{
+            textAlign: "center",
+            margin: "8px auto",
+            width: "60%",
+            height: "40px"
+          }}
+        >
+          <input style={mystyle} placeholder="Search items"></input>
+          <Button style={{ verticalAlign: "center" }} variant="outline-primary">
+            Search
+          </Button>
+        </div>
         <h1>Online shopping..</h1>
-        <Button variant="primary">Primary</Button>{" "}
-        <Button variant="secondary">Secondary</Button>{" "}
-        <Button variant="success">Success</Button>{" "}
-        <Button variant="warning">Warning</Button>{" "}
-        <Button variant="danger">Danger</Button>{" "}
-        <Button variant="info">Info</Button>{" "}
-        <Button variant="light">Light</Button>{" "}
-        <Button variant="dark">Dark</Button>{" "}
-        <Button variant="link">Link</Button>
-      </div>
+      </Layout>
     );
   }
 }
