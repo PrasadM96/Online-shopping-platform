@@ -1,7 +1,8 @@
 import React from "react";
+
 import { Form, Button, Card ,Col } from "react-bootstrap";
 
-const signUp = props => {
+const Signup = props => {
     return (
       <Card style={{ width: "22rem", margin: "3rem auto " }}>
         <Card.Header className="text-center">Sign Up</Card.Header>
@@ -42,8 +43,10 @@ const signUp = props => {
                 </Button>
             </Form>
         </Card.Body>
-    </Card>
+
+
+        </Card>
   );
 };
 
-export default signUp;
+export default Signup;
