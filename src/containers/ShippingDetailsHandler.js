@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Shipping from "../components/Signup";
+import Shipping from "../components/ShippingDetails";
 
 class ShippingDetailsHandler extends Component {
   state = {

@@ -4,7 +4,7 @@ import { Col, Container, Row, Button } from "react-bootstrap";
 const searchBar = props => {
   return (
     <Container>
-      <div style={{ marginTop: "2%" }}></div>
+      <div style={{ marginTop: "2%", marginBottom: "10px" }}></div>
       <Row>
         <Col sm={10}>
           <input

@@ -1,4 +1,4 @@
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../../components/Navigation/SearchBar";
 import React, { Component } from "react";
 
 class SearchHandler extends Component {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, NavDropdown, Nav } from "react-bootstrap";
-import Aux from "../hoc/Auxx";
+import Aux from "../../hoc/Auxx";
 
 const layout = props => {
   return (
