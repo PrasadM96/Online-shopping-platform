@@ -17,11 +17,16 @@ const searchBar = props => {
               padding: "5px"
             }}
             placeholder="Search items"
-            value={props.item}
+            onChange={props.itemHandler}
           ></input>
         </Col>
         <Col sm={2}>
-          <Button variant="outline-primary"> Search</Button>
+          <Button
+            onClick={e => props.submitHandler(e)}
+            variant="outline-primary"
+          >
+            Search
+          </Button>
         </Col>
       </Row>
     </Container>
