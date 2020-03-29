@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SignIn from "../components/SearchBar";
+import SignIn from "../components/SignIn";
 
 class SignInHandler extends Component {
   state = {
