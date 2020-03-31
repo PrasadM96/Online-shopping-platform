@@ -1,21 +1,27 @@
 import React, { Component } from "react";
 import "./App.css";
 import Layout from "./components/Navigation/Layout";
+import { Route, Switch } from "react-router-dom";
 
-// import SignInHandler from "./containers/SignInHandler";
+import SignInHandler from "./containers/Authentication/SignInHandler";
 import SearchBarHandler from "./containers/Navigation/SearchHandler";
 // import ShippingDetailsHandler from "./containers/ShippingDetailsHandler";
-import Modal from "./components/UI/Modal";
-import Carousel from "./components/Carousel";
+
+import HomePage from "./components/Homepage/Homepage";
 
 class App extends Component {
   render() {
     return (
-      <Layout>
-        <SearchBarHandler />
+      <div>
+        <Layout>
+          <SearchBarHandler />
 
-        <Carousel />
-      </Layout>
+          <Switch>
+            <Route path="/" exact component={HomePage} />
+            <Route path="/signin" component={SignInHandler} />
+          </Switch>
+        </Layout>
+      </div>
     );
   }
 }
