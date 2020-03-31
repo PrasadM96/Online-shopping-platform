@@ -18,11 +18,16 @@ h1 {
 }
 
 .col-sm {
-  margin: 2rem;
+  margin: 2rem 0rem;
 }
 
 .pic {
   width: 12rem;
   height: 12rem;
   margin: auto;
+}
+
+.services {
+  margin-top: 3rem;
+  width: 100%;
 }
