@@ -1,0 +1,16 @@
+.jumbotron-fluid {
+  background: blue;
+}
+
+.footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #2b7f87;
+  text-align: center;
+}
+
+.letter {
+  color: white;
+}

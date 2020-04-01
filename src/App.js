@@ -8,6 +8,7 @@ import SearchBarHandler from "./containers/Navigation/SearchHandler";
 // import ShippingDetailsHandler from "./containers/ShippingDetailsHandler";
 
 import HomePage from "./components/Homepage/Homepage";
+import Footer from "./components/Footer/Footer";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
             <Route path="/" exact component={HomePage} />
             <Route path="/signin" component={SignInHandler} />
           </Switch>
+          <Footer />
         </Layout>
       </div>
     );

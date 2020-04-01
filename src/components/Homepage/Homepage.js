@@ -12,7 +12,9 @@ const homepage = props => {
       <Container fluid>
         <Row>
           <Col xl>
-            <h2 style={{ marginTop: "2%" }}>Explore Popular Categories</h2>
+            <h2 style={{ marginTop: "2%", marginLeft: "2%" }}>
+              Explore Popular Categories
+            </h2>
           </Col>
         </Row>
         <Row>
