@@ -1,0 +1,1 @@
+export { postProduct } from "./products";

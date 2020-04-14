@@ -9,6 +9,7 @@ import SearchBarHandler from "./containers/Navigation/SearchHandler";
 
 import HomePage from "./components/Homepage/Homepage";
 import Footer from "./components/Footer/Footer";
+import SellingPage from "./components/Selling/SellingPage";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route path="/signin" component={SignInHandler} />
+            <Route path="/selling" component={SellingPage} />
           </Switch>
           <Footer />
         </Layout>
