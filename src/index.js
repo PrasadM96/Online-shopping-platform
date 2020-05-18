@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
+import axios from "axios";
 
 import authReducer from "./store/reducers/auth";
 import productsReducer from "./store/reducers/products";
@@ -26,6 +27,8 @@ const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(thunk))
 );
+
+axios.defaults.baseURL = "http://localhost:5000";
 
 const app = (
   <Provider store={store}>

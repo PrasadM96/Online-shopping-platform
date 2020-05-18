@@ -149,7 +149,7 @@ function AddItem(props) {
           Submit
         </Button>
       ) : (
-        <Button variant="primary" disabled>
+        <Button style={{ width: "100%" }} variant="primary" disabled>
           <Spinner
             as="span"
             animation="grow"

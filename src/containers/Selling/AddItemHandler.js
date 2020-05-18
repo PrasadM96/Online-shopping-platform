@@ -4,7 +4,10 @@ import { Container, Col, Row, Image } from "react-bootstrap";
 import AddItem from "../../components/Selling/AddItem.js";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
+import WithErrorHandler from "../../hoc/WitherrorHandler";
+import axios from "axios";
+import Modal from "../../components/UI/Modal";
 
 class AddItemHandler extends Component {
   state = {
@@ -38,7 +41,7 @@ class AddItemHandler extends Component {
   componentDidMount() {
     if (this.props.succeeded) {
       this.clearDetails();
-      this.props.history("/");
+      console.log("falgggg");
     }
   }
 
@@ -159,11 +162,23 @@ class AddItemHandler extends Component {
       subCateArr = this.state.subcate[categoryVal];
     }
 
+    var modal = null;
+    if (this.props.succeeded) {
+      modal = (
+        <Modal
+          message="Success"
+          title="Success"
+          errorConfirmedHandler={this.props.onSetSuccess}
+        ></Modal>
+      );
+    }
+
     const maxSize = 1048576;
 
     return (
       <div>
         <AddItem
+          price={this.state.price}
           loading={this.props.loading}
           subCateArr={subCateArr}
           titleHandler={this.titleHandler}
@@ -224,6 +239,7 @@ class AddItemHandler extends Component {
             {remove}
           </Container>
         </AddItem>
+        {modal}
       </div>
     );
   }
@@ -233,13 +249,18 @@ const mapStateToProps = (state) => {
   return {
     loading: state.products.loading,
     succeeded: state.products.succeeded,
+    error: state.products.error,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onPostItem: (item) => dispatch(actions.postProduct(item)),
+    onSetSuccess: () => dispatch(actions.setPostSuccess()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddItemHandler);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WithErrorHandler(withRouter(AddItemHandler), axios));

@@ -23,7 +23,7 @@ function ModalUi(props) {
             variant="secondary"
             onClick={() => {
               handleClose();
-              props.errorConfirmed();
+              props.errorConfirmedHandler();
             }}
           >
             Close

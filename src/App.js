@@ -10,6 +10,7 @@ import SearchBarHandler from "./containers/Navigation/SearchHandler";
 import HomePage from "./components/Homepage/Homepage";
 import Footer from "./components/Footer/Footer";
 import SellingPage from "./components/Selling/SellingPage";
+import TabItems from "./components/Selling/TabItems";
 
 class App extends Component {
   render() {
@@ -19,9 +20,9 @@ class App extends Component {
           <SearchBarHandler />
 
           <Switch>
-            <Route path="/" exact component={HomePage} />
+            <Route path="/" exact component={HomePage} />s
             <Route path="/signin" component={SignInHandler} />
-            <Route path="/selling" component={SellingPage} />
+            <Route path="/selling" component={TabItems} />
           </Switch>
           <Footer />
         </Layout>
