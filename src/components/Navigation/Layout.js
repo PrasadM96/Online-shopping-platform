@@ -34,6 +34,9 @@ const layout = props => {
             <Nav.Link as={NavLink} to="/signin" href="/signin">
               SignIn
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/signup" href="/signup">
+              SignUp
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
