@@ -12,6 +12,7 @@ import axios from "axios";
 
 import authReducer from "./store/reducers/auth";
 import productsReducer from "./store/reducers/products";
+import shopReducer from "./store/reducers/shop";
 
 const composeEnhancers =
   process.env.NODE_ENV === "development"
@@ -21,6 +22,7 @@ const composeEnhancers =
 const rootReducer = combineReducers({
   auth: authReducer,
   products: productsReducer,
+  shop: shopReducer,
 });
 
 const store = createStore(

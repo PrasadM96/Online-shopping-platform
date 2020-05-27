@@ -5,13 +5,14 @@ import { Route, Switch } from "react-router-dom";
 
 import SignInHandler from "./containers/Authentication/SignInHandler";
 import SearchBarHandler from "./containers/Navigation/SearchHandler";
-// import ShippingDetailsHandler from "./containers/ShippingDetailsHandler";
-
 import HomePage from "./components/Homepage/Homepage";
 import Footer from "./components/Footer/Footer";
 import SellingPage from "./components/Selling/SellingPage";
 import TabItems from "./components/Selling/TabItems";
-
+import DisplayItemHandler from "./containers/DisplayItem/DisplayItemHandler";
+import DetailPageHandler from "./containers/DisplayItem/DetailPageHandler";
+import AddtoCart from "./containers/AddtoCart/AddtoCart";
+import BuyitNow from "./containers/BuyitNow/BuyitNow";
 class App extends Component {
   render() {
     return (
@@ -23,6 +24,15 @@ class App extends Component {
             <Route path="/" exact component={HomePage} />s
             <Route path="/signin" component={SignInHandler} />
             <Route path="/selling" component={TabItems} />
+            <Route path="/category/:type/:id" component={DetailPageHandler} />
+            <Route
+              path="/category/:type"
+              exact
+              component={DisplayItemHandler}
+            />
+            <Route path="/addtocart" component={AddtoCart} />
+            />
+            <Route path="/buyitnow" component={BuyitNow} />
           </Switch>
           <Footer />
         </Layout>

@@ -4,3 +4,5 @@ export {
   getSellingProduct,
   deleteSellingItem,
 } from "./products";
+
+export { getAllProducts } from "./shop";
