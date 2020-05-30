@@ -3,6 +3,7 @@ import DisplayItem from "../../components/DisplayItem/DisplayItem";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import { Spinner } from "react-bootstrap";
 
 class DisplayItemHandler extends Component {
   state = {};
@@ -16,7 +17,7 @@ class DisplayItemHandler extends Component {
 
   render() {
     var itemArr = null;
-    if (this.props.items) {
+    if (this.props.items.length > 0) {
       itemArr = this.props.items.map((item, index) => {
         return (
           <DisplayItem
@@ -34,10 +35,37 @@ class DisplayItemHandler extends Component {
         );
       });
     } else {
-      itemArr = <h3>No items found</h3>;
+      if (!this.props.loading || this.props.error) {
+        itemArr = (
+          <div style={{ width: "100%", margin: "10% 0", textAlign: "center" }}>
+            <h3>No items found</h3>
+          </div>
+        );
+      }
     }
 
-    return <div>{itemArr}</div>;
+    var err = null;
+    if (this.props.error) {
+      err = <p>{this.props.error.message}</p>;
+    }
+
+    var loading = null;
+
+    if (this.props.loading) {
+      loading = (
+        <div style={{ width: "100%", margin: "10% 0", textAlign: "center" }}>
+          <Spinner animation="border" variant="primary" />;
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        {loading}
+        {err}
+        {itemArr}
+      </div>
+    );
   }
 }
 

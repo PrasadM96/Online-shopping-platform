@@ -27,7 +27,7 @@ const rootReducer = combineReducers({
 
 const store = createStore(
   rootReducer,
-  //composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 axios.defaults.baseURL = "http://localhost:5000";
