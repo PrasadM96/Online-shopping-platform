@@ -1,16 +1,17 @@
-import axios from 'axios';
+import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-export const register = userData => {
-    return axios 
-    .post("/user/register",userData)
-    .then(res=>{
-        console.log('Registerd');
-        console.log(res);
-        return res.data
-    })
+export const register = (userData) => {
+  return axios.post("/user/register", userData).then((res) => {
+    console.log("Registerd");
+    console.log(res);
+    return res.data;
+  });
+};
+
+
     
-}
+
 export const login = user =>{
     return axios
     .post('user/login',{
@@ -44,4 +45,7 @@ export const profile = userData => {
     })
     
 }
+
+
+    
 

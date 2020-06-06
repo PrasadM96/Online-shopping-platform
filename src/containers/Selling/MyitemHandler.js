@@ -3,6 +3,8 @@ import MyItem from "../../components/Selling/MyItems";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import { Spinner } from "react-bootstrap";
+import WitherrorHandler from "../../hoc/WitherrorHandler";
+import axios from "axios";
 
 class MyItemHandler extends Component {
   componentDidMount() {
@@ -75,3 +77,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyItemHandler);
+
+//(WitherrorHandler(MyItemHandler, axios))

@@ -37,7 +37,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
           <Modal
             //show={this.state.error}
             errorConfirmedHandler={this.errorConfirmedHandler}
-            message={this.state.error}
+            message={this.state.error.message}
             title="Error"
           ></Modal>
         );

@@ -6,7 +6,7 @@ import phone from "../../assets/phone.png";
 import product from "../../assets/product.png";
 import star from "../../assets/star.png";
 
-const services = props => {
+const services = (props) => {
   return (
     <Jumbotron fluid>
       <Container>
@@ -49,7 +49,7 @@ const services = props => {
           </Col>
           <Col sm>
             <Image
-              style={{ width: "10rem", height: "10rem", margin: "auto" }}
+              style={{ width: "10rem", height: "10rem", margin: " 0 auto" }}
               src={phone}
               rounded
             />
@@ -57,7 +57,7 @@ const services = props => {
           </Col>
           <Col sm>
             <Image
-              style={{ width: "10rem", height: "10rem", margin: "auto" }}
+              style={{ width: "10rem", height: "10rem", margin: "0 auto" }}
               src={dollar}
               rounded
             />
