@@ -5,6 +5,7 @@ const initialState = {
   loading: false,
   error: null,
   items: [],
+  searchItem: [],
 };
 
 const getProductsSuccess = (state, action) => {
@@ -27,6 +28,26 @@ const getProductsStart = (state, action) => {
   });
 };
 
+const getSearchProductsSuccess = (state, action) => {
+  return updateObject(state, {
+    loading: false,
+    searchItem: action.items,
+  });
+};
+const getSearchProductsFail = (state, action) => {
+  return updateObject(state, {
+    loading: false,
+    error: action.error,
+  });
+};
+
+const getSearchProductsStart = (state, action) => {
+  return updateObject(state, {
+    loading: true,
+    error: null,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_PRODUCTS_START:
@@ -35,6 +56,12 @@ const reducer = (state = initialState, action) => {
       return getProductsSuccess(state, action);
     case actionTypes.GET_PRODUCTS_FAIL:
       return getProductsFail(state, action);
+    case actionTypes.GET_SEARCH_PRODUCTS_START:
+      return getSearchProductsStart(state, action);
+    case actionTypes.GET_SEARCH_PRODUCTS_SUCCESS:
+      return getSearchProductsSuccess(state, action);
+    case actionTypes.GET_SEARCH_PRODUCTS_FAIL:
+      return getSearchProductsFail(state, action);
     default:
       return state;
   }

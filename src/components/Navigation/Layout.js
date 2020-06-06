@@ -3,7 +3,7 @@ import { Navbar, NavDropdown, Nav, NavItem } from "react-bootstrap";
 import Aux from "../../hoc/Auxx";
 import { NavLink, Link } from "react-router-dom";
 
-const layout = props => {
+const layout = (props) => {
   return (
     <Aux>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -16,27 +16,77 @@ const layout = props => {
             <Nav.Link as={NavLink} to="/features" href="/features">
               Features
             </Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
+            <Nav.Link
+              as={NavLink}
+              to="/selling/overview"
+              href="/selling/overview"
+            >
+              Sell
+            </Nav.Link>
+            <NavDropdown title="Categories" id="collasible-nav-dropdown">
+              <NavDropdown.Item
+                as={NavLink}
+                to="/category/health"
+                href="/category/health"
+              >
+                Health
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
+              <NavDropdown.Item
+                as={NavLink}
+                to="/category/electronics"
+                href="/category/electronics"
+              >
+                Electronics
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={NavLink}
+                to="/category/fashion"
+                href="/category/fashion"
+              >
+                Fashion
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={NavLink}
+                to="/category/sports"
+                href="/category/sports"
+              >
+                Sports
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={NavLink}
+                to="/category/stationary"
+                href="/category/stationary"
+              >
+                Stationary
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={NavLink}
+                to="/category/home-appliances"
+                href="/category/home-appliances"
+              >
+                Home Appliances
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="/deets">More deets</Nav.Link>
             <Nav.Link as={NavLink} to="/signin" href="/signin">
               SignIn
             </Nav.Link>
             <Nav.Link as={NavLink} to="/signup" href="/signup">
               SignUp
             </Nav.Link>
+            <NavDropdown title="Username" id="collasible-nav-dropdown">
+              <NavDropdown.Item as={NavLink} to="/profile" href="/profile">
+                Profile
+              </NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/orders" href="/orders">
+                Orders
+              </NavDropdown.Item>
+
+              <NavDropdown.Item as={NavLink} to="/logout" href="/logout">
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

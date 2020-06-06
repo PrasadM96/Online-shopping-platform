@@ -14,6 +14,8 @@ import DisplayItemHandler from "./containers/DisplayItem/DisplayItemHandler";
 import DetailPageHandler from "./containers/DisplayItem/DetailPageHandler";
 import AddtoCart from "./containers/AddtoCart/AddtoCart";
 import BuyitNow from "./containers/BuyitNow/BuyitNow";
+import SearchResults from "./containers/Navigation/ResultsDisplay";
+
 class App extends Component {
   render() {
     return (
@@ -35,6 +37,7 @@ class App extends Component {
             <Route path="/addtocart" component={AddtoCart} />
             />
             <Route path="/buyitnow" component={BuyitNow} />
+            <Route path="/search-results/:item" component={SearchResults} />
           </Switch>
           <Footer />
         </Layout>

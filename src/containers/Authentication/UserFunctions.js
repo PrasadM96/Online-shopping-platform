@@ -16,7 +16,7 @@ export const login = (user) => {
     })
     .then((res) => {
       console.log("login");
-      console.log(res);
+      console.log(res._id);
       console.log(res.data);
       console.log(user.password);
       console.log(user.email);

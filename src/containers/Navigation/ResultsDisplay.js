@@ -1,20 +1,10 @@
 import React, { Component } from "react";
 import DisplayItem from "../../components/DisplayItem/DisplayItem";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
 import { Spinner } from "react-bootstrap";
-
-class DisplayItemHandler extends Component {
+class ResultsDisplay extends Component {
   state = {};
-
-  componentWillMount() {
-    const path = this.props.location.pathname.split("/")[2];
-    this.props.ongetAllItems(path);
-  }
-
   render() {
-    console.log(this.props.items);
     var itemArr = null;
     if (this.props.items.length > 0) {
       itemArr = this.props.items.map((item, index) => {
@@ -71,18 +61,9 @@ class DisplayItemHandler extends Component {
 const mapStateToProps = (state) => {
   return {
     loading: state.shop.loading,
-    items: state.shop.items,
+    items: state.shop.searchItem,
     error: state.shop.error,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    ongetAllItems: (path) => dispatch(actions.getAllProducts(path)),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(DisplayItemHandler));
+export default connect(mapStateToProps, null)(ResultsDisplay);

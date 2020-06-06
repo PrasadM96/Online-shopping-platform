@@ -122,7 +122,6 @@ function AddItem(props) {
       <Form.Group sm controlId="validationCustom07">
         <Form.Label>Shipping fee</Form.Label>
         <InputGroup className="mb-3">
-
           <InputGroup.Append>
             <InputGroup.Text id="basic-addon2">USD</InputGroup.Text>
           </InputGroup.Append>
@@ -135,7 +134,10 @@ function AddItem(props) {
           <Form.Control.Feedback type="invalid">required</Form.Control.Feedback>
         </InputGroup>
       </Form.Group>
-      {props.children}
+      <Form.Group controlId="validationCustom05">
+        {props.children}
+        <Form.Control.Feedback type="invalid">required</Form.Control.Feedback>
+      </Form.Group>
       <Form.Check
         style={{ marginBottom: "2%" }}
         required

@@ -5,4 +5,4 @@ export {
   deleteSellingItem,
 } from "./products";
 
-export { getAllProducts } from "./shop";
+export { getAllProducts, getSearchProducts } from "./shop";

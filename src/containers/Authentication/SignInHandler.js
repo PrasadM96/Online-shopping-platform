@@ -50,10 +50,10 @@ class SignInHandler extends Component {
     }
 
     //console.log(this.state.isChecked);
-    console.log("hello");
 
     login(user).then((res) => {
       console.log(res);
+      console.log("login handler");
       if (!res) {
         this.props.history.push("/");
       } else {
