@@ -62,14 +62,22 @@ onChangeValue = event => {
     //console.log('hello');
     
     login(user).then(res=>{
-       if(!res){
-        //console.log(res);
+      if(res!="Invalid email or password,please try again"){
+        console.log(res);
+        localStorage.first_name = res.first_name  ? res.first_name : "";
+        localStorage.last_name = res.last_name  ? res.last_name : "";
+        localStorage.zip = res.zip  ? res.zip : "";
+        localStorage.address1 = res.address1  ? res.address1 : "";
+        localStorage.address2 = res.address2  ? res.address2 : "";
+        localStorage.city = res.city  ? res.city : "";
+        localStorage.country = res.country  ? res.country : "";
+        localStorage.province = res.province  ? res.province : "";
         this.props.history.push('/')
        }
        else{
          this.setState({errorMessage:res})
-         //console.log(this.state.errorMessage);
-      }
+         console.log(this.state.errorMessage);
+     }
       
      }
     )
