@@ -8,6 +8,7 @@ export const register = (userData) => {
     return res.data;
   });
 };
+
 export const login = (user) => {
   return axios
     .post("user/login", {
@@ -28,4 +29,12 @@ export const login = (user) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+export const profile = (userData) => {
+  return axios.post("/user/profile", userData).then((res) => {
+    console.log("saved");
+    console.log(res);
+    return res.data;
+  });
 };
