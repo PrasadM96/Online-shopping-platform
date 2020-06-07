@@ -31,6 +31,8 @@ class App extends Component {
     return (
       <div>
         <Layout>
+          {/* <SearchBarHandler /> */}
+
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route path="/signin" component={SignInHandler} />
