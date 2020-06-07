@@ -11,18 +11,20 @@ import HomePage from "./components/Homepage/Homepage";
 import Footer from "./components/Footer/Footer";
 import SellingPage from "./components/Selling/SellingPage";
 import TabItems from "./components/Selling/TabItems";
+import Cart from "./components/Cart/Cart";
+import Default from "./components/Default";
 
 class App extends Component {
   render() {
     return (
       <div>
         <Layout>
-          <SearchBarHandler />
-
           <Switch>
             <Route path="/" exact component={HomePage} />s
             <Route path="/signin" component={SignInHandler} />
             <Route path="/selling" component={TabItems} />
+            <Route path="/cart" component={Cart} />
+            <Route component={Default}/>
           </Switch>
           <Footer />
         </Layout>

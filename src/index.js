@@ -24,11 +24,11 @@ const rootReducer = combineReducers({
 });
 
 const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
+  rootReducer
+  //composeEnhancers
 );
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "http://localhost:6000";
 
 const app = (
   <Provider store={store}>

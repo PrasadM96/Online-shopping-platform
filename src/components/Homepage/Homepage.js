@@ -4,11 +4,13 @@ import { Container, Row, Col, Image } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import Services from "./Services";
 import "./Homepage.css";
+import SearchBarHandler from "../../containers/Navigation/SearchHandler";
 
-const homepage = props => {
+const homepage = (props) => {
   return (
     <div>
       <Carousel />
+      <SearchBarHandler/>
       <Container fluid>
         <Row>
           <Col xl>
@@ -31,7 +33,7 @@ const homepage = props => {
           </Col>
           <Col sm>
             <div className="pic">
-              <NavLink to="/category/fashion">
+              <NavLink to="/category/health">
                 <Image
                   src="https://images.pexels.com/photos/33355/capsule-pill-health-medicine.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   roundedCircle

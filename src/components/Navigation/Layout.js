@@ -2,8 +2,11 @@ import React from "react";
 import { Navbar, NavDropdown, Nav, NavItem } from "react-bootstrap";
 import Aux from "../../hoc/Auxx";
 import { NavLink, Link } from "react-router-dom";
+import Cart from "../Cart/";
+import styled from "styled-components";
+import { ButtonContainer } from "../../components/Styled/Button";
 
-const layout = props => {
+const layout = (props) => {
   return (
     <Aux>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -30,9 +33,19 @@ const layout = props => {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="/deets">More deets</Nav.Link>
+            <Nav.Link as={NavLink} to="/cart" href="/cart">
+              <ButtonContainer>
+                <span className="mr-2">
+                  <i className="fas fa-cart-plus" />
+                </span>
+                my cart
+              </ButtonContainer>
+            </Nav.Link>
+            <Nav.Link href="/deets">
+              <ButtonContainer>more deets</ButtonContainer>
+            </Nav.Link>
             <Nav.Link as={NavLink} to="/signin" href="/signin">
-              SignIn
+              <ButtonContainer>signIn</ButtonContainer>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
