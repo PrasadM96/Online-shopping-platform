@@ -29,7 +29,7 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          <SearchBarHandler />
+          {/* <SearchBarHandler /> */}
 
           <Switch>
             <Route path="/" exact component={HomePage} />
