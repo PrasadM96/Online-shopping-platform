@@ -37,8 +37,32 @@ export const setPostSuccess = () => {
 export const postProduct = (item) => {
   return (dispatch) => {
     dispatch(postStart());
+    console.log("on postPRODUCT");
+
+    console.log(item.files);
+    const data = new FormData();
+
+    item.files.map((file, index) => {
+      data.append("file", file);
+    });
+
+    data.append("title", item.title);
+    data.append("price", item.price);
+    data.append("category", item.category);
+    data.append("subCategory", item.subCategory);
+    data.append("condition", item.condition);
+    data.append("description", item.description);
+    data.append("sellingArea", item.sellingArea);
+    data.append("shippingFee", item.shippingFee);
+
     axios
-      .post("/shop/post-product", item)
+      .post("/shop/post-product", data, {
+        headers: {
+          Accept: "*/*",
+          "content-type":
+            "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+        },
+      })
       .then((response) => {
         dispatch(postSuccess());
       })

@@ -106,6 +106,9 @@ function AddItem(props) {
       <Form.Group sm controlId="validationCustom08">
         <Form.Label>Price</Form.Label>
         <InputGroup className="mb-3">
+          <InputGroup.Append>
+            <InputGroup.Text id="basic-addon2">USD</InputGroup.Text>
+          </InputGroup.Append>
           <Form.Control
             onChange={props.priceHandler}
             required
@@ -113,31 +116,28 @@ function AddItem(props) {
             placeholder="price"
             defaultValue=""
           />
-
-          <InputGroup.Append>
-            <InputGroup.Text id="basic-addon2">USD</InputGroup.Text>
-          </InputGroup.Append>
+          <Form.Control.Feedback type="invalid">required</Form.Control.Feedback>
         </InputGroup>
-
-        <Form.Control.Feedback type="invalid">required</Form.Control.Feedback>
       </Form.Group>
       <Form.Group sm controlId="validationCustom07">
         <Form.Label>Shipping fee</Form.Label>
         <InputGroup className="mb-3">
+          <InputGroup.Append>
+            <InputGroup.Text id="basic-addon2">USD</InputGroup.Text>
+          </InputGroup.Append>
           <Form.Control
             onChange={props.shippingFeeHandler}
             required
             type="text"
             placeholder="shipping fee"
           />
-
-          <InputGroup.Append>
-            <InputGroup.Text id="basic-addon2">USD</InputGroup.Text>
-          </InputGroup.Append>
+          <Form.Control.Feedback type="invalid">required</Form.Control.Feedback>
         </InputGroup>
+      </Form.Group>
+      <Form.Group controlId="validationCustom05">
+        {props.children}
         <Form.Control.Feedback type="invalid">required</Form.Control.Feedback>
       </Form.Group>
-      {props.children}
       <Form.Check
         style={{ marginBottom: "2%" }}
         required

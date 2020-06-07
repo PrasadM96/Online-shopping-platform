@@ -11,3 +11,5 @@ export {
   addTotals,
   setItems,
 } from "./products";
+
+export { getAllProducts, getSearchProducts } from "./shop";

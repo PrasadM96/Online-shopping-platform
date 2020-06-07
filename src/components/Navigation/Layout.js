@@ -19,20 +19,60 @@ const layout = (props) => {
             <Nav.Link as={NavLink} to="/features" href="/features">
               Features
             </Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
+            <Nav.Link
+              as={NavLink}
+              to="/selling/overview"
+              href="/selling/overview"
+            >
+              Sell
+            </Nav.Link>
+            <NavDropdown title="Categories" id="collasible-nav-dropdown">
+              <NavDropdown.Item
+                as={NavLink}
+                to="/category/health"
+                href="/category/health"
+              >
+                Health
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
+              <NavDropdown.Item
+                as={NavLink}
+                to="/category/electronics"
+                href="/category/electronics"
+              >
+                Electronics
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={NavLink}
+                to="/category/fashion"
+                href="/category/fashion"
+              >
+                Fashion
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={NavLink}
+                to="/category/sports"
+                href="/category/sports"
+              >
+                Sports
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={NavLink}
+                to="/category/stationary"
+                href="/category/stationary"
+              >
+                Stationary
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={NavLink}
+                to="/category/home-appliances"
+                href="/category/home-appliances"
+              >
+                Home Appliances
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>
+<<<<<<< HEAD
             <Nav.Link as={NavLink} to="/cart" href="/cart">
               <ButtonContainer>
                 <span className="mr-2">
@@ -44,9 +84,26 @@ const layout = (props) => {
             <Nav.Link href="/deets">
               <ButtonContainer>more deets</ButtonContainer>
             </Nav.Link>
+=======
+>>>>>>> 07ed92c6171385a08d2fafaa859fefaa32f4b7f9
             <Nav.Link as={NavLink} to="/signin" href="/signin">
               <ButtonContainer>signIn</ButtonContainer>
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/signup" href="/signup">
+              SignUp
+            </Nav.Link>
+            <NavDropdown title="Username" id="collasible-nav-dropdown">
+              <NavDropdown.Item as={NavLink} to="/profile" href="/profile">
+                Profile
+              </NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/orders" href="/orders">
+                Orders
+              </NavDropdown.Item>
+
+              <NavDropdown.Item as={NavLink} to="/logout" href="/logout">
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

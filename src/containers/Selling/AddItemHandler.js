@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Dropzone from "react-dropzone";
-import { Container, Col, Row, Image } from "react-bootstrap";
+import { Container, Col, Row, Image, Form, FormControl } from "react-bootstrap";
 import AddItem from "../../components/Selling/AddItem.js";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
@@ -19,11 +19,8 @@ class AddItemHandler extends Component {
     sellingArea: null,
     price: null,
     shippingFee: null,
-    files: [
-      "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    ],
+    file: null,
+
     subcate: {
       Electronics: [
         "CellPhone & Accessories",
@@ -76,6 +73,8 @@ class AddItemHandler extends Component {
   };
   onSubmitHandler = (event) => {
     event.preventDefault();
+    console.log("submit------------------");
+    console.log(this.state.file);
     console.log(this.state);
     this.props.onPostItem({
       title: this.state.title,
@@ -86,7 +85,7 @@ class AddItemHandler extends Component {
       sellingArea: this.state.sellingArea,
       price: this.state.price,
       shippingFee: this.state.shippingFee,
-      files: this.state.files,
+      files: this.state.file,
     });
   };
 
@@ -100,32 +99,39 @@ class AddItemHandler extends Component {
       sellingArea: null,
       price: null,
       shippingFee: null,
-      files: [
-        "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      ],
+      file: [],
     });
   };
 
-  onDrop = (acceptedFiles) => {
-    var temp = [];
-    acceptedFiles.map((val) => {
-      temp.push(val.path);
-    });
-    console.log(temp);
+  // onDrop = (acceptedFiles) => {
+  //   var temp = [];
+  //   acceptedFiles.map((val) => {
+  //     temp.push(val.path);
+  //   });
+  //   console.log(acceptedFiles);
 
-    var updatedfiles = [...this.state.files, ...temp];
-    // console.log(updatedfiles);
+  //   var updatedfiles = [this.state.files, temp];
+  //   // console.log(updatedfiles);
 
-    this.setState({ files: updatedfiles });
+  //   this.setState({ files: updatedfiles });
+  // };
+
+  getImages = (e) => {
+    var temp = e.target.files;
+    var updatedfiles;
+    if (!this.state.file) {
+      updatedfiles = [...temp];
+    } else {
+      updatedfiles = [...this.state.file, ...temp];
+    }
+    this.setState({ file: updatedfiles });
   };
 
   removeImage = (index) => {
     console.log(index);
-    var files = [...this.state.files];
+    var files = [...this.state.file];
     files.splice(index, 1);
-    this.setState({ files: files });
+    this.setState({ file: files });
   };
 
   render() {
@@ -136,15 +142,15 @@ class AddItemHandler extends Component {
     //   this.clearDetails();
     // }
 
-    if (this.state.files.length > 0) {
+    if (this.state.file) {
       remove = <p>To remove click the image</p>;
-      imageArray = this.state.files.map((i, index) => {
+      imageArray = this.state.file.map((i, index) => {
         return (
           <Col sm>
             <Image
               style={{ width: "300px", height: "200px" }}
               onClick={() => this.removeImage(index)}
-              src={i}
+              src={i.name}
               rounded
             />
           </Col>
@@ -173,7 +179,7 @@ class AddItemHandler extends Component {
       );
     }
 
-    const maxSize = 1048576;
+    console.log(this.state.file);
 
     return (
       <div>
@@ -196,43 +202,32 @@ class AddItemHandler extends Component {
               className="text-center mt-5"
               style={{
                 border: "1px solid #eee",
-                height: "5rem",
                 background: "#e9ecef",
               }}
             >
-              <Dropzone
-                onDrop={this.onDrop}
-                accept="image/png ,image/jpeg, image/jpg"
-                minSize={0}
-                maxSize={maxSize}
-                multiple
-              >
-                {({
-                  getRootProps,
-                  getInputProps,
-                  isDragActive,
-                  isDragReject,
-                  rejectedFiles,
-                }) => {
-                  const isFileTooLarge =
-                    rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
-                  return (
-                    <div style={{ height: "100%" }} {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      {!isDragActive && "Click here or drop a file to upload!"}
-                      {isDragActive &&
-                        !isDragReject &&
-                        "Drop it like it's hot!"}
-                      {isDragReject && "File type not accepted, sorry!"}
-                      {isFileTooLarge && (
-                        <div className="text-danger mt-2">
-                          File is too large.
-                        </div>
-                      )}
-                    </div>
-                  );
-                }}
-              </Dropzone>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroupFileAddon01">
+                    Upload
+                  </span>
+                </div>
+                <div className="custom-file">
+                  <input
+                    multiple
+                    type="file"
+                    className="custom-file-input"
+                    id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01"
+                    onChange={this.getImages}
+                  />
+                  <label
+                    className="custom-file-label"
+                    htmlFor="inputGroupFile01"
+                  >
+                    Choose file
+                  </label>
+                </div>
+              </div>
             </div>
 
             <Row>{imageArray}</Row>

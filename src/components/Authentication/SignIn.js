@@ -7,10 +7,13 @@ const signIn = props => {
       <Card.Header className="text-center">Sign In</Card.Header>
       <Card.Body>
         <Form>
+        { props.err &&
+         <p style={{color: 'red' ,fontSize:15,fontStyle: 'italic'}}> {props.err } </p> }
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
-              onChange={props.emailHandler}
+              name="email" value={props.email} 
+              onChange={props.onChangeValue}
               type="email"
               placeholder="Enter email"
             />
@@ -22,13 +25,16 @@ const signIn = props => {
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
-              onChange={props.passwordHandler}
+              name="password" value={props.password} 
+              onChange={props.onChangeValue}
               type="password"
               placeholder="Password"
             />
           </Form.Group>
           <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Remember me" />
+            <Form.Check 
+            checked={props.isChecked} name="lsRememberMe"
+            onChange={props.isCheckedHandler}  type="checkbox" label="Remember me" />
           </Form.Group>
           <Button
             onClick={e => {
