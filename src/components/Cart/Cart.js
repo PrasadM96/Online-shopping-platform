@@ -98,7 +98,7 @@ class Cart extends Component {
             decrement={this.decrement}
             removeItem={this.removeItem}
           />
-          <CartTotals state={this.state} clearCart={this.props.clearCart} />
+          <CartTotals state={this.state} clearCart={this.props.clearCart} history={this.props.history}/>
         </section>
       );
     } else {

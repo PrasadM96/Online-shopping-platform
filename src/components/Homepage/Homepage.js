@@ -40,8 +40,6 @@ const homepage = (props) => {
           </Col>
           <Col sm>
             <div className="pic">
-<<<<<<< HEAD
-=======
               <NavLink to="/category/stationary">
                 <Image
                   src="https://img.freepik.com/free-vector/books-stack-realistic_1284-4735.jpg?size=338&ext=jpg"
@@ -53,7 +51,6 @@ const homepage = (props) => {
           </Col>
           <Col sm>
             <div className="pic">
->>>>>>> 07ed92c6171385a08d2fafaa859fefaa32f4b7f9
               <NavLink to="/category/health">
                 <Image
                   src="https://images.pexels.com/photos/33355/capsule-pill-health-medicine.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500"

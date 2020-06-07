@@ -36,12 +36,9 @@ class App extends Component {
             <Route path="/signin" component={SignInHandler} />
             <Route path="/signup" component={SignUpHandler} />
             <Route path="/selling" component={TabItems} />
-<<<<<<< HEAD
-            <Route path="/cart" component={Cart} />
-            <Route component={Default}/>
-=======
             <Route path="/profile" component={ProfileHandler} />
             <Route path="/category/:type/:id" component={DetailPageHandler} />
+            <Route path="/cart" component={Cart} />
             <Route
               path="/category/:type"
               exact
@@ -51,7 +48,7 @@ class App extends Component {
             />
             <Route path="/buyitnow" component={BuyitNow} />
             <Route path="/search-results/:item" component={SearchResults} />
->>>>>>> 07ed92c6171385a08d2fafaa859fefaa32f4b7f9
+            <Route component={Default}/>
           </Switch>
           <Footer />
         </Layout>
