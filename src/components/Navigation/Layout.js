@@ -72,7 +72,6 @@ const layout = (props) => {
             </NavDropdown>
           </Nav>
           <Nav>
-<<<<<<< HEAD
             <Nav.Link as={NavLink} to="/cart" href="/cart">
               <ButtonContainer>
                 <span className="mr-2">
@@ -84,8 +83,6 @@ const layout = (props) => {
             <Nav.Link href="/deets">
               <ButtonContainer>more deets</ButtonContainer>
             </Nav.Link>
-=======
->>>>>>> 07ed92c6171385a08d2fafaa859fefaa32f4b7f9
             <Nav.Link as={NavLink} to="/signin" href="/signin">
               <ButtonContainer>signIn</ButtonContainer>
             </Nav.Link>
