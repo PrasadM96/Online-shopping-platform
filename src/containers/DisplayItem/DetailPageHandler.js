@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DetailPage from "../../components/DisplayItem/DetailPage";
 import { connect } from "react-redux";
+import * as actions from "../../store/actions"
 
 class DetailPageHandler extends Component {
   state = {};
@@ -12,9 +13,10 @@ class DetailPageHandler extends Component {
     this.props.history.push("/buyitnow");
   };
 
-  addtoCartHandler = (e) => {
-    e.preventDefault();
-    this.props.history.push("/addtocart");
+  addtoCartHandler = (id) => {
+    //e.preventDefault();
+    this.props.history.push("/cart");
+    this.props.addToCart(id)
   };
 
   render() {
@@ -26,7 +28,6 @@ class DetailPageHandler extends Component {
       });
     }
     item = { ...item[0] };
-
     return (
       <DetailPage
         imageUrls={item.imageUrls}
@@ -36,7 +37,9 @@ class DetailPageHandler extends Component {
         price={item.price}
         shippingFee={item.shippingFee}
         seller={"email"}
+        id={item._id}
         description={item.description}
+        inCart={item.inCart}
         buyitNowHandler={this.buyitNowHandler}
         addtoCartHandler={this.addtoCartHandler}
       />
@@ -50,4 +53,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(DetailPageHandler);
+const mapDispatchToProps=(dispatch)=>{
+  return{
+    addToCart:(id)=>dispatch(actions.addToCart(id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetailPageHandler);

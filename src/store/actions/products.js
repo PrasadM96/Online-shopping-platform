@@ -72,6 +72,12 @@ export const postProduct = (item) => {
   };
 };
 
+export const setItems = (items) => {
+  return {
+    type: actionTypes.SET_ITEMS,
+    items: items,
+  };
+};
 /////////////////////////////////////////GET SELLING PRODUCT///////////////
 export const getSellingProductStart = () => {
   return {

@@ -14,7 +14,6 @@ class DisplayItemHandler extends Component {
   }
 
   render() {
-    console.log(this.props.items);
     var itemArr = null;
     if (this.props.items.length > 0) {
       itemArr = this.props.items.map((item, index) => {
@@ -30,6 +29,7 @@ class DisplayItemHandler extends Component {
             item={item}
             path={this.props.location.pathname.split("/")[2]}
             id={item._id}
+            index={index}
           />
         );
       });

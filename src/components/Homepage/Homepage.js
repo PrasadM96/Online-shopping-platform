@@ -4,6 +4,7 @@ import { Container, Row, Col, Image } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import Services from "./Services";
 import "./Homepage.css";
+import SearchBarHandler from "../../containers/Navigation/SearchHandler";
 
 const homepage = (props) => {
   return (

@@ -15,6 +15,8 @@ import HomePage from "./components/Homepage/Homepage";
 import Footer from "./components/Footer/Footer";
 import SellingPage from "./components/Selling/SellingPage";
 import TabItems from "./components/Selling/TabItems";
+import Cart from "./components/Cart/Cart";
+import Default from "./components/Default";
 
 import Profile from "./components/Forms/Profile";
 
@@ -38,6 +40,7 @@ class App extends Component {
             <Route path="/selling" component={TabItems} />
             <Route path="/profile" component={ProfileHandler} />
             <Route path="/category/:type/:id" component={DetailPageHandler} />
+            <Route path="/cart" component={Cart} />
             <Route
               path="/category/:type"
               exact
@@ -47,6 +50,7 @@ class App extends Component {
             />
             <Route path="/buyitnow" component={BuyitNow} />
             <Route path="/search-results/:item" component={SearchResults} />
+            <Route component={Default}/>
           </Switch>
           <Footer />
         </Layout>

@@ -9,12 +9,14 @@ const detailPage = (props) => {
   var carouselItems = null;
   carouselItems = itemArr.map((image, index) => {
     return (
-      <Carousel.Item>
+      <Carousel.Item key={index}>
         <img className="d-block w-100" src={image.toString()} alt="Image" />
       </Carousel.Item>
     );
   });
 
+  const {addtoCartHandler,id,inCart}=props;
+  
   return (
     <Card style={{ margin: "5% 5%" }}>
       <Card.Body>
@@ -66,9 +68,10 @@ const detailPage = (props) => {
                   </Button>
                   <br></br>
                   <Button
-                    onClick={props.addtoCartHandler}
+                    onClick={()=>addtoCartHandler(id)}
                     style={{ marginTop: "5%", width: "100%" }}
                     variant="primary"
+                    disabled={inCart}
                   >
                     Add to cart
                   </Button>

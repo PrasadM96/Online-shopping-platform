@@ -8,6 +8,23 @@ const initialState = {
   error: null,
   succeeded: false,
   items: [],
+  cart: [],
+};
+
+const setItems = (state, action) => {
+  let items = [];
+  action.items.forEach((item) => {
+    const singleItem = { ...item };
+    items = [...items, singleItem];
+  });
+  return updateObject(state, {
+    items: items,
+    cart: items,
+  });
+};
+const getItem = (state, action) => {
+  const item = state.items.find((i) => i._id === action.id);
+  return item;
 };
 
 ////////////////////add-item////////////////////
@@ -57,7 +74,7 @@ const getSellProductsStart = (state, action) => {
 const getSellProductsSuccess = (state, action) => {
   return updateObject(state, {
     loading: false,
-    items: action.products,
+    items: action.products, //action.products i change
     error: null,
   });
 };
@@ -98,6 +115,8 @@ const reducer = (state = initialState, action) => {
       return addDetailsSuccess(state, action);
     case actionTypes.ADD_DETAILS_FAIL:
       return addDetailsFail(state, action);
+    case actionTypes.SET_ITEMS:
+      return setItems(state, action);
     // case actionTypes.SET_IMAGES:
     //   return setImages(state, action);
     case actionTypes.ADD_DETAILS_SET_SUCCESS:

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
-import cookie from "react-cookies";
+//import cookie from "react-cookies";
 
 class BuyitNow extends Component {
   // state = { cookies: null };
