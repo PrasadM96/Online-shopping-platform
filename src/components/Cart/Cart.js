@@ -9,16 +9,10 @@ import * as actionTypes from "../../store/actions/actionTypes";
 import { tempData } from "../../assets/tempData";
 
 class Cart extends Component {
-  state = {
-    cartSubTotal: 0,
-    cartTax: 0,
-    cartTotal: 0,
-  };
   componentDidMount = () => {
-    this.addTotals();
-    this.props.setItems(tempData);
+    this.props.addTotals();
   };
-  increment = (id) => {
+  /*increment = (id) => {
     let tempCart = [...this.props.cart];
     const selectedItem = tempCart.find((item) => item._id === id);
     const index = tempCart.indexOf(selectedItem);
@@ -41,7 +35,7 @@ class Cart extends Component {
     const item = tempCart[index];
     item.count = item.count - 1;
     if (item.count === 0) {
-      this.removeItem(index);
+      this.props.removeItem(index);
       console.log(index);
     } else {
       item.total = item.count * item.price;
@@ -55,7 +49,7 @@ class Cart extends Component {
       );
     }
   };
-  removeItem = (index) => {
+  /*removeItem = (index) => {
     console.log("item removed");
     let tempItems = [...this.props.items];
     let tempCart = [...this.props.cart];
@@ -85,20 +79,24 @@ class Cart extends Component {
       cartTax: tax,
       cartTotal: total,
     });
-  };
+  };*/
   render() {
-    if (this.props.cart.length > 0) {
+    if (this.props.state.cart.length > 0) {
       return (
         <section>
           <Title name="your" title="cart" />
           <CartColumns />
           <CartList
-            cart={this.props.cart}
-            increment={this.increment}
-            decrement={this.decrement}
-            removeItem={this.removeItem}
+            cart={this.props.state.cart}
+            increment={this.props.increment}
+            decrement={this.props.decrement}
+            removeItem={this.props.removeItem}
           />
-          <CartTotals state={this.state} clearCart={this.props.clearCart} history={this.props.history}/>
+          <CartTotals
+            state={this.props.state}
+            clearCart={this.props.clearCart}
+            history={this.props.history}
+          />
         </section>
       );
     } else {
@@ -109,16 +107,19 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    items: state.products.items,
-    cart: state.products.cart,
+    state:state.shop
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setItems: (items) => dispatch({ type: actionTypes.SET_ITEMS, items: items }),
-    addToCart:(id)=>dispatch({type:actionTypes.ADD_TO_CART,id:id}),
-    clearCart:()=>dispatch({type:actionTypes.CLEAR_CART})
+    addToCart: (id) => dispatch({ type: actionTypes.ADD_TO_CART, id: id }),
+    clearCart: () => dispatch({ type: actionTypes.CLEAR_CART }),
+    removeItem: (id) =>
+      dispatch({ type: actionTypes.REMOVE_ITEM, id: id }),
+    increment: (id) => dispatch({ type: actionTypes.INCREMENT, id: id }),
+    decrement: (id) => dispatch({ type: actionTypes.DECREMENT, id: id }),
+    addTotals:()=>dispatch({type:actionTypes.ADD_TOTALS})
   };
 };
 

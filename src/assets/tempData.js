@@ -1,6 +1,6 @@
 export const tempData = [
   {
-    _id: { $oid: "5ea2e2db17e32828c8de0731" },
+    _id: "5ea2e2db17e32828c8de0731" ,
     imageUrls: [
       "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -21,7 +21,7 @@ export const tempData = [
     inCart: false,
   },
   {
-    _id: { $oid: "5ec29f0096893c2a04cfa072" },
+    _id: "5ec29f0096893c2a04cfa072" ,
     imageUrls: [
       "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -42,7 +42,7 @@ export const tempData = [
     inCart: false,
   },
   {
-    _id: { $oid: "5ec91e8402e85e26ec33dec5" },
+    _id: "5ec91e8402e85e26ec33dec5" ,
     imageUrls: [
       "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
       "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",

@@ -80,9 +80,6 @@ const layout = (props) => {
                 my cart
               </ButtonContainer>
             </Nav.Link>
-            <Nav.Link href="/deets">
-              <ButtonContainer>more deets</ButtonContainer>
-            </Nav.Link>
             <Nav.Link as={NavLink} to="/signin" href="/signin">
               <ButtonContainer>signIn</ButtonContainer>
             </Nav.Link>

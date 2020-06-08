@@ -2,14 +2,14 @@ import React from "react";
 import { Card, Container, Col, Row, Image } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 const displayItem = (props) => {
-  const url = "/category/" + props.path + "/" + props.id;
+  let url = "/category/" + props.path + "/" +props.id;
   return (
     <Card style={{ margin: "2% 5%" }}>
       <Card.Body>
         <Container>
           <Row>
             <Col md={4}>
-              <Image style={{ height: "200px" }} src={props.image} rounded />
+              <Image style={{ height: "200px" }} src={props.image} rounded/>
             </Col>
             <Col md={6}>
               <NavLink to={url}>

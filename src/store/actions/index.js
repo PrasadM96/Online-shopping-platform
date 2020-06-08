@@ -3,13 +3,16 @@ export {
   setPostSuccess,
   getSellingProduct,
   deleteSellingItem,
+  setItems,
+} from "./products";
+
+export {
+  getAllProducts,
+  getSearchProducts,
   addToCart,
   increment,
   decrement,
   removeItem,
   clearCart,
   addTotals,
-  setItems,
-} from "./products";
-
-export { getAllProducts, getSearchProducts } from "./shop";
+} from "./shop";

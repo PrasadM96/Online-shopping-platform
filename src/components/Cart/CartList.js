@@ -9,7 +9,6 @@ export default function CartList(props) {
         return (
           <CartItem
             key={index}
-            index={index}
             item={item}
             increment={props.increment}
             decrement={props.decrement}

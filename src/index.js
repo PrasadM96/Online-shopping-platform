@@ -22,12 +22,12 @@ const composeEnhancers =
 const rootReducer = combineReducers({
   auth: authReducer,
   products: productsReducer,
-  shop: shopReducer,
+  shop: shopReducer
 });
 
 const store = createStore(
   rootReducer,
- // composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 axios.defaults.baseURL = "http://localhost:6000";

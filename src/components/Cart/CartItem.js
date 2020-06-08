@@ -2,10 +2,10 @@ import React from "react";
 
 export default function CartItem(props) {
   const { _id, title, imageUrls, price, total, count } = props.item;
-  const { increment, decrement, removeItem,index } = props;
+  const { increment, decrement, removeItem } = props;
   return (
     <div className="row my-1 text-capitalize text-center">
-      <div className="col-10 ma-auto col-lg-2">
+      <div className="col-10 mx-auto col-lg-2">
         <img
           src={imageUrls}
           style={{ width: "5rem", height: "5rem" }}
@@ -36,7 +36,7 @@ export default function CartItem(props) {
       </div>
       {/* */}
       <div className="col-10 mx-auto col-lg-2">
-        <div className="cart-icon" onClick={() => removeItem(index)}>
+        <div className="cart-icon" onClick={() => removeItem(_id)}>
           <i className="fas fa-trash>"></i>delete
         </div>
       </div>

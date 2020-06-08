@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
+import {tempData} from "../../assets/tempData"
 
 export const getProductSuccess = (items) => {
   return {
@@ -23,7 +24,7 @@ export const getProductStart = () => {
 
 export const getAllProducts = (path) => {
   return (dispatch) => {
-    dispatch(getProductStart());
+    /*dispatch(getProductStart());
     axios
       .get("/shop/get-all-products", {
         params: {
@@ -35,7 +36,8 @@ export const getAllProducts = (path) => {
       })
       .catch((err) => {
         dispatch(getProductFail(err));
-      });
+      });*/
+      dispatch(getProductSuccess(tempData))
   };
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,5 +74,52 @@ export const getSearchProducts = (keyword) => {
       .catch((err) => {
         dispatch(getSearchProductFail(err));
       });
+  };
+};
+
+export const addToCart = (id) => {
+  return {
+    type: actionTypes.ADD_TO_CART,
+    id: id,
+  };
+};
+
+export const increment = (id) => {
+  return {
+    type: actionTypes.INCREMENT,
+    id: id,
+  };
+};
+
+export const decrement = (id) => {
+  return {
+    type: actionTypes.DECREMENT,
+    id: id,
+  };
+};
+
+export const removeItem = (id) => {
+  return {
+    type: actionTypes.REMOVE_ITEM,
+    id: id,
+  };
+};
+
+export const clearCart = () => {
+  return {
+    type: actionTypes.CLEAR_CART,
+  };
+};
+
+export const addTotals = () => {
+  return {
+    type: actionTypes.ADD_TOTALS,
+  };
+};
+
+export const getItem = (id) => {
+  return {
+    type: actionTypes.GET_ITEM,
+    id: id,
   };
 };

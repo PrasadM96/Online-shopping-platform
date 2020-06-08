@@ -64,94 +64,6 @@ const addDetailsSetSuccess = (state, action) => {
   });
 };
 
-const addToCart = (state, action) => {
-  let tempItems = [...state.items];
-  const item = state.items.find((item) => item._id === action.id);
-  const index = tempItems.indexOf(item);
-  const product = tempItems[index];
-  product.inCart = true;
-  product.count = 1;
-  const price = product.price;
-  product.total = price;
-  console.log(product);
-  return updateObject(state, {
-    items: tempItems,
-    cart: [...state.cart, product],
-  });
-};
-
-const increment = (state, action) => {
-  console.log("increment");
-  return updateObject(state, {
-    cart: {
-      ...state.cart,
-      [state.cart.find((item) => item._id === action.id).count]:
-        [state.cart.find((item) => item._id === action.id).count] + 1,
-    },
-  });
-};
-
-const decrement = (state, action) => {
-  console.log("decrement method");
-  return updateObject(
-    state,
-    {
-      cart: {
-        ...state.cart,
-        [state.cart.find((item) => item._id === action.id).count]:
-          [state.cart.find((item) => item._id === action.id).count] - 1,
-      },
-    },
-    console.log(state.cart.find((item) => item._id === action.id).count)
-  );
-};
-
-const removeItem = (state, action) => {
-  console.log("item removed");
-  let tempItems = [...state.items];
-  let tempCart = [...state.cart];
-
-  tempCart.filter((item) => item._id !== action.id);
-
-  const index = tempItems.indexOf(getItem(action.id));
-  let removedItem = tempItems[index];
-  removedItem.inCart = false;
-  removedItem.count = 0;
-  removedItem.total = 0;
-
-  return updateObject(
-    state,
-    {
-      cart: [...tempCart],
-      items: [...tempItems],
-    },
-    console.log(state.cart)
-  );
-};
-
-const clearCart = (state, action) => {
-  console.log("cart was cleared");
-  return updateObject(
-    state,
-    {
-      cart: [],
-    },
-    console.log(state.cart)
-  );
-};
-
-const addTotals = (state, action) => {
-  let subTotal = 0;
-  state.cart.map((item) => (subTotal += item.total));
-  const tempTax = subTotal * 0.1;
-  const tax = parseFloat(tempTax.toFixed(2));
-  const total = subTotal + tax;
-    return updateObject(state,{
-      cartSubTotal: subTotal,
-      cartTax: tax,
-      cartTotal: total,}
-  )
-};
 ///////////////////////////grt-selling-item////////////////////////
 const getSellProductsStart = (state, action) => {
   return updateObject(state, {
@@ -203,20 +115,6 @@ const reducer = (state = initialState, action) => {
       return addDetailsSuccess(state, action);
     case actionTypes.ADD_DETAILS_FAIL:
       return addDetailsFail(state, action);
-    case actionTypes.ADD_TO_CART:
-      return addToCart(state, action);
-    case actionTypes.INCREMENT:
-      return increment(state, action);
-    case actionTypes.DECREMENT:
-      return decrement(state, action);
-    case actionTypes.REMOVE_ITEM:
-      return removeItem(state, action);
-    case actionTypes.CLEAR_CART:
-      return clearCart(state, action);
-    case actionTypes.ADD_TOTALS:
-      return addTotals(state, action);
-    case actionTypes.GET_ITEM:
-      return getItem(state, action);
     case actionTypes.SET_ITEMS:
       return setItems(state, action);
     // case actionTypes.SET_IMAGES:
