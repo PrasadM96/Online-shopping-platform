@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
-import {tempData,tempData2} from "../../assets/tempData"
+import { tempData, tempData2 } from "../../assets/tempData";
 
 export const getProductSuccess = (items) => {
   return {
@@ -24,7 +24,7 @@ export const getProductStart = () => {
 
 export const getAllProducts = (path) => {
   return (dispatch) => {
-    /*dispatch(getProductStart());
+    dispatch(getProductStart());
     axios
       .get("/shop/get-all-products", {
         params: {
@@ -36,12 +36,12 @@ export const getAllProducts = (path) => {
       })
       .catch((err) => {
         dispatch(getProductFail(err));
-      });*/
-      if(path==="home-appliances"){
+      });
+    /*if(path==="home-appliances"){
        dispatch(getProductSuccess(tempData2))}
        else{
          dispatch(getProductSuccess(tempData))
-       }
+       }*/
   };
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////

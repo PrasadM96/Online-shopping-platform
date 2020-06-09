@@ -15,8 +15,8 @@ class DetailPageHandler extends Component {
 
   addtoCartHandler = (id) => {
     //e.preventDefault();
-    this.props.history.push("/cart");
     this.props.addToCart(id)
+    this.props.history.push("/cart");
   };
 
   render() {
