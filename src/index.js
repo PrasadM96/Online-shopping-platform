@@ -30,7 +30,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
-axios.defaults.baseURL = "http://localhost:6000";
+axios.defaults.baseURL = "http://localhost:5000";
 
 const app = (
   <Provider store={store}>

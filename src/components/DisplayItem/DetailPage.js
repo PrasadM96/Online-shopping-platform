@@ -15,8 +15,13 @@ const detailPage = (props) => {
     );
   });
 
-  const {addtoCartHandler,id,inCart}=props;
-  
+  const { addtoCartHandler, id, cart } = props;
+  let inCart = false;
+  if (cart.find((item) => item._id === id)) {
+    inCart = true;
+  }
+
+  console.log(inCart);
   return (
     <Card style={{ margin: "5% 5%" }}>
       <Card.Body>
@@ -68,7 +73,7 @@ const detailPage = (props) => {
                   </Button>
                   <br></br>
                   <Button
-                    onClick={()=>addtoCartHandler(id)}
+                    onClick={() => addtoCartHandler(id)}
                     style={{ marginTop: "5%", width: "100%" }}
                     variant="primary"
                     disabled={inCart}

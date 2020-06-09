@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
-import {tempData} from "../../assets/tempData"
+import {tempData,tempData2} from "../../assets/tempData"
 
 export const getProductSuccess = (items) => {
   return {
@@ -37,7 +37,11 @@ export const getAllProducts = (path) => {
       .catch((err) => {
         dispatch(getProductFail(err));
       });*/
-      dispatch(getProductSuccess(tempData))
+      if(path==="home-appliances"){
+       dispatch(getProductSuccess(tempData2))}
+       else{
+         dispatch(getProductSuccess(tempData))
+       }
   };
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////

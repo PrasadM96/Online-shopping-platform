@@ -84,7 +84,7 @@ const layout = (props) => {
               <ButtonContainer>signIn</ButtonContainer>
             </Nav.Link>
             <Nav.Link as={NavLink} to="/signup" href="/signup">
-              SignUp
+            <ButtonContainer>signUp</ButtonContainer>
             </Nav.Link>
             <NavDropdown title="Username" id="collasible-nav-dropdown">
               <NavDropdown.Item as={NavLink} to="/profile" href="/profile">
