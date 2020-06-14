@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import SignIn from "../../components/Authentication/SignIn";
 import { login } from "./UserFunctions";
+import { connect } from "react-redux";
+import * as actionTypes from "../../store/actions/actionTypes";
 
 class SignInHandler extends Component {
   state = {
@@ -55,6 +57,7 @@ class SignInHandler extends Component {
       console.log(res);
       console.log("login handler");
       if (!res) {
+        this.props.authSuccess();
         this.props.history.push("/");
       } else {
         this.setState({ errorMessage: res });
@@ -80,4 +83,10 @@ class SignInHandler extends Component {
   }
 }
 
-export default SignInHandler;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    authSuccess: (id) => dispatch({ type: actionTypes.AUTH_SUCCESS }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SignInHandler);

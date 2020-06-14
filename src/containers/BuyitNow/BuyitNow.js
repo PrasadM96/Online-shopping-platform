@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import axios from "axios";
+import PayPalButton from "../../components/PayPalButton"
 //import cookie from "react-cookies";
 
 class BuyitNow extends Component {
@@ -27,6 +28,7 @@ class BuyitNow extends Component {
     return (
       <div>
         <h5>buy</h5>
+        <PayPalButton/>
         {/* <Button onClick={this.onclickHandler}>hdsfhsdjkfs</Button> */}
       </div>
     );

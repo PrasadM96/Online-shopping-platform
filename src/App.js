@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import "./App.css";
 import Layout from "./components/Navigation/Layout";
 import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
+import * as actionTypes from "./store/actions/actionTypes"
 import SignInHandler from "./containers/Authentication/SignInHandler";
 import SignUpHandler from "./containers/Authentication/SignUpHandler";
 import SearchBarHandler from "./containers/Navigation/SearchHandler";
@@ -30,7 +32,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Layout>
+        <Layout islog={this.props.islog}>
           {/* <SearchBarHandler /> */}
 
           <Switch>
@@ -59,4 +61,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    islog:state.auth.islog
+  };
+};
+
+export default connect(mapStateToProps)(App);

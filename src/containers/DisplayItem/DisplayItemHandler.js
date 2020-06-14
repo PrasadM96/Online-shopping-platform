@@ -9,6 +9,7 @@ class DisplayItemHandler extends Component {
   state = {};
 
   componentWillMount() {
+    this.props.clearItems()
     const path = this.props.location.pathname.split("/")[2];
     this.props.ongetAllItems(path);
   }
@@ -79,6 +80,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     ongetAllItems: (path) => dispatch(actions.getAllProducts(path)),
+    clearItems:()=>dispatch(actions.clearItems())
   };
 };
 

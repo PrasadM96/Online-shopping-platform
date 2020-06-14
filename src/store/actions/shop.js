@@ -37,11 +37,11 @@ export const getAllProducts = (path) => {
       .catch((err) => {
         dispatch(getProductFail(err));
       });
-    /*if(path==="home-appliances"){
-       dispatch(getProductSuccess(tempData2))}
-       else{
-         dispatch(getProductSuccess(tempData))
-       }*/
+    /*if (path === "home-appliances") {
+      dispatch(getProductSuccess(tempData2));
+    } else {
+      dispatch(getProductSuccess(tempData));
+    }*/
   };
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,6 +112,12 @@ export const removeItem = (id) => {
 export const clearCart = () => {
   return {
     type: actionTypes.CLEAR_CART,
+  };
+};
+
+export const clearItems = () => {
+  return {
+    type: actionTypes.CLEAR_ITEMS,
   };
 };
 

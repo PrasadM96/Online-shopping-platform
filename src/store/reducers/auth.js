@@ -1,12 +1,19 @@
 import * as actionTypes from "../actions/actionTypes";
+import { updateObject } from "../../Shared/Utility";
 
 const initialState = {
-  loading: false
+  loading: false,
+  islog:false
 };
 
 const authStart = (state, action) => {};
 
-const authSuccess = (state, action) => {};
+const authSuccess = (state, action) => {
+  return updateObject(state, {
+    loading: false,
+    islog:true,
+  });
+};
 
 const authFail = (state, action) => {};
 
