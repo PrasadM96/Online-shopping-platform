@@ -132,15 +132,12 @@ const removeItem = (state, action) => {
   const tempTax = subTotal * 0.1;
   const tax = parseFloat(tempTax.toFixed(2));
   const total = subTotal + tax;
-  return updateObject(
-    state,
-    {
-      cart: tempCart,
-      cartSubTotal: subTotal,
-      cartTax: tax,
-      cartTotal: total,
-    },
-  );
+  return updateObject(state, {
+    cart: tempCart,
+    cartSubTotal: subTotal,
+    cartTax: tax,
+    cartTotal: total,
+  });
 };
 
 const clearCart = (state, action) => {
@@ -157,6 +154,11 @@ const clearCart = (state, action) => {
   );
 };
 
+const clearItems = (state, action) => {
+  return updateObject(state, {
+    items: [],
+  });
+};
 const addTotals = (state, action) => {
   let subTotal = 0;
   state.cart.map((item) => (subTotal += item.total));
@@ -194,6 +196,8 @@ const reducer = (state = initialState, action) => {
       return removeItem(state, action);
     case actionTypes.CLEAR_CART:
       return clearCart(state, action);
+    case actionTypes.CLEAR_ITEMS:
+      return clearItems(state,action)
     case actionTypes.ADD_TOTALS:
       return addTotals(state, action);
     case actionTypes.GET_ITEM:

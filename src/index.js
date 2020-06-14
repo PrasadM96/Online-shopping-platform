@@ -6,36 +6,17 @@ import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose, combineReducers } from "redux";
-import thunk from "redux-thunk";
 import axios from "axios";
-
-import authReducer from "./store/reducers/auth";
-import productsReducer from "./store/reducers/products";
-import shopReducer from "./store/reducers/shop";
-
-const composeEnhancers =
-  process.env.NODE_ENV === "development"
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : null || compose;
-
-const rootReducer = combineReducers({
-  auth: authReducer,
-  products: productsReducer,
-  shop: shopReducer
-});
-
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
+import { store, persistor } from "./Store";
 
 axios.defaults.baseURL = "http://localhost:5000";
 
 const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <persistGate persistor={persistor}>
+        <App />
+      </persistGate>
     </BrowserRouter>
   </Provider>
 );

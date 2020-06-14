@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DetailPage from "../../components/DisplayItem/DetailPage";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions"
+import * as actions from "../../store/actions";
 
 class DetailPageHandler extends Component {
   state = {};
@@ -15,8 +15,12 @@ class DetailPageHandler extends Component {
 
   addtoCartHandler = (id) => {
     //e.preventDefault();
-    this.props.addToCart(id)
-    this.props.history.push("/cart");
+    if(this.props.islog){
+      this.props.addToCart(id);
+      this.props.history.push("/cart");
+    }else{
+      this.props.history.push("/signin")
+    }
   };
 
   render() {
@@ -51,14 +55,15 @@ class DetailPageHandler extends Component {
 const mapStateToProps = (state) => {
   return {
     items: state.shop.items,
-    cart: state.shop.cart
+    cart: state.shop.cart,
+    islog:state.auth.islog
   };
 };
 
-const mapDispatchToProps=(dispatch)=>{
-  return{
-    addToCart:(id)=>dispatch(actions.addToCart(id))
-  }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (id) => dispatch(actions.addToCart(id)),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailPageHandler);

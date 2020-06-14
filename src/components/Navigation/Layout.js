@@ -73,7 +73,7 @@ const layout = (props) => {
           </Nav>
           <Nav>
             <Nav.Link as={NavLink} to="/cart" href="/cart">
-              <ButtonContainer>
+              <ButtonContainer hidden={!props.islog}>
                 <span className="mr-2">
                   <i className="fas fa-cart-plus" />
                 </span>
@@ -84,7 +84,7 @@ const layout = (props) => {
               <ButtonContainer>signIn</ButtonContainer>
             </Nav.Link>
             <Nav.Link as={NavLink} to="/signup" href="/signup">
-            <ButtonContainer>signUp</ButtonContainer>
+              <ButtonContainer>signUp</ButtonContainer>
             </Nav.Link>
             <NavDropdown title="Username" id="collasible-nav-dropdown">
               <NavDropdown.Item as={NavLink} to="/profile" href="/profile">
