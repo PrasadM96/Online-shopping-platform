@@ -12,6 +12,7 @@ import axios from "axios";
 
 import authReducer from "./store/reducers/authReducer";
 import productsReducer from "./store/reducers/products";
+import errorReducer from "./store/reducers/errorReducer";
 import shopReducer from "./store/reducers/shop";
 
 const composeEnhancers =
@@ -22,7 +23,8 @@ const composeEnhancers =
 const rootReducer = combineReducers({
   auth: authReducer,
   products: productsReducer,
-  shop: shopReducer
+  shop: shopReducer,
+  error:errorReducer
 });
 
 const store = createStore(
