@@ -26,17 +26,30 @@ import AddtoCart from "./containers/AddtoCart/AddtoCart";
 import BuyitNow from "./containers/BuyitNow/BuyitNow";
 import SearchResults from "./containers/Navigation/ResultsDisplay";
 
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+
 class App extends Component {
+
+  
+  static propTypes = {
+    auth:PropTypes.object.isRequired
+}
+
   render() {
+    const { isAuthenticated , user,isRegister} = this.props.auth
     return (
       <div>
-        <Layout>
+        <Layout
+         isAuthenticated = {isAuthenticated}
+         user ={user}
+         isRegister = {isRegister}
+         >
           {/* <SearchBarHandler /> */}
 
           <Switch>
             <Route path="/" exact component={HomePage} />
-            <Route path="/signin" component={SignInHandler} />
-            <Route path="/signup" component={SignUpHandler} />
+            
             <Route path="/selling" component={TabItems} />
             <Route path="/profile" component={ProfileHandler} />
             <Route path="/category/:type/:id" component={DetailPageHandler} />
@@ -47,7 +60,7 @@ class App extends Component {
               component={DisplayItemHandler}
             />
             <Route path="/addtocart" component={AddtoCart} />
-            />
+            
             <Route path="/buyitnow" component={BuyitNow} />
             <Route path="/search-results/:item" component={SearchResults} />
             <Route component={Default}/>
@@ -59,4 +72,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state =>({
+  auth:state.auth
+})
+
+export default connect(mapStateToProps,null)(App);
+
+

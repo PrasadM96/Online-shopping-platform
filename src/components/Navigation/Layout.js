@@ -1,10 +1,14 @@
-import React from "react";
+import React ,{Fragment} from "react";
 import { Navbar, NavDropdown, Nav, NavItem } from "react-bootstrap";
 import Aux from "../../hoc/Auxx";
 import { NavLink, Link } from "react-router-dom";
 import Cart from "../Cart/";
 import styled from "styled-components";
 import { ButtonContainer } from "../../components/Styled/Button";
+
+import RegisterModal from '../Authentication/RegisterModal';
+
+import Logout from '../Authentication/Logout';
 
 const layout = (props) => {
   return (
@@ -71,33 +75,37 @@ const layout = (props) => {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Nav>
-            <Nav.Link as={NavLink} to="/cart" href="/cart">
-              <ButtonContainer>
-                <span className="mr-2">
-                  <i className="fas fa-cart-plus" />
-                </span>
-                my cart
-              </ButtonContainer>
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/signin" href="/signin">
-              <ButtonContainer>signIn</ButtonContainer>
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/signup" href="/signup">
-            <ButtonContainer>signUp</ButtonContainer>
-            </Nav.Link>
-            <NavDropdown title="Username" id="collasible-nav-dropdown">
-              <NavDropdown.Item as={NavLink} to="/profile" href="/profile">
-                Profile
-              </NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/orders" href="/orders">
-                Orders
-              </NavDropdown.Item>
-
-              <NavDropdown.Item as={NavLink} to="/logout" href="/logout">
-                Logout
-              </NavDropdown.Item>
-            </NavDropdown>
+          <Nav className ="ml-auto">
+          {props.isAuthenticated && props.isRegister ?   
+            <Fragment>
+                    <NavItem>
+                        <span className="navbar-text mr-3">
+                            <strong>{props.user ? `Welcome ${props.user.first_name}`:''}</strong>
+                        </span>
+                    </NavItem>
+                    <Nav.Link as={NavLink} to="/cart" href="/cart">
+                    My Cart
+                    </Nav.Link>
+                    
+                    <Nav.Link as={NavLink} to="/profile" href="/profile">
+                    Profile
+                    </Nav.Link>
+                    <Nav.Link as={NavLink} to="/orders" href="/orders">
+                     Orders
+                    </Nav.Link>
+                    <NavItem>
+                        <Logout />
+                    </NavItem>
+              </Fragment>:   
+              <Fragment>
+                    <Nav.Link as={NavLink} to="/cart" href="/cart">
+                    My Cart
+                    </Nav.Link>
+                    <NavItem>
+                        <RegisterModal />
+                    </NavItem>
+                    
+              </Fragment>}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

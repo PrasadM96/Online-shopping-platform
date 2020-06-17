@@ -10,7 +10,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import axios from "axios";
 
-import authReducer from "./store/reducers/auth";
+import authReducer from "./store/reducers/authReducer";
 import productsReducer from "./store/reducers/products";
 import shopReducer from "./store/reducers/shop";
 
