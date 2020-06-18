@@ -19,6 +19,7 @@ class AddItemHandler extends Component {
     sellingArea: null,
     price: null,
     shippingFee: null,
+    quantity: null,
     file: null,
 
     subcate: {
@@ -32,18 +33,22 @@ class AddItemHandler extends Component {
       Health: ["Make up", "Healthcare", "Nailcare", "Haircare"],
       Sports: ["Outdoor Sporting", "Indoor Sporting", "Hunting", "Fishing"],
       Home: ["Tools", "Baby", "Kithen Dining"],
+      Stationary: ["Books", "Writing Materials", "Bags", "Wrappings"],
     },
   };
 
   componentDidMount() {
     if (this.props.succeeded) {
       this.clearDetails();
-      console.log("falgggg");
     }
   }
 
   titleHandler = (event) => {
     this.setState({ title: event.target.value });
+  };
+  quantityHandler = (event) => {
+    this.setState({ quantity: event.target.value });
+    console.log(this.state.quantity);
   };
   categoryHandler = (event) => {
     console.log(event.target.value);
@@ -71,10 +76,10 @@ class AddItemHandler extends Component {
   shippingFeeHandler = (event) => {
     this.setState({ shippingFee: event.target.value });
   };
+
   onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log("submit------------------");
-    console.log(this.state.file);
+
     console.log(this.state);
     this.props.onPostItem({
       title: this.state.title,
@@ -83,6 +88,7 @@ class AddItemHandler extends Component {
       condition: this.state.condition,
       description: this.state.description,
       sellingArea: this.state.sellingArea,
+      quantity: this.state.quantity,
       price: this.state.price,
       shippingFee: this.state.shippingFee,
       files: this.state.file,
@@ -97,24 +103,14 @@ class AddItemHandler extends Component {
       condition: null,
       description: null,
       sellingArea: null,
+      quantity: null,
       price: null,
       shippingFee: null,
       file: [],
     });
+    this.props.onSetSuccess();
+    this.props.history.push("/selling/my-items");
   };
-
-  // onDrop = (acceptedFiles) => {
-  //   var temp = [];
-  //   acceptedFiles.map((val) => {
-  //     temp.push(val.path);
-  //   });
-  //   console.log(acceptedFiles);
-
-  //   var updatedfiles = [this.state.files, temp];
-  //   // console.log(updatedfiles);
-
-  //   this.setState({ files: updatedfiles });
-  // };
 
   getImages = (e) => {
     var temp = e.target.files;
@@ -174,16 +170,15 @@ class AddItemHandler extends Component {
         <Modal
           message="Success"
           title="Success"
-          errorConfirmedHandler={this.props.onSetSuccess}
+          errorConfirmedHandler={this.clearDetails}
         ></Modal>
       );
     }
 
-    console.log(this.state.file);
-
     return (
       <div>
         <AddItem
+          item={this.state}
           price={this.state.price}
           loading={this.props.loading}
           subCateArr={subCateArr}
@@ -196,6 +191,7 @@ class AddItemHandler extends Component {
           priceHandler={this.priceHandler}
           shippingFeeHandler={this.shippingFeeHandler}
           onSubmitHandler={this.onSubmitHandler}
+          quantityHandler={this.quantityHandler}
         >
           <Container fluid>
             <div

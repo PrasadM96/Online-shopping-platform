@@ -47,6 +47,7 @@ function AddItem(props) {
             <option>Health</option>
             <option>Home</option>
             <option>Sports</option>
+            <option>Stationary</option>
           </Form.Control>
           <Form.Control.Feedback type="invalid">required</Form.Control.Feedback>
         </Form.Group>
@@ -99,7 +100,19 @@ function AddItem(props) {
           <option>Asia</option>
           <option>Europe</option>
           <option>Africa</option>
-        </Form.Control>{" "}
+        </Form.Control>
+        <Form.Control.Feedback type="invalid">required</Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group sm controlId="validationCustom10">
+        <Form.Label>Quantity</Form.Label>
+        <Form.Control
+          onChange={props.quantityHandler}
+          required
+          type="number"
+          min="1"
+          placeholder="quantity"
+        />
         <Form.Control.Feedback type="invalid">required</Form.Control.Feedback>
       </Form.Group>
 

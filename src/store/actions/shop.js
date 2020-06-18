@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
-import {tempData} from "../../assets/tempData"
+import { tempData } from "../../assets/tempData";
 
 export const getProductSuccess = (items) => {
   return {
@@ -23,8 +23,10 @@ export const getProductStart = () => {
 };
 
 export const getAllProducts = (path) => {
+  console.log(path);
+
   return (dispatch) => {
-    /*dispatch(getProductStart());
+    dispatch(getProductStart());
     axios
       .get("/shop/get-all-products", {
         params: {
@@ -36,8 +38,7 @@ export const getAllProducts = (path) => {
       })
       .catch((err) => {
         dispatch(getProductFail(err));
-      });*/
-      dispatch(getProductSuccess(tempData))
+      });
   };
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -121,5 +122,44 @@ export const getItem = (id) => {
   return {
     type: actionTypes.GET_ITEM,
     id: id,
+  };
+};
+
+//////////////////checkout////////////////////
+export const getCheckoutFail = (error) => {
+  return {
+    type: actionTypes.GET_CHECKOUT_ITEM_FAIL,
+    error: error.message,
+  };
+};
+
+export const getcheckoutSuccess = (item) => {
+  return {
+    type: actionTypes.GET_CHECKOUT_ITEM_SUCCESS,
+    item: item,
+  };
+};
+
+export const getCheckoutStart = () => {
+  return {
+    type: actionTypes.GET_CHECKOUT_ITEM_START,
+  };
+};
+
+export const getSingleItem = (id) => {
+  return (dispatch) => {
+    dispatch(getCheckoutStart());
+    axios
+      .get("/shop/get-single-product", {
+        params: {
+          id: id,
+        },
+      })
+      .then((item) => {
+        dispatch(getcheckoutSuccess(item));
+      })
+      .catch((err) => {
+        dispatch(getCheckoutFail(err));
+      });
   };
 };

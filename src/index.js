@@ -22,7 +22,7 @@ const composeEnhancers =
 const rootReducer = combineReducers({
   auth: authReducer,
   products: productsReducer,
-  shop: shopReducer
+  shop: shopReducer,
 });
 
 const store = createStore(
@@ -30,7 +30,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
-axios.defaults.baseURL = "http://localhost:6000";
+axios.defaults.baseURL = "http://localhost:5000";
 
 const app = (
   <Provider store={store}>

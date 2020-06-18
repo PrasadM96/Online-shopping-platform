@@ -3,7 +3,7 @@ import DisplayItem from "../../components/DisplayItem/DisplayItem";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Alert } from "react-bootstrap";
 
 class DisplayItemHandler extends Component {
   state = {};
@@ -24,7 +24,7 @@ class DisplayItemHandler extends Component {
             price={item.price}
             shippingFee={item.shippingFee}
             title={item.title}
-            itemCount={500}
+            itemCount={item.quantity}
             condition={item.condition}
             item={item}
             path={this.props.location.pathname.split("/")[2]}
@@ -34,7 +34,7 @@ class DisplayItemHandler extends Component {
         );
       });
     } else {
-      if (!this.props.loading || this.props.error) {
+      if (!this.props.loading && !this.props.error) {
         itemArr = (
           <div style={{ width: "100%", margin: "10% 0", textAlign: "center" }}>
             <h3>No items found</h3>
@@ -45,7 +45,14 @@ class DisplayItemHandler extends Component {
 
     var err = null;
     if (this.props.error) {
-      err = <p>{this.props.error.message}</p>;
+      err = (
+        <Alert
+          style={{ margin: " 2% auto", textAlign: "center", width: "60%" }}
+          variant="danger"
+        >
+          {this.props.error.message}
+        </Alert>
+      );
     }
 
     var loading = null;

@@ -23,7 +23,7 @@ import Profile from "./components/Forms/Profile";
 import DisplayItemHandler from "./containers/DisplayItem/DisplayItemHandler";
 import DetailPageHandler from "./containers/DisplayItem/DetailPageHandler";
 import AddtoCart from "./containers/AddtoCart/AddtoCart";
-import BuyitNow from "./containers/BuyitNow/BuyitNow";
+import BuyitNowHandler from "./containers/BuyitNow/BuyitNowHandler";
 import SearchResults from "./containers/Navigation/ResultsDisplay";
 
 class App extends Component {
@@ -31,7 +31,7 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          {/* <SearchBarHandler /> */}
+          <SearchBarHandler />
 
           <Switch>
             <Route path="/" exact component={HomePage} />
@@ -47,10 +47,10 @@ class App extends Component {
               component={DisplayItemHandler}
             />
             <Route path="/addtocart" component={AddtoCart} />
-            />
-            <Route path="/buyitnow" component={BuyitNow} />
+
+            <Route path="/checkout/:id" component={BuyitNowHandler} />
             <Route path="/search-results/:item" component={SearchResults} />
-            <Route component={Default}/>
+            <Route component={Default} />
           </Switch>
           <Footer />
         </Layout>

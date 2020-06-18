@@ -51,12 +51,6 @@ const addDetailsSuccess = (state, action) => {
   });
 };
 
-// const setImages = (state, action) => {
-//     return updateObject(state, {
-
-//     })
-// }
-
 const addDetailsSetSuccess = (state, action) => {
   return updateObject(state, {
     succeeded: false,

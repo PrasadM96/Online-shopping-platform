@@ -10,13 +10,18 @@ const detailPage = (props) => {
   carouselItems = itemArr.map((image, index) => {
     return (
       <Carousel.Item key={index}>
-        <img className="d-block w-100" src={image.toString()} alt="Image" />
+        <img
+          className="d-block w-100"
+          style={{ width: "auto", height: "500px" }}
+          src={image.toString()}
+          alt="Image"
+        />
       </Carousel.Item>
     );
   });
 
-  const {addtoCartHandler,id,inCart}=props;
-  
+  const { addtoCartHandler, id, inCart } = props;
+
   return (
     <Card style={{ margin: "5% 5%" }}>
       <Card.Body>
@@ -68,7 +73,7 @@ const detailPage = (props) => {
                   </Button>
                   <br></br>
                   <Button
-                    onClick={()=>addtoCartHandler(id)}
+                    onClick={() => addtoCartHandler(id)}
                     style={{ marginTop: "5%", width: "100%" }}
                     variant="primary"
                     disabled={inCart}

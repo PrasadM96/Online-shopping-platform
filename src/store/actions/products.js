@@ -37,9 +37,8 @@ export const setPostSuccess = () => {
 export const postProduct = (item) => {
   return (dispatch) => {
     dispatch(postStart());
-    console.log("on postPRODUCT");
 
-    console.log(item.files);
+    console.log(item.quantity);
     const data = new FormData();
 
     item.files.map((file, index) => {
@@ -53,6 +52,7 @@ export const postProduct = (item) => {
     data.append("condition", item.condition);
     data.append("description", item.description);
     data.append("sellingArea", item.sellingArea);
+    data.append("quantity", item.quantity);
     data.append("shippingFee", item.shippingFee);
 
     axios

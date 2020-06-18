@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import MyItem from "../../components/Selling/MyItems";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Alert } from "react-bootstrap";
 import WitherrorHandler from "../../hoc/WitherrorHandler";
 import axios from "axios";
 
@@ -47,7 +47,14 @@ class MyItemHandler extends Component {
 
     var errorTxt = null;
     if (this.props.error) {
-      errorTxt = this.props.error.message;
+      errorTxt = (
+        <Alert
+          style={{ margin: "auto", textAlign: "center", width: "60%" }}
+          variant="danger"
+        >
+          {this.props.error.message}
+        </Alert>
+      );
     }
 
     return (

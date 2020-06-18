@@ -15,4 +15,5 @@ export {
   removeItem,
   clearCart,
   addTotals,
+  getSingleItem,
 } from "./shop";

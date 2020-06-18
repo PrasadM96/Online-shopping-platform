@@ -11,6 +11,9 @@ const initialState = {
   cartSubTotal: 0,
   cartTax: 0,
   cartTotal: 0,
+  checkoutItem: null,
+  checkoutErr: null,
+  checkoutLoading: false,
 };
 
 const getProductsSuccess = (state, action) => {
@@ -124,7 +127,9 @@ const removeItem = (state, action) => {
   let tempItems = state.items;
   let tempCart = state.cart;
   tempCart = tempCart.filter((item) => item._id !== action.id);
-  const index = tempItems.indexOf(tempItems.find(item=>item._id===action.id))
+  const index = tempItems.indexOf(
+    tempItems.find((item) => item._id === action.id)
+  );
   let removedItem = tempItems[index];
   removedItem.inCart = false;
   removedItem.count = 0;
@@ -134,16 +139,13 @@ const removeItem = (state, action) => {
   const tempTax = subTotal * 0.1;
   const tax = parseFloat(tempTax.toFixed(2));
   const total = subTotal + tax;
-  return updateObject(
-    state,
-    {
-      cart: tempCart,
-      items: tempItems,
-      cartSubTotal: subTotal,
-      cartTax: tax,
-      cartTotal: total,
-    },
-  );
+  return updateObject(state, {
+    cart: tempCart,
+    items: tempItems,
+    cartSubTotal: subTotal,
+    cartTax: tax,
+    cartTotal: total,
+  });
 };
 
 const clearCart = (state, action) => {
@@ -167,6 +169,28 @@ const addTotals = (state, action) => {
     cartSubTotal: subTotal,
     cartTax: tax,
     cartTotal: total,
+  });
+};
+
+////////////////////////checkout-get item////////////////////////////////////
+const getCheckoutStart = (state, action) => {
+  return updateObject(state, {
+    checkoutLoading: true,
+    checkoutErr: null,
+  });
+};
+
+const getCheckoutSuccess = (state, action) => {
+  return updateObject(state, {
+    checkoutLoading: false,
+    checkoutItem: action.item.data,
+  });
+};
+
+const getCheckourFail = (state, action) => {
+  return updateObject(state, {
+    checkoutErr: action.error,
+    checkoutLoading: false,
   });
 };
 
@@ -198,6 +222,12 @@ const reducer = (state = initialState, action) => {
       return addTotals(state, action);
     case actionTypes.GET_ITEM:
       return getItem(state, action);
+    case actionTypes.GET_CHECKOUT_ITEM_START:
+      return getCheckoutStart(state, action);
+    case actionTypes.GET_CHECKOUT_ITEM_SUCCESS:
+      return getCheckoutSuccess(state, action);
+    case actionTypes.GET_CHECKOUT_ITEM_FAIL:
+      return getCheckourFail(state, action);
     default:
       return state;
   }
