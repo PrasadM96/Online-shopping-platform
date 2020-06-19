@@ -17,6 +17,7 @@ import SellingPage from "./components/Selling/SellingPage";
 import TabItems from "./components/Selling/TabItems";
 import Cart from "./components/Cart/Cart";
 import Default from "./components/Default";
+import RegisterModal from "./components/Authentication/RegisterModal";
 
 import Profile from "./components/Forms/Profile";
 
@@ -29,24 +30,46 @@ import SearchResults from "./containers/Navigation/ResultsDisplay";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import {register,login} from './store/actions/authActions';
+import {clearErrors} from './store/actions/errorActions';
+import {modalstate} from './store/actions/modalActions';
+
+
 class App extends Component {
 
   
   static propTypes = {
-    auth:PropTypes.object.isRequired
+    auth:PropTypes.object.isRequired,
+    clearErrors : PropTypes.func.isRequired,
+    modalstate : PropTypes.func.isRequired,
+    modal : PropTypes.bool
+    
 }
+
+
+toggle = () =>{
+  //clear errors
+  const {modal} =this.props
+  console.log(modal)
+  this.props.modalstate();
+  console.log(modal);
+
+}
+
 
   render() {
     const { isAuthenticated , user,isRegister} = this.props.auth
+    console.log(isAuthenticated)
     return (
       <div>
         <Layout
          isAuthenticated = {isAuthenticated}
          user ={user}
          isRegister = {isRegister}
+         toggle ={this.toggle}
          >
           {/* <SearchBarHandler /> */}
-
+    <RegisterModal />
           <Switch>
             <Route path="/" exact component={HomePage} />
             
@@ -59,7 +82,8 @@ class App extends Component {
               exact
               component={DisplayItemHandler}
             />
-            <Route path="/addtocart" component={AddtoCart} />
+            
+            <Route path="/addtocart"  component={AddtoCart}  />
             
             <Route path="/buyitnow" component={BuyitNow} />
             <Route path="/search-results/:item" component={SearchResults} />
@@ -73,9 +97,11 @@ class App extends Component {
 }
 
 const mapStateToProps = state =>({
-  auth:state.auth
+  auth:state.auth,
+  modalstate:state.modalstate,
+  
 })
 
-export default connect(mapStateToProps,null)(App);
+export default connect(mapStateToProps,{modalstate})(App);
 
 

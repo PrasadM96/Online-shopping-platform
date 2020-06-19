@@ -15,7 +15,8 @@ const initialState =  {
   isAuthenticated : false,
   isRegister : false,
   isLoading :false,
-  user:null
+  user:null,
+  
 }
 
 
@@ -45,7 +46,7 @@ export default function(state=initialState,action){
                 isAuthenticated:true,
                 isLoading:false,
                 isRegister : true,
-                
+               
                 
   
             };

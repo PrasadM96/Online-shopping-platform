@@ -101,9 +101,11 @@ const layout = (props) => {
                     <Nav.Link as={NavLink} to="/cart" href="/cart">
                     My Cart
                     </Nav.Link>
-                    <NavItem>
-                        <RegisterModal />
-                    </NavItem>
+                    
+              <Nav.Link onClick={props.toggle} href="#">
+                  Register
+              </Nav.Link>
+              
                     
               </Fragment>}
           </Nav>
