@@ -24,7 +24,7 @@ const details = (props) => {
         </Form.Row>
 
         <Form.Group controlId="formGridAddress1">
-          <Form.Label>Address</Form.Label>
+          <Form.Label>Address 1</Form.Label>
           <Form.Control
             onChange={props.address1Handler}
             placeholder="1234 Main St"
@@ -35,27 +35,30 @@ const details = (props) => {
           <Form.Label>Address 2</Form.Label>
           <Form.Control
             onChange={props.address2Handler}
-            placeholder="Apartment, studio, or floor"
+            placeholder="1234 Main St"
           />
         </Form.Group>
 
         <Form.Row>
           <Form.Group as={Col} controlId="formGridCity">
-            <Form.Label>City</Form.Label>
-            <Form.Control onChange={props.cityHandler} />
+            <Form.Label>Country</Form.Label>
+            <Form.Control
+              onChange={props.countryHandler}
+              placeholder="country"
+            />
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridState">
-            <Form.Label>State</Form.Label>
-            <Form.Control onChange={props.statesHandler} as="select">
-              <option>western</option>
-              <option>north</option>
-            </Form.Control>
+            <Form.Label>Province</Form.Label>
+            <Form.Control
+              onChange={props.provinceHandler}
+              placeholder="Western"
+            ></Form.Control>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridZip">
-            <Form.Label>Zip</Form.Label>
-            <Form.Control onChange={props.zipHandler} />
+            <Form.Label>Zip Code</Form.Label>
+            <Form.Control onChange={props.zipCodeHandler} placeholder="zip" />
           </Form.Group>
         </Form.Row>
 

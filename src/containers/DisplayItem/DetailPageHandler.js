@@ -42,6 +42,7 @@ class DetailPageHandler extends Component {
         inCart={item.inCart}
         buyitNowHandler={this.buyitNowHandler}
         addtoCartHandler={this.addtoCartHandler}
+        cart={this.props.cart}
       />
     );
   }
@@ -50,6 +51,7 @@ class DetailPageHandler extends Component {
 const mapStateToProps = (state) => {
   return {
     items: state.shop.items,
+    cart: state.shop.cart,
   };
 };
 

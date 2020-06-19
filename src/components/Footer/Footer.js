@@ -2,7 +2,7 @@ import React from "react";
 import { Jumbotron, Container, Row, Col } from "react-bootstrap";
 import "./Footer.css";
 
-const footer = props => {
+const footer = (props) => {
   return (
     <div className="footer">
       <Container>

@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
-import { tempData } from "../../assets/tempData";
+import { tempData, tempData2 } from "../../assets/tempData";
 
 export const getProductSuccess = (items) => {
   return {

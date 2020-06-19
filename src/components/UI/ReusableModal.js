@@ -25,7 +25,7 @@ function ReuseableModal(props) {
         <Button
           onClick={() => {
             handleClose();
-            props.click();
+            //props.click();
           }}
           //   onClick={(e) => props.submitHandler(e)}
 

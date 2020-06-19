@@ -17,9 +17,14 @@ const initialState = {
 };
 
 const getProductsSuccess = (state, action) => {
+  let items = [];
+  action.items.forEach((item) => {
+    const singleItem = { ...item };
+    items = [...items, singleItem];
+  });
   return updateObject(state, {
     loading: false,
-    items: action.items,
+    items: items,
   });
 };
 const getProductsFail = (state, action) => {
@@ -62,7 +67,7 @@ const getItem = (state, action) => {
 };
 
 const addToCart = (state, action) => {
-  let tempItems = [...state.items];
+  let tempItems = state.items;
   const item = state.items.find((item) => item._id === action.id);
   const index = tempItems.indexOf(item);
   const product = tempItems[index];
@@ -71,7 +76,6 @@ const addToCart = (state, action) => {
   const price = product.price;
   product.total = price;
   return updateObject(state, {
-    items: tempItems,
     cart: [...state.cart, product],
   });
 };
@@ -124,28 +128,27 @@ const decrement = (state, action) => {
 };
 
 const removeItem = (state, action) => {
-  let tempItems = state.items;
   let tempCart = state.cart;
   tempCart = tempCart.filter((item) => item._id !== action.id);
-  const index = tempItems.indexOf(
-    tempItems.find((item) => item._id === action.id)
-  );
-  let removedItem = tempItems[index];
-  removedItem.inCart = false;
-  removedItem.count = 0;
-  removedItem.total = 0;
-  let subTotal = 0;
-  tempCart.map((item) => (subTotal += item.total));
-  const tempTax = subTotal * 0.1;
-  const tax = parseFloat(tempTax.toFixed(2));
-  const total = subTotal + tax;
-  return updateObject(state, {
-    cart: tempCart,
-    items: tempItems,
-    cartSubTotal: subTotal,
-    cartTax: tax,
-    cartTotal: total,
-  });
+  // const index = tempItems.indexOf(
+  //   tempItems.find((item) => item._id === action.id)
+  // );
+  // let removedItem = tempItems[index];
+  // removedItem.inCart = false;
+  // removedItem.count = 0;
+  // removedItem.total = 0;
+  // let subTotal = 0;
+  // tempCart.map((item) => (subTotal += item.total));
+  // const tempTax = subTotal * 0.1;
+  // const tax = parseFloat(tempTax.toFixed(2));
+  // const total = subTotal + tax;
+  // return updateObject(state, {
+  //   cart: tempCart,
+  //   items: tempItems,
+  //   cartSubTotal: subTotal,
+  //   cartTax: tax,
+  //   cartTotal: total,
+  // });
 };
 
 const clearCart = (state, action) => {
@@ -154,6 +157,9 @@ const clearCart = (state, action) => {
     state,
     {
       cart: [],
+      cartSubTotal: 0,
+      cartTax: 0,
+      cartTotal: 0,
     },
     console.log(state.cart)
   );
