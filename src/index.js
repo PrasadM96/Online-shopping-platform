@@ -14,6 +14,7 @@ import authReducer from "./store/reducers/authReducer";
 import productsReducer from "./store/reducers/products";
 import errorReducer from "./store/reducers/errorReducer";
 import shopReducer from "./store/reducers/shop";
+import modalReducer from "./store/reducers/modalReducer";
 
 const composeEnhancers =
   process.env.NODE_ENV === "development"
@@ -24,6 +25,8 @@ const rootReducer = combineReducers({
   auth: authReducer,
   products: productsReducer,
   shop: shopReducer,
+  error: errorReducer,
+  modal: modalReducer,
 });
 
 const store = createStore(

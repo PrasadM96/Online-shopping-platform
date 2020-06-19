@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./style.css";
+import "./RegisterModal.css";
 import { Button, Modal, Col, Form, Nav, Alert } from "react-bootstrap";
 
 import { connect } from "react-redux";
@@ -7,16 +7,17 @@ import PropTypes from "prop-types";
 
 import { register, login } from "../../store/actions/authActions";
 import { clearErrors } from "../../store/actions/errorActions";
+import { modalstate } from "../../store/actions/modalActions";
 
 class RegisterModal extends Component {
   state = {
-    modal: false,
     first_name: "",
     last_name: "",
     email: "",
     password: "",
     msgLogin: null,
     msgRegister: null,
+    //  modal:false
   };
 
   static propTypes = {
@@ -26,10 +27,13 @@ class RegisterModal extends Component {
     register: PropTypes.func.isRequired,
     login: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
+    modalstate: PropTypes.func.isRequired,
+    modal: PropTypes.bool,
   };
 
   componentDidUpdate(prevProps) {
-    const { error, isAuthenticated, isRegister } = this.props;
+    const { error, isAuthenticated, isRegister, modal } = this.props;
+
     if (error !== prevProps.error) {
       if (error.id === "REGISTER_FAIL") {
         //check for register error
@@ -44,9 +48,9 @@ class RegisterModal extends Component {
       }
     }
     //if authenticated close the modal
-    if (this.state.modal) {
-      console.log(isRegister);
-      console.log(isAuthenticated);
+    if (modal) {
+      // console.log(isRegister)
+      // console.log(isAuthenticated)
       if (isAuthenticated) {
         this.toggle();
       }
@@ -60,10 +64,11 @@ class RegisterModal extends Component {
 
   toggle = () => {
     //clear errors
+    // console.log(this.state.modal)
     this.props.clearErrors();
-    this.setState({
-      modal: !this.state.modal,
-    });
+    this.props.modalstate();
+    // this.setState({modal :!this.state.modal});
+    //console.log(this.state.modal)
   };
 
   onChange = (e) => {
@@ -71,11 +76,14 @@ class RegisterModal extends Component {
   };
 
   onClickSignUp = (e) => {
+    this.props.clearErrors();
     var element = document.getElementById("container1");
     element.classList.remove("right-panel-active");
+    //  console.log(this.state.modal)
   };
 
   onClickSignIn = (e) => {
+    this.props.clearErrors();
     var element = document.getElementById("container1");
     element.classList.add("right-panel-active");
   };
@@ -110,16 +118,12 @@ class RegisterModal extends Component {
   };
 
   render() {
+    const { modal } = this.props;
+    // console.log(modal);
     return (
       <div>
-        <Nav.Item>
-          <Nav.Link onClick={this.toggle} href="#">
-            Register
-          </Nav.Link>
-        </Nav.Item>
-
         <Modal
-          show={this.state.modal}
+          show={modal}
           onHide={this.toggle}
           dialogClassName="custom-modal-style"
         >
@@ -309,7 +313,11 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   isRegister: state.auth.isRegister,
   error: state.error,
+  modal: state.modal.modal,
 });
-export default connect(mapStateToProps, { register, clearErrors, login })(
-  RegisterModal
-);
+export default connect(mapStateToProps, {
+  register,
+  clearErrors,
+  login,
+  modalstate,
+})(RegisterModal);
