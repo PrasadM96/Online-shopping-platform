@@ -7,10 +7,14 @@ import CartList from "./CartList";
 import CartTotals from "./CartTotals";
 import * as actionTypes from "../../store/actions/actionTypes";
 import { tempData } from "../../assets/tempData";
+import * as actions from "../../store/actions/index";
+import { ThemeProvider } from "styled-components";
+import { Spinner, Alert } from "react-bootstrap";
 
 class Cart extends Component {
   componentDidMount = () => {
-    this.props.addTotals();
+    // this.props.addTotals();
+    this.props.ongetCartItems();
   };
   /*increment = (id) => {
     let tempCart = [...this.props.cart];
@@ -80,34 +84,79 @@ class Cart extends Component {
       cartTotal: total,
     });
   };*/
+
+  checkout = () => {
+    console.log("/checkout");
+
+    this.props.history.push("/checkout");
+  };
+
   render() {
+    var loading = null;
+    if (this.props.state.loading) {
+      loading = (
+        <div style={{ width: "100%", margin: "10% 0", textAlign: "center" }}>
+          <Spinner animation="border" variant="primary" />;
+        </div>
+      );
+    }
+    var error = null;
+    if (this.props.state.error) {
+      error = (
+        <Alert
+          style={{ margin: " 2% auto", textAlign: "center", width: "60%" }}
+          variant="danger"
+        >
+          {this.props.state.error}
+        </Alert>
+      );
+    }
+
+    var cartUi = null;
+
     if (this.props.state.cart.length > 0) {
-      return (
+      cartUi = (
         <section>
           <Title name="your" title="cart" />
           <CartColumns />
           <CartList
             cart={this.props.state.cart}
-            increment={this.props.increment}
-            decrement={this.props.decrement}
+            cartItemCount={this.props.state.cartItemCount}
+            // increment={this.props.increment}
+            // decrement={this.props.decrement}
+            increment={this.props.onUpdateCartItem}
+            decrement={this.props.onUpdateCartItem}
             removeItem={this.props.removeItem}
           />
           <CartTotals
             state={this.props.state}
             clearCart={this.props.clearCart}
             history={this.props.history}
+            checkout={this.checkout}
           />
         </section>
       );
     } else {
-      return <EmptyCart />;
+      if (
+        this.props.state.error !== null &&
+        this.props.state.loading === true
+      ) {
+        cartUi = <EmptyCart />;
+      }
     }
+    return (
+      <div>
+        {loading}
+        {error}
+        {cartUi}
+      </div>
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    state:state.shop
+    state: state.shop,
   };
 };
 
@@ -115,11 +164,13 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (id) => dispatch({ type: actionTypes.ADD_TO_CART, id: id }),
     clearCart: () => dispatch({ type: actionTypes.CLEAR_CART }),
-    removeItem: (id) =>
-      dispatch({ type: actionTypes.REMOVE_ITEM, id: id }),
+    removeItem: (id) => dispatch({ type: actionTypes.REMOVE_ITEM, id: id }),
     increment: (id) => dispatch({ type: actionTypes.INCREMENT, id: id }),
     decrement: (id) => dispatch({ type: actionTypes.DECREMENT, id: id }),
-    addTotals:()=>dispatch({type:actionTypes.ADD_TOTALS})
+    addTotals: () => dispatch({ type: actionTypes.ADD_TOTALS }),
+    ongetCartItems: () => dispatch(actions.getCartItem()),
+    onUpdateCartItem: (prodId, amount) =>
+      dispatch(actions.updateCartItem(prodId, amount)),
   };
 };
 

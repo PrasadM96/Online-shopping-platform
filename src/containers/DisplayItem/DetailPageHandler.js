@@ -8,6 +8,9 @@ class DetailPageHandler extends Component {
 
   componentDidMount() {
     console.log(this.props.items);
+    if (this.props.addtoCartSuccess) {
+      this.props.history.push("/cart");
+    }
   }
 
   buyitNowHandler = (id) => {
@@ -15,8 +18,9 @@ class DetailPageHandler extends Component {
   };
 
   addtoCartHandler = (id) => {
+    this.props.onAddItemToCart(id);
     this.props.history.push("/cart");
-    this.props.addToCart(id);
+    //this.props.addToCart(id);
   };
 
   render() {
@@ -52,12 +56,14 @@ const mapStateToProps = (state) => {
   return {
     items: state.shop.items,
     cart: state.shop.cart,
+    addtoCartSuccess: state.shop.addtoCartSuccess,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (id) => dispatch(actions.addToCart(id)),
+    onAddItemToCart: (id) => dispatch(actions.addItemToCart(id)),
   };
 };
 

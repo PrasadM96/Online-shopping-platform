@@ -59,7 +59,7 @@ class App extends Component {
           isRegister={isRegister}
           toggle={this.toggle}
         >
-          {/* <SearchBarHandler /> */}
+          <SearchBarHandler />
           <RegisterModal />
           <Switch>
             <Route path="/" exact component={HomePage} />

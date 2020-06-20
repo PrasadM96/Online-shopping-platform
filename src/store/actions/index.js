@@ -16,4 +16,7 @@ export {
   clearCart,
   addTotals,
   getSingleItem,
+  getCartItem,
+  updateCartItem,
+  addItemToCart,
 } from "./shop";
