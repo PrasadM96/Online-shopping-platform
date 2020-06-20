@@ -55,9 +55,12 @@ export const postProduct = (item) => {
     data.append("quantity", item.quantity);
     data.append("shippingFee", item.shippingFee);
 
+    const token = localStorage.getItem("token");
+
     axios
       .post("/shop/post-product", data, {
         headers: {
+          "x-auth-token": token,
           Accept: "*/*",
           "content-type":
             "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
