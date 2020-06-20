@@ -3,11 +3,10 @@ import "./App.css";
 import Layout from "./components/Navigation/Layout";
 import { Route, Switch } from "react-router-dom";
 
-import SignInHandler from "./containers/Authentication/SignInHandler";
-import SignUpHandler from "./containers/Authentication/SignUpHandler";
-import SearchBarHandler from "./containers/Navigation/SearchHandler";
 
+import SearchBarHandler from "./containers/Navigation/SearchHandler";
 import ProfileHandler from "./containers/Forms/ProfileHandler";
+//import Profile from "./components/Pro/ProfileHandler";
 
 // import ShippingDetailsHandler from "./containers/ShippingDetailsHandler";
 
@@ -19,7 +18,7 @@ import Cart from "./components/Cart/Cart";
 import Default from "./components/Default";
 import RegisterModal from "./components/Authentication/RegisterModal";
 
-import Profile from "./components/Forms/Profile";
+import Profile from "./components/Profile/Profile";
 
 import DisplayItemHandler from "./containers/DisplayItem/DisplayItemHandler";
 import DetailPageHandler from "./containers/DisplayItem/DetailPageHandler";
@@ -68,7 +67,7 @@ toggle = () =>{
          isRegister = {isRegister}
          toggle ={this.toggle}
          >
-          {/* <SearchBarHandler /> */}
+           <SearchBarHandler /> 
     <RegisterModal />
           <Switch>
             <Route path="/" exact component={HomePage} />
