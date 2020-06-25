@@ -103,10 +103,16 @@ export const getSellingProductFail = (error) => {
 };
 
 export const getSellingProduct = () => {
+  const token = localStorage.getItem("token");
+
   return (dispatch) => {
     dispatch(getSellingProductStart());
     axios
-      .get("/shop/get-selling-products")
+      .get("/shop/get-selling-products", {
+        headers: {
+          "x-auth-token": token,
+        },
+      })
       .then((products) => {
         dispatch(getSellingProductSuccess(products.data));
       })
@@ -134,12 +140,21 @@ export const delteItemSuccess = () => {
 };
 
 export const deleteSellingItem = (prodId) => {
+  const token = localStorage.getItem("token");
   return (dispatch) => {
     dispatch(deleteItemStart());
     axios
-      .post("/shop/delete-selling-item", {
-        prodId: prodId,
-      })
+      .post(
+        "/shop/delete-selling-item",
+        {
+          prodId: prodId,
+        },
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      )
       .then((response) => {
         dispatch(delteItemSuccess(prodId));
         dispatch(getSellingProduct());

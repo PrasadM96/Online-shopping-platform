@@ -39,7 +39,8 @@ export default function(state=initialState,action){
       case LOGIN_SUCCESS:
         if(action.payload != null){
             localStorage.setItem('token',action.payload.token);
-            localStorage.setItem('first_name',action.payload.user.first_name);}
+            localStorage.setItem('first_name',action.payload.user.first_name);
+            localStorage.setItem('user_id',action.payload.user.id);}
             return{
                 ...state,
                 ...action.payload,

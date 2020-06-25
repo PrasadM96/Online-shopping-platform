@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import DetailPage from "../../components/DisplayItem/DetailPage";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
+import axios from "axios";
 
 class DetailPageHandler extends Component {
-  state = {};
+  state = {
+    loading: false,
+    error: null,
+  };
 
   componentDidMount() {
     console.log(this.props.items);
@@ -14,12 +18,51 @@ class DetailPageHandler extends Component {
   }
 
   buyitNowHandler = (id) => {
-    this.props.history.push("/checkout/" + this.props.match.params.id);
+    if (!this.props.isAuthenticated) {
+      this.props.onModalState();
+      console.log("solve");
+    } else {
+      this.props.history.push("/checkout/" + this.props.match.params.id);
+    }
   };
 
   addtoCartHandler = (id) => {
-    this.props.onAddItemToCart(id);
-    this.props.history.push("/cart");
+    if (!this.props.isAuthenticated) {
+      this.props.onModalState();
+      console.log("solve");
+    } else {
+      console.log("To cart");
+
+      //this.props.onAddItemToCart(id);
+      const token = localStorage.getItem("token");
+
+      this.setState({ loading: true });
+      axios
+        .post(
+          "/shop/add-to-cart",
+          { productId: id },
+          {
+            headers: {
+              "x-auth-token": token,
+            },
+          }
+        )
+        .then((results) => {
+          // dispatch(addToCartSuccess(results));
+          this.setState({
+            loading: false,
+            error: null,
+          });
+          this.props.history.push("/cart");
+        })
+        .catch((err) => {
+          this.setState({
+            loading: false,
+            error: err.message,
+          });
+          // dispatch(addToCartFail(err));
+        });
+    }
     //this.props.addToCart(id);
   };
 
@@ -43,6 +86,8 @@ class DetailPageHandler extends Component {
         seller={"email"}
         id={item._id}
         description={item.description}
+        loading={this.state.loading}
+        error={this.state.error}
         inCart={item.inCart}
         buyitNowHandler={this.buyitNowHandler}
         addtoCartHandler={this.addtoCartHandler}
@@ -57,6 +102,7 @@ const mapStateToProps = (state) => {
     items: state.shop.items,
     cart: state.shop.cart,
     addtoCartSuccess: state.shop.addtoCartSuccess,
+    isAuthenticated: state.auth.isAuthenticated,
   };
 };
 
@@ -64,6 +110,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (id) => dispatch(actions.addToCart(id)),
     onAddItemToCart: (id) => dispatch(actions.addItemToCart(id)),
+    onModalState: () => dispatch(actions.modalstate()),
   };
 };
 

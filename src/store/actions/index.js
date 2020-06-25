@@ -16,7 +16,8 @@ export {
   clearCart,
   addTotals,
   getSingleItem,
-  getCartItem,
-  updateCartItem,
-  addItemToCart,
 } from "./shop";
+
+export { modalstate } from "./modalActions";
+
+export { getCartItem, updateCartItem, addItemToCart } from "./cart";

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Profile from "../../components/Forms/Profile";
+import Profile from "../../components/Profile/Profile";
 import {profile} from '../Authentication/UserFunctions'
 
 class ProfileHandler extends Component {
@@ -18,7 +18,7 @@ class ProfileHandler extends Component {
 
   componentDidMount() {
     // if (localStorage.checkbox ) {
-         this.setState({
+      /*   this.setState({
              user_id:localStorage.user_id,
              firstname:localStorage.first_name,
              lastname:localStorage.last_name,
@@ -29,7 +29,7 @@ class ProfileHandler extends Component {
              province:localStorage.province,
              country:localStorage.country
          })
- 
+ */
         }
   /*componentDidMount() {
    // if (localStorage.checkbox ) {
@@ -45,6 +45,7 @@ onChangeValue = event => {
   this.setState({
       [event.target.name]: event.target.value
   })
+ // console.log(this.state.event.target.value);
   
 }
   /*isCheckedHandler=event=>{
@@ -55,11 +56,10 @@ onChangeValue = event => {
 
   submitHandler = e => {
     e.preventDefault();
-    if (this.state.firstname !== null ) {
+   
       console.log("submit signin");
 
   
-    }
    
     const user = {
       firstname : this.state.firstname,
@@ -70,7 +70,7 @@ onChangeValue = event => {
       zip:this.state.zip,
       country:this.state.country,
       province:this.state.province,
-      user_id:this.state.user_id
+      user_id:localStorage.user_id
 
   }
 
@@ -131,7 +131,7 @@ onChangeValue = event => {
 
   render() {
     var err=null
-   
+   console.log(this.state.city);
     
     return (
       <Profile

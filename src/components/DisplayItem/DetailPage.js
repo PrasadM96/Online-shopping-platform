@@ -1,5 +1,13 @@
 import React from "react";
-import { Container, Row, Col, Carousel, Card, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Carousel,
+  Card,
+  Button,
+  Spinner,
+} from "react-bootstrap";
 
 const detailPage = (props) => {
   var itemArr = [];
@@ -21,6 +29,15 @@ const detailPage = (props) => {
   });
 
   const { addtoCartHandler, id, inCart } = props;
+
+  var text = "add to cart";
+  if (props.loading) {
+    text = "Loading...";
+  }
+  var error = null;
+  if (props.error) {
+    error = <div style={{ color: "red", fontSize: "8px" }}>{props.error}</div>;
+  }
 
   return (
     <Card style={{ margin: "5% 5%" }}>
@@ -76,9 +93,9 @@ const detailPage = (props) => {
                     onClick={() => addtoCartHandler(id)}
                     style={{ marginTop: "5%", width: "100%" }}
                     variant="primary"
-                    disabled={inCart}
+                    disabled={props.loading}
                   >
-                    Add to cart
+                    {text}
                   </Button>
                 </Col>
               </Row>

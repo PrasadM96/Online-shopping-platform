@@ -4,8 +4,10 @@ import PayPalButton from "../PayPalButton";
 import { Button } from "react-bootstrap";
 
 export default function CartTotals(props) {
-  const { cartSubTotal, cartTax /*cartTotal*/ } = props.state;
+  const { cartSubTotal, cartTax } = props;
   const { clearCart, history } = props;
+  console.log(cartTax);
+
   return (
     <React.Fragment>
       <div className="container">
@@ -30,7 +32,7 @@ export default function CartTotals(props) {
             </h5>
             <h5>
               <span className="text-title">total :</span>
-              {/* <strong>$ {cartTotal}</strong> */}
+              <strong>$ {cartSubTotal + cartTax}</strong>
             </h5>
             {/* <PayPalButton
               // total={cartTotal}

@@ -113,15 +113,34 @@ class Cart extends Component {
     }
 
     var cartUi = null;
+    var cartSubTotal = 0;
+    var cartTax = 0;
 
     if (this.props.state.cart.length > 0) {
+      const cartCount = this.props.state.cartItemCount.items;
+      var tempArr = [];
+      cartCount.map((element) => {
+        const temp = this.props.state.cart.filter(
+          (x) => x._id === element.productId
+        );
+        if (temp) {
+          const t1 = temp[0];
+          t1.itemCount = element.quantity;
+          cartSubTotal = cartSubTotal + t1.price * t1.itemCount;
+          console.log(t1.shippingFee);
+
+          cartTax = cartTax + parseFloat(t1.shippingFee) * t1.itemCount;
+          tempArr.push(t1);
+        }
+      });
+
       cartUi = (
         <section>
           <Title name="your" title="cart" />
           <CartColumns />
           <CartList
-            cart={this.props.state.cart}
-            cartItemCount={this.props.state.cartItemCount}
+            cart={tempArr}
+            // cartItemCount={this.props.state.cartItemCount}
             // increment={this.props.increment}
             // decrement={this.props.decrement}
             increment={this.props.onUpdateCartItem}
@@ -129,7 +148,9 @@ class Cart extends Component {
             removeItem={this.props.removeItem}
           />
           <CartTotals
-            state={this.props.state}
+            // state={this.props.state}
+            cartSubTotal={cartSubTotal}
+            cartTax={cartTax}
             clearCart={this.props.clearCart}
             history={this.props.history}
             checkout={this.checkout}
@@ -156,7 +177,8 @@ class Cart extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    state: state.shop,
+    // state: state.shop,
+    state: state.cart,
   };
 };
 
