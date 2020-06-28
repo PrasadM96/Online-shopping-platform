@@ -60,7 +60,12 @@ export const updateItemCountFail = (error) => {
   };
 };
 
-export const updateCartItem = (prodId, amount) => {
+export const updateCartItem = (prodId, amount, cartQuantity) => {
+  if (cartQuantity === 1 && amount === -1) {
+    return (dispatch) => {
+      dispatch(removeCartItem(prodId, cartQuantity));
+    };
+  }
   const token = localStorage.getItem("token");
   return (dispatch) => {
     dispatch(updateItemCountStart());
@@ -68,6 +73,30 @@ export const updateCartItem = (prodId, amount) => {
       .post(
         "/shop/update-cart",
         { productId: prodId, newAmount: amount },
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      )
+      .then((results) => {
+        dispatch(updateItemCountSuccess(results.data));
+        dispatch(getCartItem());
+      })
+      .catch((err) => {
+        dispatch(updateItemCountFail(err));
+      });
+  };
+};
+
+export const removeCartItem = (prodId, count) => {
+  const token = localStorage.getItem("token");
+  return (dispatch) => {
+    dispatch(updateItemCountStart());
+    axios
+      .post(
+        "/shop/remove-from-cart",
+        { productId: prodId, itemCount: count },
         {
           headers: {
             "x-auth-token": token,

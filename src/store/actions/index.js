@@ -20,4 +20,4 @@ export {
 
 export { modalstate } from "./modalActions";
 
-export { getCartItem, updateCartItem, addItemToCart } from "./cart";
+export { getCartItem, updateCartItem, addItemToCart, removeCartItem, clearCartItems } from "./cart";

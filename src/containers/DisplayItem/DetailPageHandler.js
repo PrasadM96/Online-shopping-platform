@@ -35,7 +35,7 @@ class DetailPageHandler extends Component {
 
       //this.props.onAddItemToCart(id);
       const token = localStorage.getItem("token");
-
+      
       this.setState({ loading: true });
       axios
         .post(

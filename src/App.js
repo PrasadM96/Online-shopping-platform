@@ -65,7 +65,7 @@ class App extends Component {
             <Route path="/selling" component={TabItems} />
             <Route path="/profile" component={ProfileHandler} />
             <Route path="/category/:type/:id" component={DetailPageHandler} />
-            <Route path="/cart" component={Cart} />
+            <Route path="/cart" component={Cart}/>
             <Route
               path="/category/:type"
               exact

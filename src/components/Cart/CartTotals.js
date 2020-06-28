@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 
 export default function CartTotals(props) {
   const { cartSubTotal, cartTax } = props;
-  const { clearCart, history } = props;
+  const { clearCart, history, cart } = props;
   console.log(cartTax);
 
   return (
@@ -17,7 +17,7 @@ export default function CartTotals(props) {
               <button
                 className="btn btn-outline-danger text-uppercase mb-3 px-5"
                 type="button"
-                onClick={() => clearCart()}
+                onClick={() => clearCart(cart)}
               >
                 clear cart
               </button>

@@ -1,7 +1,9 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/fontawesome-free-solid";
 
 export default function CartItem(props) {
-  const { _id, title, imageUrls, price } = props.item;
+  const { _id, title, imageUrls, price, count } = props.item;
   const { increment, decrement, removeItem } = props;
   // console.log(cartItemCount);
 
@@ -10,7 +12,7 @@ export default function CartItem(props) {
       <div className="col-10 mx-auto col-lg-2">
         <img
           src={imageUrls[0]}
-          style={{ width: "5rem", height: "5rem" }}
+          style={{ width: "6rem", height: "5rem" }}
           className="img-fluid"
           alt="product"
         />
@@ -28,14 +30,14 @@ export default function CartItem(props) {
           <div>
             <span
               className="btn btn-black mx-1"
-              onClick={() => decrement(_id, -1)}
+              onClick={() => decrement(_id, -1, props.count)}
             >
               -
             </span>
             <span className="btn btn-black mx-1">{props.count}</span>
             <span
               className="btn btn-black mx-1"
-              onClick={() => increment(_id, 1)}
+              onClick={() => increment(_id, 1, props.count)}
             >
               +
             </span>
@@ -43,8 +45,8 @@ export default function CartItem(props) {
         </div>
       </div>
       <div className="col-10 mx-auto col-lg-2">
-        <div className="cart-icon" onClick={() => removeItem(_id)}>
-          <i className="fas fa-trash>"></i>delete
+        <div className="cart-icon" onClick={() => removeItem(_id, props.count)}>
+        <FontAwesomeIcon icon="trash-alt" />
         </div>
       </div>
       <div className="col-10 mx-auto col-lg-2">

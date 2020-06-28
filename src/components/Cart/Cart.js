@@ -145,13 +145,14 @@ class Cart extends Component {
             // decrement={this.props.decrement}
             increment={this.props.onUpdateCartItem}
             decrement={this.props.onUpdateCartItem}
-            removeItem={this.props.removeItem}
+            removeItem={this.props.onRemoveCartItem}
           />
           <CartTotals
             // state={this.props.state}
+            cart={tempArr}
             cartSubTotal={cartSubTotal}
             cartTax={cartTax}
-            clearCart={this.props.clearCart}
+            clearCart={this.props.onClearCart}
             history={this.props.history}
             checkout={this.checkout}
           />
@@ -191,8 +192,12 @@ const mapDispatchToProps = (dispatch) => {
     decrement: (id) => dispatch({ type: actionTypes.DECREMENT, id: id }),
     addTotals: () => dispatch({ type: actionTypes.ADD_TOTALS }),
     ongetCartItems: () => dispatch(actions.getCartItem()),
-    onUpdateCartItem: (prodId, amount) =>
-      dispatch(actions.updateCartItem(prodId, amount)),
+    onUpdateCartItem: (prodId, amount, cartQuantity) =>
+      dispatch(actions.updateCartItem(prodId, amount, cartQuantity)),
+    onRemoveCartItem: (prodId, count) =>
+      dispatch(actions.removeCartItem(prodId, count)),
+    onClearCart: (cartItemsArr) =>
+      dispatch(actions.clearCartItems(cartItemsArr)),
   };
 };
 
