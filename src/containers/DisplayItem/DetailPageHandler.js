@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DetailPage from "../../components/DisplayItem/DetailPage";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions";
+import * as actions from "../../store/actions/index";
 import axios from "axios";
 
 class DetailPageHandler extends Component {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Layout from "./components/Navigation/Layout";
 import { Route, Switch } from "react-router-dom";
-
+import * as actions from "./store/actions/index";
 import SearchBarHandler from "./containers/Navigation/SearchHandler";
 import ProfileHandler from "./containers/Forms/ProfileHandler";
 //import Profile from "./components/Pro/ProfileHandler";
@@ -29,20 +29,26 @@ import PropTypes from "prop-types";
 import { register, login } from "./store/actions/authActions";
 import { clearErrors } from "./store/actions/errorActions";
 import { modalstate } from "./store/actions/modalActions";
+import { authCheckState } from "./store/actions/authActions";
 
 class App extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     clearErrors: PropTypes.func.isRequired,
     modalstate: PropTypes.func.isRequired,
+    authCheckState: PropTypes.func.isRequired,
     modal: PropTypes.bool,
   };
+
+  componentDidMount() {
+    this.props.onAuthCheckState();
+  }
 
   toggle = () => {
     //clear errors
     const { modal } = this.props;
     console.log(modal);
-    this.props.modalstate();
+    this.props.onModatState();
     console.log(modal);
   };
 
@@ -91,4 +97,11 @@ const mapStateToProps = (state) => ({
   modalstate: state.modalstate,
 });
 
-export default connect(mapStateToProps, { modalstate })(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAuthCheckState: () => dispatch(actions.authCheckState()),
+    onModatState: () => dispatch(actions.modalstate()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

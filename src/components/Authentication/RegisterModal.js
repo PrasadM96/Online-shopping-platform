@@ -58,7 +58,9 @@ class RegisterModal extends Component {
 
     if (isRegister) {
       var element = document.getElementById("container1");
-      element.classList.remove("right-panel-active");
+      if (element) {
+        element.classList.remove("right-panel-active");
+      }
     }
   }
 
