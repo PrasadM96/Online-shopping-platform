@@ -192,3 +192,11 @@ export const clearCartItems = (cartItemArr) => {
       });
   };
 };
+
+export const setTotal = (cartSubTotal, cartTax) => {
+  return {
+    type: actionTypes.SET_TOTAL,
+    cartSubTotal: cartSubTotal,
+    cartTax: cartTax,
+  };
+};

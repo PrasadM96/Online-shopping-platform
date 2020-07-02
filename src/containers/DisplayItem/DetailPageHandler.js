@@ -27,7 +27,9 @@ class DetailPageHandler extends Component {
   };
 
   addtoCartHandler = (id) => {
+    console.log(this.props)
     if (!this.props.isAuthenticated) {
+      this.props.history.push({oldUrl:this.props.match.url})
       this.props.onModalState();
       console.log("solve");
     } else {

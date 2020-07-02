@@ -28,4 +28,5 @@ export {
   addItemToCart,
   removeCartItem,
   clearCartItems,
+  setTotal,
 } from "./cart";

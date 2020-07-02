@@ -2,18 +2,23 @@ import React from "react";
 import { Button, Container, Row, Col, Card, Image } from "react-bootstrap";
 
 const buyItNow = (props) => {
-  var totalPrice = props.cartTotal;
-  console.log(props.cartItems);
+  var totalPrice = 0;
+  var withoutShipping = props.cartSubTotal;
+  var totalShippingFee = props.cartTax;
+  var buyingQuantity = props.buyingQuantity;
 
   if (props.currentItems) {
-    var price = +props.currentItems[0].price;
-    var buyingQuantity = +props.buyingQuantity;
-    var withoutShipping = price * buyingQuantity;
-    var totalShippingFee = props.currentItems[0].shippingFee;
-    totalPrice = totalPrice + withoutShipping + totalShippingFee;
+    var price = props.currentItems[0].price;
+    withoutShipping += price * buyingQuantity;
+    totalShippingFee += props.currentItems[0].shippingFee;
+    totalPrice += withoutShipping + totalShippingFee;
+  } else {
+    totalPrice = props.cartTotal;
   }
   if (props.toggle) {
-    totalPrice = totalPrice - props.cartTotal;
+    totalPrice -= props.cartTotal;
+    withoutShipping -= props.cartSubTotal;
+    totalShippingFee -= props.cartTax;
   }
 
   var details = <div className="text-left">Update your shipping details</div>;
@@ -33,7 +38,7 @@ const buyItNow = (props) => {
     );
   }
 
-  console.log("buy it noe", props.cartItems);
+  console.log("buy it now");
 
   var cartitemArr = <div className="text-left ">No cart items</div>;
   if (props.cartItems.length > 0) {
@@ -58,7 +63,7 @@ const buyItNow = (props) => {
                 <input
                   name="buyingQuantity"
                   style={{ marginLeft: "5%" }}
-                  defaultValue={1}
+                  defaultValue={item.itemCount}
                   min="1"
                   max={props.quantity}
                   type="Number"
@@ -174,7 +179,9 @@ const buyItNow = (props) => {
           <Col md="4">
             <Card className="sticky-top">
               <Card.Body>
-                <div class="float-left">items ({props.buyingQuantity})</div>
+                <div class="float-left">
+                  items ({props.currentItems?props.buyingQuantity + props.cartItemsCount:props.cartItemsCount})
+                </div>
 
                 <div class="float-right">{withoutShipping}</div>
                 <br></br>
@@ -188,11 +195,14 @@ const buyItNow = (props) => {
                   <h4> Order Total</h4>
                 </div>
                 <div class="float-right ont-weight-bold">
-                  <h4> {totalPrice}</h4>
+                  <h4> ${totalPrice}</h4>
                 </div>
                 <br></br>
                 <br></br>
-                <Button style={{ width: "100%" }} onClick={props.orderHandler}>
+                <Button
+                  style={{ width: "100%" }}
+                  onClick={() => props.orderHandler(totalPrice)}
+                >
                   Order Now
                 </Button>
               </Card.Body>

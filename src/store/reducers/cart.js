@@ -5,6 +5,9 @@ const initialState = {
   loading: false,
   error: null,
   cart: [],
+  cartSubTotal: 0.0,
+  cartTax: 0.0,
+  cartTotal: 0.0,
   updateCartLaoding: false,
   updatedCart: null,
   updateCartError: null,
@@ -16,6 +19,14 @@ const initialState = {
   cartItemCount: [],
 };
 
+const setTotal = (state, action) => {
+  console.log("cartSubTotal", action.cartSubTotal);
+  return updateObject(state, {
+    cartSubTotal: action.cartSubTotal,
+    cartTax: action.cartTax,
+    cartTotal: action.cartSubTotal + action.cartTax,
+  });
+};
 const getCartSuccess = (state, action) => {
   return updateObject(state, {
     loading: false,
@@ -141,6 +152,8 @@ const reducer = (state = initialState, action) => {
       return clearCartSuccess(state, action);
     case actionTypes.CLEAR_CART_ITEMS_ERROR:
       return clearCartFail(state, action);
+    case actionTypes.SET_TOTAL:
+      return setTotal(state, action);
     default:
       return state;
   }

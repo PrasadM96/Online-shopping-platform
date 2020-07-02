@@ -5,8 +5,7 @@ import { Button } from "react-bootstrap";
 
 export default function CartTotals(props) {
   const { cartSubTotal, cartTax } = props;
-  const { clearCart, history, cart } = props;
-  console.log(cartTax);
+  const { clearCart, history, cart, checkout } = props;
 
   return (
     <React.Fragment>
@@ -41,7 +40,7 @@ export default function CartTotals(props) {
             /> */}
             <Button
               style={{ margin: "2% 0" }}
-              onClick={props.checkout}
+              onClick={() => checkout(cartSubTotal , cartTax)}
               variant="primary"
             >
               Go to Checkout
