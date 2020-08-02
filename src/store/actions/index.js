@@ -4,6 +4,9 @@ export {
   getSellingProduct,
   deleteSellingItem,
   setItems,
+  getEditProductSuccess,
+  updateItem,
+  sellingRegister,
 } from "./products";
 
 export {
@@ -16,6 +19,7 @@ export {
   clearCart,
   addTotals,
   getSingleItem,
+  getDetailSingleItem,
 } from "./shop";
 
 export { modalstate } from "./modalActions";

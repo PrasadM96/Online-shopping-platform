@@ -1,4 +1,4 @@
-import React ,{Fragment} from "react";
+import React, { Fragment } from "react";
 import { Navbar, NavDropdown, Nav, NavItem } from "react-bootstrap";
 import Aux from "../../hoc/Auxx";
 import { NavLink, Link } from "react-router-dom";
@@ -6,9 +6,9 @@ import Cart from "../Cart/";
 import styled from "styled-components";
 import { ButtonContainer } from "../../components/Styled/Button";
 
-import RegisterModal from '../Authentication/RegisterModal';
+import RegisterModal from "../Authentication/RegisterModal";
 
-import Logout from '../Authentication/Logout';
+import Logout from "../Authentication/Logout";
 
 const layout = (props) => {
   return (
@@ -25,8 +25,9 @@ const layout = (props) => {
             </Nav.Link>
             <Nav.Link
               as={NavLink}
-              to="/selling/overview"
-              href="/selling/overview"
+              to="/selling"
+              href="/selling"
+              onClick={props.checkState}
             >
               Sell
             </Nav.Link>
@@ -75,39 +76,41 @@ const layout = (props) => {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Nav className ="ml-auto">
-          {props.isAuthenticated && props.isRegister ?   
-            <Fragment>
-                    <NavItem>
-                        <span className="navbar-text mr-3">
-                            <strong>{props.user ? `Welcome ${props.user.first_name}`:''}</strong>
-                        </span>
-                    </NavItem>
-                    <Nav.Link as={NavLink} to="/cart" href="/cart">
-                    My Cart
-                    </Nav.Link>
-                    
-                    <Nav.Link as={NavLink} to="/profile" href="/profile">
-                    Profile
-                    </Nav.Link>
-                    <Nav.Link as={NavLink} to="/orders" href="/orders">
-                     Orders
-                    </Nav.Link>
-                    <NavItem>
-                        <Logout />
-                    </NavItem>
-              </Fragment>:   
+          <Nav className="ml-auto">
+            {props.isAuthenticated && props.isRegister ? (
               <Fragment>
-                    <Nav.Link as={NavLink} to="/cart" href="/cart">
-                    My Cart
-                    </Nav.Link>
-                    
-              <Nav.Link onClick={props.toggle} href="#">
+                <NavItem>
+                  <span className="navbar-text mr-3">
+                    <strong>
+                      {props.user ? `Welcome ${props.user.first_name}` : ""}
+                    </strong>
+                  </span>
+                </NavItem>
+                <Nav.Link as={NavLink} to="/cart" href="/cart">
+                  My Cart
+                </Nav.Link>
+
+                <Nav.Link as={NavLink} to="/profile" href="/profile">
+                  Profile
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/orders" href="/orders">
+                  Orders
+                </Nav.Link>
+                <NavItem>
+                  <Logout />
+                </NavItem>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Nav.Link as={NavLink} to="/cart" href="/cart">
+                  My Cart
+                </Nav.Link>
+
+                <Nav.Link onClick={props.toggle} href="#">
                   Register
-              </Nav.Link>
-              
-                    
-              </Fragment>}
+                </Nav.Link>
+              </Fragment>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

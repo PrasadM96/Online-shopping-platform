@@ -15,14 +15,17 @@ const initialState = {
   checkoutItem: null,
   checkoutErr: null,
   checkoutLoading: false,
-  updateCartLaoding: false,
-  updatedCart: null,
-  updateCartError: null,
-  addtoCartSuccess: false,
-  addToCartError: null,
-  clearCartLoading: false,
-  clearCartItem: null,
-  clearCartError: null,
+  detailItemLoading: false,
+  detailItem: null,
+  detailItemError: null,
+  // updateCartLaoding: false,
+  // updatedCart: null,
+  // updateCartError: null,
+  // addtoCartSuccess: false,
+  // addToCartError: null,
+  // clearCartLoading: false,
+  // clearCartItem: null,
+  // clearCartError: null,
 };
 
 const getProductsSuccess = (state, action) => {
@@ -209,6 +212,26 @@ const getCheckourFail = (state, action) => {
   });
 };
 
+//////get detail item //////////////////////////
+const getDetailItemStart = (state, action) => {
+  return updateObject(state, {
+    detailItemLoading: true,
+    detailItemError: null,
+  });
+};
+const getDetailItemSuccess = (state, action) => {
+  return updateObject(state, {
+    detailItemLoading: false,
+    detailItem: action.item,
+  });
+};
+const getDetailItemFail = (state, action) => {
+  return updateObject(state, {
+    detailItemLoading: false,
+    detailItemError: action.error,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_PRODUCTS_START:
@@ -243,6 +266,12 @@ const reducer = (state = initialState, action) => {
       return getCheckoutSuccess(state, action);
     case actionTypes.GET_CHECKOUT_ITEM_FAIL:
       return getCheckourFail(state, action);
+    case actionTypes.GET_DETAIL_SINGLE_ITEM_START:
+      return getDetailItemStart(state, action);
+    case actionTypes.GET_DETAIL_SINGLE_ITEM_SUCCESS:
+      return getDetailItemSuccess(state, action);
+    case actionTypes.GET_DETAIL_SINGLE_ITEM_FAIL:
+      return getDetailItemFail(state, action);
 
     default:
       return state;

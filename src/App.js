@@ -30,6 +30,8 @@ import { register, login } from "./store/actions/authActions";
 import { clearErrors } from "./store/actions/errorActions";
 import { modalstate } from "./store/actions/modalActions";
 import { authCheckState } from "./store/actions/authActions";
+import RegisterSelling from "./containers/Selling/registerSellingHandler";
+import axios from "axios";
 
 class App extends Component {
   static propTypes = {
@@ -54,6 +56,9 @@ class App extends Component {
 
   render() {
     const { isAuthenticated, user, isRegister } = this.props.auth;
+    const sellerStatus = localStorage.getItem("sellerStatus");
+    console.log("seller", sellerStatus);
+
     console.log(isAuthenticated);
     return (
       <div>
@@ -62,13 +67,15 @@ class App extends Component {
           user={user}
           isRegister={isRegister}
           toggle={this.toggle}
+          sellerStatus={this.sellerStatus}
         >
           <SearchBarHandler />
           <RegisterModal />
           <Switch>
             <Route path="/" exact component={HomePage} />
 
-            <Route path="/selling" component={TabItems} />
+            <Route path="/selling/:section" component={TabItems} />
+            <Route path="/selling" component={RegisterSelling} />
             <Route path="/profile" component={ProfileHandler} />
             <Route path="/category/:type/:id" component={DetailPageHandler} />
             <Route path="/cart" component={Cart} />

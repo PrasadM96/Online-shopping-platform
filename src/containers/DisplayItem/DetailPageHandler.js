@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DetailPage from "../../components/DisplayItem/DetailPage";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import { Spinner, Alert } from "react-bootstrap";
 import axios from "axios";
 
 class DetailPageHandler extends Component {
@@ -11,10 +12,12 @@ class DetailPageHandler extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.items);
-    if (this.props.addtoCartSuccess) {
-      this.props.history.push("/cart");
-    }
+    // console.log(this.props.items);
+    // if (this.props.addtoCartSuccess) {
+    //   this.props.history.push("/cart");
+    // }
+    const id = this.props.match.params.id;
+    this.props.onGetDetailItem(id);
   }
 
   buyitNowHandler = (id) => {
@@ -67,39 +70,71 @@ class DetailPageHandler extends Component {
   };
 
   render() {
-    const id = this.props.match.params.id;
+    console.log(this.props.detailItem);
     var item = null;
-    if (id) {
-      item = this.props.items.filter((item) => {
-        return id === item._id;
-      });
+
+    // item = { ...item[0] };
+    var err = null;
+    if (this.props.error) {
+      err = (
+        <Alert
+          style={{ margin: " 2% auto", textAlign: "center", width: "60%" }}
+          variant="danger"
+        >
+          {this.props.error}
+        </Alert>
+      );
     }
-    item = { ...item[0] };
+
+    var loading = null;
+
+    if (this.props.loading) {
+      loading = (
+        <div style={{ width: "100%", margin: "10% 0", textAlign: "center" }}>
+          <Spinner animation="border" variant="primary" />;
+        </div>
+      );
+    }
+
+    var detailPage = null;
+    if (this.props.detailItem) {
+      item = this.props.detailItem[0];
+      detailPage = (
+        <DetailPage
+          imageUrls={item.imageUrls}
+          title={item.title}
+          condition={item.condition}
+          quantity={item.quantity}
+          price={item.price}
+          shippingFee={item.shippingFee}
+          seller={"email"}
+          id={item._id}
+          description={item.description}
+          loading={this.state.loading}
+          error={this.state.error}
+          inCart={item.inCart}
+          buyitNowHandler={this.buyitNowHandler}
+          addtoCartHandler={this.addtoCartHandler}
+          cart={this.props.cart}
+        />
+      );
+    }
+
     return (
-      <DetailPage
-        imageUrls={item.imageUrls}
-        title={item.title}
-        condition={item.condition}
-        quantity={item.quantity}
-        price={item.price}
-        shippingFee={item.shippingFee}
-        seller={"email"}
-        id={item._id}
-        description={item.description}
-        loading={this.state.loading}
-        error={this.state.error}
-        inCart={item.inCart}
-        buyitNowHandler={this.buyitNowHandler}
-        addtoCartHandler={this.addtoCartHandler}
-        cart={this.props.cart}
-      />
+      <div>
+        {loading}
+        {err}
+        {detailPage}
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    items: state.shop.items,
+    detailItem: state.shop.detailItem,
+    loading: state.shop.detailItemLoading,
+    error: state.shop.detailItemError,
     cart: state.shop.cart,
     addtoCartSuccess: state.shop.addtoCartSuccess,
     isAuthenticated: state.auth.isAuthenticated,
@@ -111,6 +146,7 @@ const mapDispatchToProps = (dispatch) => {
     addToCart: (id) => dispatch(actions.addToCart(id)),
     onAddItemToCart: (id) => dispatch(actions.addItemToCart(id)),
     onModalState: () => dispatch(actions.modalstate()),
+    onGetDetailItem: (id) => dispatch(actions.getDetailSingleItem(id)),
   };
 };
 

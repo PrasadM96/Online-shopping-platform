@@ -34,12 +34,18 @@ export default function (state = initialState, action) {
       };
 
     case LOGIN_SUCCESS:
-      if (action.payload != null) {
+      if (action.payload) {
         console.log(action.payload);
         localStorage.setItem("token", action.payload.token);
         localStorage.setItem("first_name", action.payload.user.first_name);
         localStorage.setItem("user_id", action.payload.user.id);
-        localStorage.setItem("expiresIn", action.payload.user.expiresIn);
+        localStorage.setItem("sellerStatus", action.payload.user.sellerStatus);
+        console.log("rerererererrererere");
+        // if (action.payload.user.sellerStatus === "true") {
+        //   localStorage.setItem("sellerStatus", true);
+        // } else {
+        //   localStorage.setItem("sellerStatus", false);
+        // }
       }
       return {
         ...state,

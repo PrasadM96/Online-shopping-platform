@@ -80,14 +80,18 @@ class RegisterModal extends Component {
   onClickSignUp = (e) => {
     this.props.clearErrors();
     var element = document.getElementById("container1");
-    element.classList.remove("right-panel-active");
+    if (element) {
+      element.classList.remove("right-panel-active");
+    }
     //  console.log(this.state.modal)
   };
 
   onClickSignIn = (e) => {
     this.props.clearErrors();
     var element = document.getElementById("container1");
-    element.classList.add("right-panel-active");
+    if (element) {
+      element.classList.add("right-panel-active");
+    }
   };
 
   onSubmit1 = (e) => {
