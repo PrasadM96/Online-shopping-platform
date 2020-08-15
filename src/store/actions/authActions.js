@@ -74,6 +74,23 @@ export const authSuccess = (res) => {
   };
 };
 
+//logout user
+
+export const logout = () => {
+  return {
+    type: LOGOUT_SUCCESS,
+  };
+};
+
+export const checkAuthTimeout = (expiresIn) => {
+  console.log(expiresIn);
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(logout());
+    }, expiresIn * 1000);
+  };
+};
+
 //login user
 export const login = ({ email, password }) => (dispatch) => {
   //headers
@@ -88,26 +105,26 @@ export const login = ({ email, password }) => (dispatch) => {
 
   axios
     .post("/user/login", body, config)
-    .then((
-      res /////
-    ) => dispatch(authSuccess(res.data)))
+    .then(
+      (
+        res /////
+      ) => {
+        console.log(res.data);
+        dispatch(authSuccess(res.data));
+        const expirationDate = new Date(
+          new Date().getTime() + res.data.user.expiresIn * 1000
+        );
+        localStorage.setItem("expiresIn", expirationDate);
+        dispatch(checkAuthTimeout(parseInt(res.data.user.expiresIn)));
+      }
+    )
     .catch((err) => {
-      dispatch(
-        returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
-      );
-
+      dispatch();
+      returnErrors(err.response.data, err.response.status, "LOGIN_FAIL");
       dispatch({
         type: LOGIN_FAIL,
       });
     });
-};
-
-//logout user
-
-export const logout = () => {
-  return {
-    type: LOGOUT_SUCCESS,
-  };
 };
 
 //setup config/header in token
@@ -127,15 +144,6 @@ export const tokenConfig = (getState) => {
   }
 
   return config;
-};
-
-export const checkAuthTimeout = (expiresIn) => {
-  console.log(expiresIn);
-  return (dispatch) => {
-    setTimeout(() => {
-      dispatch(logout());
-    }, expiresIn * 1000);
-  };
 };
 
 export const authCheckState = () => {

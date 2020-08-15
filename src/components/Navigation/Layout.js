@@ -10,15 +10,8 @@ import RegisterModal from "../Authentication/RegisterModal";
 
 import Logout from "../Authentication/Logout";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faShoppingCart,
-  faUserCircle,
-  faSignOutAlt,
-  faReceipt
-} from "@fortawesome/fontawesome-free-solid";
-
 const layout = (props) => {
+  
   return (
     <Aux>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -27,14 +20,17 @@ const layout = (props) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
+        {!props.isAdmin ? (
           <Nav className="mr-auto">
+          
             <Nav.Link as={NavLink} to="/features" href="/features">
               Features
             </Nav.Link>
             <Nav.Link
               as={NavLink}
-              to="/selling/overview"
-              href="/selling/overview"
+              to="/selling"
+              href="/selling"
+              onClick={props.checkState}
             >
               Sell
             </Nav.Link>
@@ -82,10 +78,35 @@ const layout = (props) => {
                 Home Appliances
               </NavDropdown.Item>
             </NavDropdown>
-          </Nav>
+          </Nav>)
+          : (
+            <Nav className="mr-auto">
+            <Nav.Link as={NavLink} to="/products" href="/products">
+            Products
+          </Nav.Link> 
+          <Nav.Link as={NavLink} to="/customers" href="/customers">
+            Customers
+        </Nav.Link> 
+        <Nav.Link as={NavLink} to="/sellers" href="/sellers">
+            Sellers
+        </Nav.Link> 
+        </Nav> 
+        )}
+        {props.isAuthenticated && props.isRegister ? (
           <Nav className="ml-auto">
-            {props.isAuthenticated && props.isRegister ? (
+            
+                {props.isAdmin ? 
+                   ( <Fragment>
+                    <NavItem>
+                   <Logout />
+                 </NavItem>
+                 </Fragment>
+                 
+                   
+                 
+               ):(
               <Fragment>
+              
                 <NavItem>
                   <span className="navbar-text mr-3">
                     <strong>
@@ -94,30 +115,36 @@ const layout = (props) => {
                   </span>
                 </NavItem>
                 <Nav.Link as={NavLink} to="/cart" href="/cart">
-                  <FontAwesomeIcon icon="shopping-cart" />
-                  <span> </span>My Cart
+                  My Cart
                 </Nav.Link>
 
                 <Nav.Link as={NavLink} to="/profile" href="/profile">
-                  <FontAwesomeIcon icon="user-circle" />
-                  <span> </span>Profile
+                  Profile
                 </Nav.Link>
                 <Nav.Link as={NavLink} to="/orders" href="/orders">
-                <FontAwesomeIcon icon="receipt" />
-                <span> </span>Orders
+                  Orders
                 </Nav.Link>
                 <NavItem>
                   <Logout />
                 </NavItem>
+               
               </Fragment>
-            ) : (
+               )  }
+               </Nav>
+               ): (
+              <Nav className="ml-auto">
               <Fragment>
+                <Nav.Link as={NavLink} to="/cart" href="/cart">
+                  My Cart
+                </Nav.Link>
+
                 <Nav.Link onClick={props.toggle} href="#">
                   Register
                 </Nav.Link>
               </Fragment>
+              </Nav>
             )}
-          </Nav>
+         
         </Navbar.Collapse>
       </Navbar>
       {props.children}

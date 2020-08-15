@@ -163,3 +163,42 @@ export const getSingleItem = (id) => {
       });
   };
 };
+
+////////////get detail page////////////////////////
+export const getDetailItemFail = (error) => {
+  return {
+    type: actionTypes.GET_DETAIL_SINGLE_ITEM_FAIL,
+    error: error.message,
+  };
+};
+
+export const getDetailItemSuccess = (item) => {
+  return {
+    type: actionTypes.GET_DETAIL_SINGLE_ITEM_SUCCESS,
+    item: item,
+  };
+};
+
+export const getDetailItemStart = () => {
+  return {
+    type: actionTypes.GET_DETAIL_SINGLE_ITEM_START,
+  };
+};
+
+export const getDetailSingleItem = (id) => {
+  return (dispatch) => {
+    dispatch(getDetailItemStart());
+    axios
+      .get("/shop/get-single-product", {
+        params: {
+          id: id,
+        },
+      })
+      .then((item) => {
+        dispatch(getDetailItemSuccess(item.data));
+      })
+      .catch((err) => {
+        dispatch(getDetailItemFail(err));
+      });
+  };
+};

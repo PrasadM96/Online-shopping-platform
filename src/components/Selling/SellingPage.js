@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs, Tab, TabLink } from "react-bootstrap";
-import AddItemHandler from "../../containers/Selling/AddItemHandler";
+import AddItemHandler from "../../containers/Selling/AddItemHandler1";
 import { Nav, Card, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
@@ -37,6 +37,17 @@ const sellingPage = (props) => {
               Myitems
             </Nav.Link>
           </Nav.Item>
+          {props.displayEdit ? (
+            <Nav.Item>
+              <Nav.Link
+                as={NavLink}
+                to="/selling/edit-item"
+                href="/selling/edit-item"
+              >
+                EditItem
+              </Nav.Link>
+            </Nav.Item>
+          ) : null}
         </Nav>
       </Card.Header>
       <Card.Body>{props.children}</Card.Body>

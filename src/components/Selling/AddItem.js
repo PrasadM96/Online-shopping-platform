@@ -13,7 +13,6 @@ function AddItem(props) {
     } else {
       props.onSubmitHandler(event);
     }
-
     setValidated(true);
   };
 
@@ -76,7 +75,7 @@ function AddItem(props) {
           </option>
           <option>New</option>
           <option>Used</option>
-        </Form.Control>{" "}
+        </Form.Control>
         <Form.Control.Feedback type="invalid">required</Form.Control.Feedback>
       </Form.Group>
       <Form.Group controlId="validationCustom05">

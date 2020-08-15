@@ -20,8 +20,6 @@ export class Logout extends Component{
             <div>
                  <Nav.Item>
               <Nav.Link onClick={this.props.logout} href="/">
-              <FontAwesomeIcon icon="sign-out-alt" />
-                <span> </span>
                   Logout
               </Nav.Link>
               </Nav.Item>

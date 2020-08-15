@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Container, Row, Col, Card, Image } from "react-bootstrap";
+import * as BackendUrl from "../../Shared/BackendUrl";
 
 const buyItNow = (props) => {
   var totalPrice = 0;
@@ -49,7 +50,8 @@ const buyItNow = (props) => {
             <Col md="3">
               <Image
                 style={{ width: "100%", height: "100%" }}
-                src={item.imageUrls[0]}
+                src={BackendUrl.getBUrl() + item.imageUrls[0].toString()}
+                alt="image"
                 rounded
               />
             </Col>
@@ -91,7 +93,7 @@ const buyItNow = (props) => {
         <Col md="3">
           <Image
             style={{ width: "100%", height: "100%" }}
-            src={item.imageUrls[0]}
+            src={BackendUrl.getBUrl() + item.imageUrls[0]}
             rounded
           />
         </Col>

@@ -8,6 +8,7 @@ import {
   Button,
   Spinner,
 } from "react-bootstrap";
+import * as BackendUrl from "../../Shared/BackendUrl";
 
 const detailPage = (props) => {
   var itemArr = [];
@@ -20,8 +21,9 @@ const detailPage = (props) => {
       <Carousel.Item key={index}>
         <img
           className="d-block w-100"
-          style={{ width: "auto", height: "500px" }}
-          src={image.toString()}
+          className="img-responsive "
+          style={{ maxHeight: "500px", maxWidth: "250px" }}
+          src={BackendUrl.getBUrl() + image}
           alt="Image"
         />
       </Carousel.Item>

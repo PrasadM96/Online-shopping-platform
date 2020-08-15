@@ -7,13 +7,22 @@ import WitherrorHandler from "../../hoc/WitherrorHandler";
 import axios from "axios";
 
 class MyItemHandler extends Component {
+  state = {};
+
   componentDidMount() {
     this.props.onGetSellingProducts();
+    if (this.props.editItem) {
+      this.props.history.push("/selling/add-item");
+    }
   }
 
   deleteHandler = (index) => {
     const prod = this.props.items[index];
     this.props.ondeleteSellingItem(prod._id);
+  };
+
+  editHandler = (id) => {
+    this.props.history.push("/selling/edit-item/" + id);
   };
 
   render() {
@@ -28,21 +37,31 @@ class MyItemHandler extends Component {
     }
     var ItemArr = null;
 
-    if (this.props.items.length > 0) {
+    if (this.props.items.length > 0 && !this.props.error) {
       ItemArr = this.props.items.map((item, index) => {
         return (
           <MyItem
             key={index}
+            id={item._id}
             index={index}
             image={item.imageUrls[0]}
             title={item.title}
             price={item.price}
             shippingFee={item.shippingFee}
             deleteHandler={this.deleteHandler}
+            editHandler={this.editHandler}
             loading={this.props.loading}
           />
         );
       });
+    } else {
+      if (!this.props.loading && !this.props.error) {
+        ItemArr = (
+          <h5 style={{ margin: "5% auto", textAlign: "center" }}>
+            No Items Found!
+          </h5>
+        );
+      }
     }
 
     var errorTxt = null;
@@ -78,8 +97,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    ondeleteSellingItem: (index) => dispatch(actions.deleteSellingItem(index)),
+    // ondeleteSellingItem: (index) => dispatch(actions.deleteSellingItem(index)),
     onGetSellingProducts: () => dispatch(actions.getSellingProduct()),
+    // onEditItemHandler: (id) => dispatch(actions.getEditProduct(id)),
   };
 };
 

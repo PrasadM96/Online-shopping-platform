@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, Container, Col, Row, Image } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import * as BackendUrl from "../../Shared/BackendUrl";
+
 const displayItem = (props) => {
   let url = "/category/" + props.path + "/" + props.id;
   console.log(props.image);
@@ -17,7 +19,7 @@ const displayItem = (props) => {
             >
               <Image
                 style={{ height: "200px", width: "auto" }}
-                src={props.image}
+                src={BackendUrl.getBUrl() + props.image}
                 rounded
               />
             </Col>

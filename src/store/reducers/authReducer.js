@@ -15,6 +15,8 @@ const initialState = {
   isRegister: false,
   isLoading: false,
   user: null,
+  //isAdmin:false
+ 
 };
 
 export default function (state = initialState, action) {
@@ -34,19 +36,31 @@ export default function (state = initialState, action) {
       };
 
     case LOGIN_SUCCESS:
-      if (action.payload != null) {
+      if (action.payload) {
         console.log(action.payload);
         localStorage.setItem("token", action.payload.token);
         localStorage.setItem("first_name", action.payload.user.first_name);
         localStorage.setItem("user_id", action.payload.user.id);
-        localStorage.setItem("expiresIn", action.payload.user.expiresIn);
+        localStorage.setItem("sellerStatus", action.payload.user.sellerStatus);
+       // localStorage.setItem("status",action.payload.user.status);
+        localStorage.setItem("user_count",action.payload.userCount);
+        localStorage.setItem("product_count",action.payload.productCount);
+        localStorage.setItem("seller_count",action.payload.sellerCount);
+        console.log("rerererererrererere");
+        // if (action.payload.user.sellerStatus === "true") {
+        //   localStorage.setItem("sellerStatus", true);
+        // } else {
+        //   localStorage.setItem("sellerStatus", false);
+        // }
       }
       return {
         ...state,
         ...action.payload,
+       // isAdmin:action.payload.user.status,
         isAuthenticated: true,
         isLoading: false,
         isRegister: true,
+      
       };
     case REGISTER_SUCCESS:
       return {
@@ -61,6 +75,10 @@ export default function (state = initialState, action) {
       localStorage.removeItem("token");
       localStorage.removeItem("first_name");
       localStorage.removeItem("expiresIn");
+      
+    // localStorage.setItem("status",false);
+     // localStorage.setItem("status",false);
+     
 
       return {
         ...state,
@@ -69,6 +87,7 @@ export default function (state = initialState, action) {
         isAuthenticated: false,
         isRegister: false,
         isLoading: false,
+      //  isAdmin:false
       };
 
     case AUTH_ERROR:
