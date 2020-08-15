@@ -16,6 +16,7 @@ import errorReducer from "./store/reducers/errorReducer";
 import shopReducer from "./store/reducers/shop";
 import modalReducer from "./store/reducers/modalReducer";
 import cartReducer from "./store/reducers/cart";
+import adminReducer from "./store/reducers/admin";
 
 const composeEnhancers =
   process.env.NODE_ENV === "development"
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   error: errorReducer,
   modal: modalReducer,
   cart: cartReducer,
+  admin: adminReducer
 });
 
 const store = createStore(

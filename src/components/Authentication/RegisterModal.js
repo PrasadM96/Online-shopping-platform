@@ -4,7 +4,7 @@ import { Button, Modal, Col, Form, Nav, Alert } from "react-bootstrap";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-
+import { getAdmin } from "../../store/actions/admin";
 import { register, login } from "../../store/actions/authActions";
 import { clearErrors } from "../../store/actions/errorActions";
 import { modalstate } from "../../store/actions/modalActions";
@@ -29,6 +29,7 @@ class RegisterModal extends Component {
     clearErrors: PropTypes.func.isRequired,
     modalstate: PropTypes.func.isRequired,
     modal: PropTypes.bool,
+    getAdmin:PropTypes.func.isRequired
   };
 
   componentDidUpdate(prevProps) {
@@ -53,6 +54,7 @@ class RegisterModal extends Component {
       // console.log(isAuthenticated)
       if (isAuthenticated) {
         this.toggle();
+      //  this.props.getAdmin();
       }
     }
 
@@ -326,4 +328,5 @@ export default connect(mapStateToProps, {
   clearErrors,
   login,
   modalstate,
+  getAdmin
 })(RegisterModal);

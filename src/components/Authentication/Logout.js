@@ -15,7 +15,7 @@ export class Logout extends Component{
         return(
             <div>
                  <Nav.Item>
-              <Nav.Link onClick={this.props.logout} href="#">
+              <Nav.Link onClick={this.props.logout} href="/">
                   Logout
               </Nav.Link>
               </Nav.Item>
