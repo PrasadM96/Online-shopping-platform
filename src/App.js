@@ -31,11 +31,12 @@ import { clearErrors } from "./store/actions/errorActions";
 import { modalstate } from "./store/actions/modalActions";
 import { authCheckState } from "./store/actions/authActions";
 import RegisterSelling from "./containers/Selling/registerSellingHandler";
-import HomePageHandler from "./containers/HomePage/HomePageHandler"
-import FooterHandler from "./containers/Footer/FooterHandler"
+import HomePageHandler from "./containers/HomePage/HomePageHandler";
+import FooterHandler from "./containers/Footer/FooterHandler";
 import UsersList from "./components/Admin/UsersList";
 import ProductList from "./components/Admin/ProductList";
 import SellersList from "./components/Admin/SellersList";
+import OrderList from "./components/Admin/OrderList";
 
 import { getAdmin } from "./store/actions/admin";
 
@@ -49,14 +50,13 @@ class App extends Component {
     modalstate: PropTypes.func.isRequired,
     authCheckState: PropTypes.func.isRequired,
     modal: PropTypes.bool,
-    getAdmin:PropTypes.func.isRequired
-
+    getAdmin: PropTypes.func.isRequired,
   };
 
   //state={
-   // isAdmin:false
- // }
- /*componentWillMount(){
+  // isAdmin:false
+  // }
+  /*componentWillMount(){
    console.log("component");
    const {isAdmin} = this.props.admin
    const {isAuthenticated} =this.props.auth
@@ -68,24 +68,20 @@ class App extends Component {
   componentDidMount() {
     this.props.onAuthCheckState();
     console.log("heloo");
-    const {isAdmin} = this.props.admin;
-   // if(this.props.auth.isAuthenticated){
-     // this.props.onGetAdmin();
- 
+    const { isAdmin } = this.props.admin;
+    // if(this.props.auth.isAuthenticated){
+    // this.props.onGetAdmin();
+
     //}
-console.log("hello");
+    console.log("hello");
     //if(this.props.auth.isAuthenticated ){
-     // this.props.onGetAdmin();
-     // console.log()
+    // this.props.onGetAdmin();
+    // console.log()
 
     //}
-  
-    //console.log(this.props.admin.isAdmin,"isAdmin");
-   // localStorage.setItem("isAd",isAdmin);
- 
-      
 
-      
+    //console.log(this.props.admin.isAdmin,"isAdmin");
+    // localStorage.setItem("isAd",isAdmin);
   }
 
   toggle = () => {
@@ -98,16 +94,15 @@ console.log("hello");
 
   render() {
     const { isAuthenticated, user, isRegister } = this.props.auth;
-    const {isAdmin} = this.props.admin;
-    console.log(this.props.admin.isAdmin,"app")
+    const { isAdmin } = this.props.admin;
+    console.log(this.props.admin.isAdmin, "app");
     const sellerStatus = localStorage.getItem("sellerStatus");
-    if(this.props.auth.isAuthenticated ){
+    if (this.props.auth.isAuthenticated) {
       this.props.onGetAdmin();
-
     }
-   
+
     console.log(isAuthenticated);
-    
+
     return (
       <div>
         <Layout
@@ -117,7 +112,7 @@ console.log("hello");
           toggle={this.toggle}
           sellerStatus={this.sellerStatus}
           isAdmin={isAdmin}
-         // status={this.status}
+          // status={this.status}
         >
           <SearchBarHandler />
           <RegisterModal />
@@ -128,10 +123,11 @@ console.log("hello");
             <Route path="/selling" component={RegisterSelling} />
             <Route path="/profile" component={ProfileHandler} />
             <Route path="/products" component={ProductList} />
+            <Route path="/orders" component={OrderList} />
             <Route path="/customers" component={UsersList} />
             <Route path="/sellers" component={SellersList} />
             <Route path="/category/:type/:id" component={DetailPageHandler} />
-            <Route path="/cart" component={Cart}/>
+            <Route path="/cart" component={Cart} />
             <Route
               path="/category/:type"
               exact
@@ -155,14 +151,14 @@ console.log("hello");
 const mapStateToProps = (state) => ({
   auth: state.auth,
   modalstate: state.modalstate,
-  admin:state.admin
+  admin: state.admin,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onAuthCheckState: () => dispatch(actions.authCheckState()),
     onModatState: () => dispatch(actions.modalstate()),
-    onGetAdmin:() => dispatch(actions.getAdmin())
+    onGetAdmin: () => dispatch(actions.getAdmin()),
   };
 };
 
