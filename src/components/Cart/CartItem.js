@@ -1,4 +1,5 @@
 import React from "react";
+import * as BackendUrl from "../../Shared/BackendUrl";
 
 export default function CartItem(props) {
   const { _id, title, imageUrls, price } = props.item;
@@ -9,8 +10,8 @@ export default function CartItem(props) {
     <div className="row my-1 text-capitalize text-center">
       <div className="col-10 mx-auto col-lg-2">
         <img
-          src={imageUrls[0]}
-          style={{ width: "5rem", height: "5rem" }}
+          src={BackendUrl.getBUrl() + imageUrls[0]}
+          style={{ width: "5rem", height: "5rem", margin: "auto" }}
           className="img-fluid"
           alt="product"
         />
@@ -39,13 +40,27 @@ export default function CartItem(props) {
             >
               +
             </span>
+            {props.updateCartError ? (
+              <p style={{ color: "red", fontSize: "15px" }}>
+                Error! You can't update!
+              </p>
+            ) : null}
           </div>
         </div>
       </div>
       <div className="col-10 mx-auto col-lg-2">
-        <div className="cart-icon" onClick={() => removeItem(_id)}>
-          <i className="fas fa-trash>"></i>delete
+        <div
+          className="cart-icon"
+          onClick={() => props.deleteSingleItem(_id, props.count)}
+        >
+          <i className="fas fa-trash>"></i>
+          {props.deleteSingleItemLoading ? "deleting..." : "delete"}
         </div>
+        {props.deleteSingleItemError ? (
+          <p style={{ color: "red", fontSize: "15px" }}>
+            Error! Try Again Later!
+          </p>
+        ) : null}
       </div>
       <div className="col-10 mx-auto col-lg-2">
         <strong> item total : $ {price * props.count}</strong>

@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
+import { deleteItemFail } from "./products";
 
 ///////////////////////////////cart///////////4
 export const getCartItmesStart = () => {
@@ -160,6 +161,48 @@ export const clearCartItems = (cartItemArr) => {
       })
       .catch((err) => {
         dispatch(clearCartItemFail(err));
+      });
+  };
+};
+
+////////////////////delete single cart item////////////////
+export const deleteSingleItemStart = () => {
+  return {
+    type: actionTypes.DELETE_SINGLE_CART_ITEM_START,
+  };
+};
+export const deleteSingleItemSuccess = (item) => {
+  return {
+    type: actionTypes.DELETE_SINGLE_CART_ITEM_SUCCESS,
+    item: item,
+  };
+};
+export const deleteSingleItemFail = (err) => {
+  return {
+    type: actionTypes.DELETE_SINGLE_CART_ITEM_FAIL,
+    error: err,
+  };
+};
+export const deleteSingleItem = (id, itemCount) => {
+  const token = localStorage.getItem("token");
+  return (dispatch) => {
+    dispatch(deleteSingleItemStart());
+    axios
+      .post(
+        "/shop/remove-from-cart",
+        { productId: id, itemCount: itemCount },
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      )
+      .then((results) => {
+        dispatch(deleteSingleItemSuccess(results.data));
+        dispatch(getCartItem());
+      })
+      .catch((err) => {
+        dispatch(deleteSingleItemFail(err));
       });
   };
 };

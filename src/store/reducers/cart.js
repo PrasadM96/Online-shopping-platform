@@ -14,6 +14,9 @@ const initialState = {
   clearCartItem: null,
   clearCartError: null,
   cartItemCount: [],
+  removeSingleItemLoading: false,
+  removeSingleItem: null,
+  removeSingleItemError: null,
 };
 
 const getCartSuccess = (state, action) => {
@@ -117,6 +120,27 @@ const clearCartFail = (state, action) => {
   });
 };
 
+///////////////////////remove single item///////////////////////
+const deleteSigleItemStart = (state, action) => {
+  return updateObject(state, {
+    removeSingleItemLoading: true,
+    removeSingleItemError: null,
+  });
+};
+const deleteSigleItemSuccess = (state, action) => {
+  return updateObject(state, {
+    removeSingleItemLoading: false,
+    removeSingleItem: action.item,
+  });
+};
+
+const deleteSigleItemFail = (state, action) => {
+  return updateObject(state, {
+    removeSingleItemLoading: false,
+    removeSingleItemError: action.error,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_CART_START:
@@ -141,6 +165,12 @@ const reducer = (state = initialState, action) => {
       return clearCartSuccess(state, action);
     case actionTypes.CLEAR_CART_ITEMS_ERROR:
       return clearCartFail(state, action);
+    case actionTypes.DELETE_SINGLE_CART_ITEM_START:
+      return deleteSigleItemStart(state, action);
+    case actionTypes.DELETE_SINGLE_CART_ITEM_FAIL:
+      return deleteSigleItemFail(state, action);
+    case actionTypes.DELETE_SINGLE_CART_ITEM_SUCCESS:
+      return deleteSigleItemSuccess(state, action);
     default:
       return state;
   }

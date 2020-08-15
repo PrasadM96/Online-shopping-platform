@@ -86,8 +86,6 @@ class Cart extends Component {
   };*/
 
   checkout = () => {
-    console.log("/checkout");
-
     this.props.history.push("/checkout");
   };
 
@@ -116,7 +114,7 @@ class Cart extends Component {
     var cartSubTotal = 0;
     var cartTax = 0;
 
-    if (this.props.state.cart.length > 0) {
+    if (this.props.state.cart.length > 0 && !this.props.state.loading) {
       const cartCount = this.props.state.cartItemCount.items;
       var tempArr = [];
       cartCount.map((element) => {
@@ -136,7 +134,6 @@ class Cart extends Component {
 
       cartUi = (
         <section>
-          <Title name="your" title="cart" />
           <CartColumns />
           <CartList
             cart={tempArr}
@@ -146,6 +143,10 @@ class Cart extends Component {
             increment={this.props.onUpdateCartItem}
             decrement={this.props.onUpdateCartItem}
             removeItem={this.props.removeItem}
+            updateCartError={this.props.updateCartError}
+            deleteSingleItem={this.props.onDeleteSingleItem}
+            deleteSingleItemError={this.props.deleteSingleItemError}
+            deleteSingleItemLoading={this.props.deleteSingleItemLoading}
           />
           <CartTotals
             // state={this.props.state}
@@ -167,6 +168,7 @@ class Cart extends Component {
     }
     return (
       <div>
+        <Title name="your" title="cart" />
         {loading}
         {error}
         {cartUi}
@@ -179,6 +181,9 @@ const mapStateToProps = (state) => {
   return {
     // state: state.shop,
     state: state.cart,
+    updateCartError: state.cart.updateCartError,
+    deleteSingleItemError: state.cart.removeSingleItemError,
+    deleteSingleItemLoading: state.cart.removeSingleItemLoading,
   };
 };
 
@@ -193,6 +198,8 @@ const mapDispatchToProps = (dispatch) => {
     ongetCartItems: () => dispatch(actions.getCartItem()),
     onUpdateCartItem: (prodId, amount) =>
       dispatch(actions.updateCartItem(prodId, amount)),
+    onDeleteSingleItem: (id, itemCount) =>
+      dispatch(actions.deleteSingleItem(id, itemCount)),
   };
 };
 

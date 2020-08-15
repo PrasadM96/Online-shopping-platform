@@ -18,6 +18,9 @@ const initialState = {
   detailItemLoading: false,
   detailItem: null,
   detailItemError: null,
+  orderLoading: false,
+  orderItems: null,
+  orderError: null,
   // updateCartLaoding: false,
   // updatedCart: null,
   // updateCartError: null,
@@ -232,6 +235,26 @@ const getDetailItemFail = (state, action) => {
   });
 };
 
+//////order item //////////////////////////
+const orderStart = (state, action) => {
+  return updateObject(state, {
+    orderLoading: true,
+    orderError: null,
+  });
+};
+const orderSuccess = (state, action) => {
+  return updateObject(state, {
+    orderLoading: false,
+    orderItems: action.result,
+  });
+};
+const orderFail = (state, action) => {
+  return updateObject(state, {
+    orderLoading: false,
+    orderError: action.err,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_PRODUCTS_START:
@@ -272,7 +295,12 @@ const reducer = (state = initialState, action) => {
       return getDetailItemSuccess(state, action);
     case actionTypes.GET_DETAIL_SINGLE_ITEM_FAIL:
       return getDetailItemFail(state, action);
-
+    case actionTypes.ORDER_START:
+      return orderStart(state, action);
+    case actionTypes.ORDER_START:
+      return orderSuccess(state, action);
+    case actionTypes.ORDER_FAIL:
+      return orderFail(state, action);
     default:
       return state;
   }

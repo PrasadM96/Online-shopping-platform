@@ -202,3 +202,48 @@ export const getDetailSingleItem = (id) => {
       });
   };
 };
+
+export const postOrderStart = () => {
+  return {
+    type: actionTypes.ORDER_START,
+  };
+};
+
+export const postOrderSuccess = (result) => {
+  return {
+    type: actionTypes.ORDER_SUCCESS,
+    result: result,
+  };
+};
+
+export const postOrderFail = (err) => {
+  return {
+    type: actionTypes.ORDER_FAIL,
+    err: err.message,
+  };
+};
+
+export const postOrder = (order) => {
+  const token = localStorage.getItem("token");
+  return (dispatch) => {
+    dispatch(postOrderStart());
+    axios
+      .post(
+        "/order/post-order",
+        {
+          order: order,
+        },
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      )
+      .then((result) => {
+        dispatch(postOrderSuccess(result.data));
+      })
+      .catch((err) => {
+        dispatch(postOrderFail(err));
+      });
+  };
+};

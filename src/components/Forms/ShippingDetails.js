@@ -10,6 +10,7 @@ const details = (props) => {
             <Form.Label>Firstname</Form.Label>
             <Form.Control
               onChange={props.firstnameHandler}
+              value={props.firstName}
               placeholder="first name"
             />
           </Form.Group>
@@ -18,6 +19,7 @@ const details = (props) => {
             <Form.Label>Lastname</Form.Label>
             <Form.Control
               onChange={props.lastnameHandler}
+              value={props.lastName}
               placeholder="lastname"
             />
           </Form.Group>
@@ -27,15 +29,17 @@ const details = (props) => {
           <Form.Label>Address 1</Form.Label>
           <Form.Control
             onChange={props.address1Handler}
+            value={props.address}
             placeholder="1234 Main St"
           />
         </Form.Group>
 
         <Form.Group controlId="formGridAddress2">
-          <Form.Label>Address 2</Form.Label>
+          <Form.Label>TelePhone Number</Form.Label>
           <Form.Control
-            onChange={props.address2Handler}
-            placeholder="1234 Main St"
+            onChange={props.teleNumberHandler}
+            value={props.teleNumber}
+            placeholder="94769374753"
           />
         </Form.Group>
 
@@ -43,6 +47,7 @@ const details = (props) => {
           <Form.Group as={Col} controlId="formGridCity">
             <Form.Label>Country</Form.Label>
             <Form.Control
+              value={props.country}
               onChange={props.countryHandler}
               placeholder="country"
             />
@@ -52,13 +57,18 @@ const details = (props) => {
             <Form.Label>Province</Form.Label>
             <Form.Control
               onChange={props.provinceHandler}
+              value={props.province}
               placeholder="Western"
             ></Form.Control>
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridZip">
             <Form.Label>Zip Code</Form.Label>
-            <Form.Control onChange={props.zipCodeHandler} placeholder="zip" />
+            <Form.Control
+              value={props.zipCode}
+              onChange={props.zipCodeHandler}
+              placeholder="zip"
+            />
           </Form.Group>
         </Form.Row>
 

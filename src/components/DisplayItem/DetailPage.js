@@ -22,7 +22,7 @@ const detailPage = (props) => {
         <img
           className="d-block w-100"
           className="img-responsive "
-          style={{ maxHeight: "500px", maxWidth: "250px" }}
+          style={{ maxHeight: "400px", maxWidth: "250px" }}
           src={BackendUrl.getBUrl() + image}
           alt="Image"
         />
@@ -47,7 +47,12 @@ const detailPage = (props) => {
         <Container>
           <Row>
             <Col style={{ height: "60%" }} sm={true}>
-              <div style={{ border: "1px solid #ccc", height: "100%" }}>
+              <div
+                style={{
+                  border: "1px solid #ccc",
+                  height: "100%",
+                }}
+              >
                 <Carousel>{carouselItems}</Carousel>
               </div>
             </Col>

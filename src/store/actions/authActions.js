@@ -119,8 +119,9 @@ export const login = ({ email, password }) => (dispatch) => {
       }
     )
     .catch((err) => {
-      dispatch();
-      returnErrors(err.response.data, err.response.status, "LOGIN_FAIL");
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
+      );
       dispatch({
         type: LOGIN_FAIL,
       });

@@ -44,3 +44,9 @@
 [0629/072403.530:ERROR:process_info.cc(556)] ReadMemoryInfo failed
 [0629/072403.446:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
 [0629/072403.446:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[0810/063643.141:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0810/063643.141:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0810/063643.173:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0810/063643.442:ERROR:exception_snapshot_win.cc(98)] thread ID 12556 not found in process
+[0810/063643.423:ERROR:exception_snapshot_win.cc(98)] thread ID 6516 not found in process
+[0810/063643.423:ERROR:exception_snapshot_win.cc(98)] thread ID 12856 not found in process
