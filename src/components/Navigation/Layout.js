@@ -11,6 +11,7 @@ import RegisterModal from "../Authentication/RegisterModal";
 import Logout from "../Authentication/Logout";
 
 const layout = (props) => {
+  
   return (
     <Aux>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -19,7 +20,9 @@ const layout = (props) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
+        {!props.isAdmin ? (
           <Nav className="mr-auto">
+          
             <Nav.Link as={NavLink} to="/features" href="/features">
               Features
             </Nav.Link>
@@ -75,10 +78,35 @@ const layout = (props) => {
                 Home Appliances
               </NavDropdown.Item>
             </NavDropdown>
-          </Nav>
+          </Nav>)
+          : (
+            <Nav className="mr-auto">
+            <Nav.Link as={NavLink} to="/products" href="/products">
+            Products
+          </Nav.Link> 
+          <Nav.Link as={NavLink} to="/customers" href="/customers">
+            Customers
+        </Nav.Link> 
+        <Nav.Link as={NavLink} to="/sellers" href="/sellers">
+            Sellers
+        </Nav.Link> 
+        </Nav> 
+        )}
+        {props.isAuthenticated && props.isRegister ? (
           <Nav className="ml-auto">
-            {props.isAuthenticated && props.isRegister ? (
+            
+                {props.isAdmin ? 
+                   ( <Fragment>
+                    <NavItem>
+                   <Logout />
+                 </NavItem>
+                 </Fragment>
+                 
+                   
+                 
+               ):(
               <Fragment>
+              
                 <NavItem>
                   <span className="navbar-text mr-3">
                     <strong>
@@ -99,8 +127,12 @@ const layout = (props) => {
                 <NavItem>
                   <Logout />
                 </NavItem>
+               
               </Fragment>
-            ) : (
+               )  }
+               </Nav>
+               ): (
+              <Nav className="ml-auto">
               <Fragment>
                 <Nav.Link as={NavLink} to="/cart" href="/cart">
                   My Cart
@@ -110,8 +142,9 @@ const layout = (props) => {
                   Register
                 </Nav.Link>
               </Fragment>
+              </Nav>
             )}
-          </Nav>
+         
         </Navbar.Collapse>
       </Navbar>
       {props.children}

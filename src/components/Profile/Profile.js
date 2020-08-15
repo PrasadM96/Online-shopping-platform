@@ -5,7 +5,20 @@ import { Form, Button, Card, Col } from "react-bootstrap";
 
 const Profile = props =>{
     const [key, setKey] = useState('profile');
-  
+    const uploadedImage = React.useRef(null);
+
+    const handleImageUpload = e => {
+      const [file] = e.target.files;
+      if (file) {
+        const reader = new FileReader();
+        const {current} = uploadedImage;
+        current.file = file;
+        reader.onload = (e) => {
+            current.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    }
     return (
         <Card style={{ width: "44rem", margin: "3rem auto " }}>
         <Card.Header className="text-center">Your Information</Card.Header>
@@ -153,6 +166,33 @@ const Profile = props =>{
             <Form.Label></Form.Label>
             </Form.Row>
             
+
+              
+      <Form.Row>
+      <Form.Group as={Col} controlId="formBasicEmail">
+            <Form.Label>Photo</Form.Label>
+            <Form.Control
+              name="profile" 
+              type="file"
+              accept="image/*" 
+              onChange={handleImageUpload}
+              
+            />
+
+        <div
+        
+        >
+        <img
+          ref={uploadedImage}
+          style={{
+            width: "60px",
+            height: "60px",
+            position: "auto"
+          }}
+        />
+      </div>
+    </Form.Group>
+    </Form.Row>
             
     <Form.Row>
       <Form.Group as={Col} controlId="formBasicEmail">
