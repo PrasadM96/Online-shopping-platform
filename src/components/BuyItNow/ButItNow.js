@@ -1,39 +1,51 @@
 import React from "react";
 import { Button, Container, Row, Col, Card, Image } from "react-bootstrap";
 import * as BackendUrl from "../../Shared/BackendUrl";
+import StripeCheckout from "react-stripe-checkout";
 
 const buyItNow = (props) => {
-  var totalPrice = 0;
+  var totalPrice = +props.cartSubTotal + props.cartTax;
   var withoutShipping = props.cartSubTotal;
   var totalShippingFee = props.cartTax;
-  var buyingQuantity = props.buyingQuantity;
+  var totalItemCount = +props.carrTotalCount;
 
   if (props.currentItems) {
-    var price = props.currentItems[0].price;
-    withoutShipping += price * buyingQuantity;
-    totalShippingFee += props.currentItems[0].shippingFee;
-    totalPrice += withoutShipping + totalShippingFee;
-  } else {
-    totalPrice = props.cartTotal;
+    var price = +props.currentItems[0].price;
+    var buyingQuantity = +props.buyingQuantity;
+    totalItemCount = totalItemCount + buyingQuantity;
+    withoutShipping = withoutShipping + price * buyingQuantity;
+    totalShippingFee =
+      totalShippingFee + props.currentItems[0].shippingFee * buyingQuantity;
+    totalPrice = withoutShipping + totalShippingFee;
   }
+
   if (props.toggle) {
-    totalPrice -= props.cartTotal;
-    withoutShipping -= props.cartSubTotal;
-    totalShippingFee -= props.cartTax;
+    withoutShipping = withoutShipping - props.cartSubTotal;
+    totalPrice = totalPrice - props.cartSubTotal - props.cartTax;
+    totalItemCount = totalItemCount - props.carrTotalCount;
   }
+
+  console.log(props);
 
   var details = <div className="text-left">Update your shipping details</div>;
   if (
-    props.name != null &&
+    props.lastName != null &&
+    props.firstName != null &&
     props.country != null &&
     props.address != null &&
-    props.teleNumber != null
+    props.teleNumber != null &&
+    props.zipCode != null &&
+    props.province != null
   ) {
     details = (
       <div>
-        <div className="text-left">{props.name}</div>
+        <div className="text-left">
+          {props.firstName + " " + props.lastName}
+        </div>
         <div className="text-left">{props.address}</div>
+        <div className="text-left">{props.province}</div>
         <div className="text-left">{props.country}</div>
+        <div className="text-left">{props.zipCode}</div>
         <div className="text-left">{props.teleNumber}</div>
       </div>
     );
@@ -42,8 +54,20 @@ const buyItNow = (props) => {
   console.log("buy it now");
 
   var cartitemArr = <div className="text-left ">No cart items</div>;
+
+  var totaltems = [];
+
   if (props.cartItems.length > 0) {
     cartitemArr = props.cartItems.map((item, index) => {
+      var temp = null,
+        count = null;
+      if (props.itemsCount.length >= 0) {
+        temp = props.itemsCount.filter((element) => {
+          return element.productId === item._id;
+        });
+        count = temp[0].quantity;
+      }
+
       return (
         <div>
           <Row>
@@ -65,7 +89,7 @@ const buyItNow = (props) => {
                 <input
                   name="buyingQuantity"
                   style={{ marginLeft: "5%" }}
-                  defaultValue={item.itemCount}
+                  defaultValue={count}
                   min="1"
                   max={props.quantity}
                   type="Number"
@@ -181,9 +205,7 @@ const buyItNow = (props) => {
           <Col md="4">
             <Card className="sticky-top">
               <Card.Body>
-                <div class="float-left">
-                  items ({props.currentItems?props.buyingQuantity + props.cartItemsCount:props.cartItemsCount})
-                </div>
+                <div class="float-left">items ({totalItemCount})</div>
 
                 <div class="float-right">{withoutShipping}</div>
                 <br></br>
@@ -201,12 +223,21 @@ const buyItNow = (props) => {
                 </div>
                 <br></br>
                 <br></br>
-                <Button
+                {/* <Button
                   style={{ width: "100%" }}
-                  onClick={() => props.orderHandler(totalPrice)}
+                  onClick={(totalPrice) => props.orderHandler(totalPrice)}
                 >
                   Order Now
-                </Button>
+                </Button> */}
+                <StripeCheckout
+                  style={{ width: "100%" }}
+                  amount={totalPrice * 100}
+                  token={(token) => {
+                    props.totalPriceHandler(totalPrice);
+                    props.orderHandler(token);
+                  }}
+                  stripeKey="pk_test_51HGIUnB9kGdqbOgc3PVGu5R9mNBsX2trYRJNLqzsIdZugjg1xlgjb26G3Gbdkkh7CIGKEShjlo81dgXKWfRzFJ1f00tfRUYy4G"
+                />
               </Card.Body>
             </Card>
           </Col>

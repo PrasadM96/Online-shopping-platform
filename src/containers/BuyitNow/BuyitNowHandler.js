@@ -12,14 +12,15 @@ class BuyitNowHandler extends Component {
     firstname: null,
     lastname: null,
     address1: null,
-    address2: null,
     country: null,
     zipCode: null,
+    teleNumber: null,
     province: null,
     buyingQuantity: 1,
     cartItemsCount: 0,
     updateModalShow: false,
     toggle: false,
+    totalPrice: null,
   };
 
   componentWillMount() {
@@ -38,14 +39,15 @@ class BuyitNowHandler extends Component {
     if (id) {
       this.props.ongetItem(id);
     }
-
+    this.props.ongetCartItems();
     this.setState({
-      firstName: localStorage.getItem("firstName"),
-      lastName: localStorage.getItem("lastName"),
+      firstname: localStorage.getItem("first_name"),
+      lastname: localStorage.getItem("last_name"),
       address1: localStorage.getItem("address"),
       country: localStorage.getItem("country"),
-      zipCode: localStorage.getItem("zipCode"),
-      province: localStorage.getItem("teleNumber"),
+      zipCode: localStorage.getItem("zip"),
+      province: localStorage.getItem("province"),
+      teleNumber: localStorage.getItem("teleNumber"),
     });
   }
 
@@ -59,8 +61,8 @@ class BuyitNowHandler extends Component {
   address1Handler = (event) => {
     this.setState({ address1: event.target.value });
   };
-  address2Handler = (event) => {
-    this.setState({ address2: event.target.value });
+  teleNumberHandler = (event) => {
+    this.setState({ teleNumber: event.target.value });
   };
   countryHandler = (event) => {
     this.setState({ country: event.target.value });
@@ -73,17 +75,17 @@ class BuyitNowHandler extends Component {
   };
 
   submitHandler = (e) => {
-    console.log("inside");
+    console.log("inside dfsfdsfdsfdsfs");
 
     if (
       this.state.firstname !== null &&
       this.state.lastname !== null &&
-      (this.state.address1 !== null || this.state.address2 !== null) &&
+      this.state.address1 !== null &&
       this.state.country !== null &&
       this.state.province !== null &&
-      this.state.zipCode !== null
+      this.state.zipCode !== null &&
+      this.state.teleNumber !== null
     ) {
-      console.log("right");
     }
   };
 
@@ -100,14 +102,30 @@ class BuyitNowHandler extends Component {
     });
   };
 
-  orderHandler = (totalPrice) => {
-    console.log("order");
-    const items = [];
-    items.push(this.props.item[0]);
-    this.props.cart.forEach((item) => {
-      items.push(item);
+  totalPriceHandler = (totalPrice) => {
+    this.setState({
+      totalPrice: totalPrice,
     });
-    console.log(this.props.user.id, items,totalPrice);
+  };
+
+  orderHandler = (token) => {
+    const userId = localStorage.getItem("user_id");
+
+    var order = {
+      stripeToken: token,
+      userId: userId,
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      province: this.state.province,
+      address: this.state.address1,
+      country: this.state.country,
+      zipCode: this.state.zipCode,
+      teleNumber: this.state.teleNumber,
+      items: this.props.cartItemCount.items,
+      totalPrice: this.state.totalPrice,
+    };
+
+    this.props.onPostOrder(order);
   };
 
   click = () => {
@@ -122,6 +140,7 @@ class BuyitNowHandler extends Component {
       toggle: !toggleVal,
     });
   };
+
   render() {
     var modal = null;
     if (this.state.updateModalShow) {
@@ -130,14 +149,22 @@ class BuyitNowHandler extends Component {
           title="Shipping Details"
           status={this.state.updateModalShow}
           click={this.click}
+          submitHandler={this.submitHandler}
         >
           <ShippingDetails
+            firstName={this.state.firstname}
+            lastName={this.state.lastname}
+            address={this.state.address1}
+            country={this.state.country}
+            zipCode={this.state.zipCode}
+            province={this.state.province}
+            teleNumber={this.state.teleNumber}
             firstnameHandler={this.firstnameHandler}
             lastnameHandler={this.lastnameHandler}
             address1Handler={this.address1Handler}
-            address2Handler={this.address2Handler}
             countryHandler={this.countryHandler}
             provinceHandler={this.provinceHandler}
+            teleNumberHandler={this.teleNumberHandler}
             zipCodeHandler={this.zipCodeHandler}
             click={this.submitHandler}
           />
@@ -180,19 +207,45 @@ class BuyitNowHandler extends Component {
     if (cartItems.length > 0 || this.props.item) {
       // const item = { ...this.props.item[0] };
       // var { title, price, shippingFee, shippingArea, quantity } = item;
+      var cartSubTotal = 0;
+      var cartTax = 0;
+      var carrTotalCount = 0;
+
+      if (this.props.cartItemCount.items) {
+        const cartCount = this.props.cartItemCount.items;
+        var tempArr = [];
+        cartCount.map((element) => {
+          const temp = this.props.cart.filter(
+            (x) => x._id === element.productId
+          );
+          if (temp) {
+            const t1 = temp[0];
+            t1.itemCount = element.quantity;
+            cartSubTotal = cartSubTotal + t1.price * t1.itemCount;
+            carrTotalCount = carrTotalCount + t1.itemCount;
+            console.log(t1.shippingFee);
+
+            cartTax = cartTax + parseFloat(t1.shippingFee) * t1.itemCount;
+            tempArr.push(t1);
+          }
+        });
+      }
 
       detail = (
         <BuyitNow
-          firstName={this.state.firstName}
-          lastName={this.state.lastName}
-          address={this.state.address}
+          firstName={this.state.firstname}
+          lastName={this.state.lastname}
+          address={this.state.address1}
           country={this.state.country}
+          province={this.state.province}
           zipCode={this.state.zipCode}
           teleNumber={this.state.teleNumber}
           cartItems={cartItems}
           cartTotal={this.props.cartTotal}
-          cartSubTotal={this.props.cartSubTotal}
-          cartTax={this.props.cartTax}
+          cartSubTotal={cartSubTotal}
+          carrTotalCount={carrTotalCount}
+          cartTax={cartTax}
+          itemsCount={this.props.cartItemCount.items}
           currentItems={this.props.item}
           cartItemsCount={this.state.cartItemsCount}
           buyingQuantity={this.state.buyingQuantity}
@@ -201,6 +254,7 @@ class BuyitNowHandler extends Component {
           orderHandler={this.orderHandler}
           toggleHandler={this.toggleHandler}
           toggle={this.state.toggle}
+          totalPriceHandler={this.totalPriceHandler}
         />
       );
     } else {
@@ -230,15 +284,15 @@ const mapStateToProps = (state) => {
     error: state.shop.checkoutErr,
     cart: state.cart.cart,
     cartTotal: state.cart.cartTotal,
-    cartSubTotal: state.cart.cartSubTotal,
-    cartTax: state.cart.cartTax,
-    user: state.auth.user,
+    cartItemCount: state.cart.cartItemCount,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     ongetItem: (id) => dispatch(actions.getSingleItem(id)),
+    ongetCartItems: () => dispatch(actions.getCartItem()),
+    onPostOrder: (order) => dispatch(actions.postOrder(order)),
   };
 };
 

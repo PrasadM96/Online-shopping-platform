@@ -16,10 +16,7 @@ class MyItemHandler extends Component {
     }
   }
 
-  deleteHandler = (index) => {
-    const prod = this.props.items[index];
-    this.props.ondeleteSellingItem(prod._id);
-  };
+
 
   editHandler = (id) => {
     this.props.history.push("/selling/edit-item/" + id);

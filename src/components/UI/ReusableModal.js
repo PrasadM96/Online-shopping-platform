@@ -23,9 +23,10 @@ function ReuseableModal(props) {
       <Modal.Body>{props.children}</Modal.Body>
       <Modal.Footer>
         <Button
-          onClick={() => {
+          onClick={(e) => {
             handleClose();
-            //props.click();
+            props.click();
+            props.submitHandler(e);
           }}
           //   onClick={(e) => props.submitHandler(e)}
 

@@ -15,6 +15,10 @@ export default function CartList(props) {
             increment={props.increment}
             decrement={props.decrement}
             removeItem={props.removeItem}
+            updateCartError={props.updateCartError}
+            deleteSingleItem={props.deleteSingleItem}
+            deleteSingleItemError={props.deleteSingleItemError}
+            deleteSingleItemLoading={props.deleteSingleItemLoading}
           />
         );
       })}

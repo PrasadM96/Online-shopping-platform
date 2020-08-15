@@ -20,12 +20,13 @@ export {
   addTotals,
   getSingleItem,
   getDetailSingleItem,
+  postOrder,
 } from "./shop";
 
 export { modalstate } from "./modalActions";
 
 export { authCheckState } from "./authActions";
 
-export { getCartItem, updateCartItem, addItemToCart,clearCartItems,removeCartItem,setTotal } from "./cart";
+export { getCartItem, updateCartItem, addItemToCart } from "./cart";
 
 export { getAdmin } from "./admin";
