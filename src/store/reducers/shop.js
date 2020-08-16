@@ -1,6 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../../Shared/Utility";
-import { tempData } from "../../assets/tempData";
+import { tempData,tempData2 } from "../../assets/tempData";
 
 const initialState = {
   loading: false,

@@ -19,12 +19,24 @@ class BuyitNowHandler extends Component {
     teleNumber: null,
     province: null,
     buyingQuantity: 1,
+    cartItemsCount: 0,
     updateModalShow: false,
     toggle: false,
     totalPrice: null,
   };
 
   componentWillMount() {
+    if (this.props.cart.length > 0) {
+      var total = 0;
+      this.props.cart.forEach((item, index) => {
+        total = total + item.itemCount;
+      });
+      console.log("total", total);
+      this.setState({
+        ...this.state,
+        cartItemsCount: total,
+      });
+    }
     const id = this.props.match.params.id;
     if (id) {
       this.props.ongetItem(id);
@@ -90,7 +102,6 @@ class BuyitNowHandler extends Component {
     this.setState({
       buyingQuantity: e.target.value,
     });
-    console.log(this.state.buyingQuantity);
   };
 
   updateHandler = () => {
@@ -122,7 +133,7 @@ class BuyitNowHandler extends Component {
       items: this.props.cartItemCount.items,
       totalPrice: this.state.totalPrice,
     };
-
+    console.log(order);
     this.props.onPostOrder(order);
   };
 
@@ -245,6 +256,7 @@ class BuyitNowHandler extends Component {
           cartTax={cartTax}
           itemsCount={this.props.cartItemCount.items}
           currentItems={this.props.item}
+          cartItemsCount={this.state.cartItemsCount}
           buyingQuantity={this.state.buyingQuantity}
           buyingQuantityHandler={this.buyingQuantityHandler}
           updateHandler={this.updateHandler}

@@ -135,7 +135,6 @@ class Cart extends Component {
           tempArr.push(t1);
         }
       });
-
       cartUi = (
         <section>
           <CartColumns />
@@ -154,6 +153,7 @@ class Cart extends Component {
           />
           <CartTotals
             // state={this.props.state}
+            cart={tempArr}
             cartSubTotal={cartSubTotal}
             cartItems={this.props.state.cart}
             cartTax={cartTax}
@@ -192,7 +192,8 @@ const mapDispatchToProps = (dispatch) => {
     removeItem: (id) => dispatch({ type: actionTypes.REMOVE_ITEM, id: id }),
     increment: (id) => dispatch({ type: actionTypes.INCREMENT, id: id }),
     decrement: (id) => dispatch({ type: actionTypes.DECREMENT, id: id }),
-    addTotals: () => dispatch({ type: actionTypes.ADD_TOTALS }),
+    setTotal: (cartSubTotal, cartTax) =>
+      dispatch(actions.setTotal(cartSubTotal, cartTax)),
     ongetCartItems: () => dispatch(actions.getCartItem()),
     onUpdateCartItem: (prodId, amount) =>
       dispatch(actions.updateCartItem(prodId, amount)),

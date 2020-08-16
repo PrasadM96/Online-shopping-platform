@@ -245,6 +245,7 @@ export const postOrder = (order) => {
       })
       .catch((err) => {
         dispatch(postOrderFail(err));
+        console.log("post-error")
       });
   };
 };

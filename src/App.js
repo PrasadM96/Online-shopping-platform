@@ -36,6 +36,7 @@ import FooterHandler from "./containers/Footer/FooterHandler";
 import UsersList from "./components/Admin/UsersList";
 import ProductList from "./components/Admin/ProductList";
 import SellersList from "./components/Admin/SellersList";
+import OrderList from "./components/Admin/OrderList";
 
 import { getAdmin } from "./store/actions/admin";
 
@@ -45,11 +46,11 @@ class App extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     admin: PropTypes.object.isRequired,
-    clearErrors: PropTypes.func.isRequired,
-    modalstate: PropTypes.func.isRequired,
-    authCheckState: PropTypes.func.isRequired,
+    //clearErrors: PropTypes.func.isRequired,
+    //modalstate: PropTypes.func.isRequired,
+    //authCheckState: PropTypes.func.isRequired,
     modal: PropTypes.bool,
-    getAdmin: PropTypes.func.isRequired,
+    //getAdmin: PropTypes.func.isRequired,
   };
 
   //state={
@@ -66,11 +67,11 @@ class App extends Component {
   }*/
   componentDidMount() {
     this.props.onAuthCheckState();
-
     const { isAdmin } = this.props.admin;
+    // if(this.props.auth.isAuthenticated){
+    // this.props.onGetAdmin();
 
-    this.props.onGetAdmin();
-
+    //}
     //if(this.props.auth.isAuthenticated ){
     // this.props.onGetAdmin();
     // console.log()
@@ -84,18 +85,17 @@ class App extends Component {
   toggle = () => {
     //clear errors
     const { modal } = this.props;
-    console.log(modal);
     this.props.onModatState();
-    console.log(modal);
+  };
+
+  getAdmin = () => {
+    this.props.onGetAdmin();
   };
 
   render() {
     const { isAuthenticated, user, isRegister } = this.props.auth;
     const { isAdmin } = this.props.admin;
-    console.log(this.props.admin.isAdmin, "app");
     const sellerStatus = localStorage.getItem("sellerStatus");
-
-    console.log(isAuthenticated);
 
     return (
       <div>
@@ -117,6 +117,7 @@ class App extends Component {
             <Route path="/selling" component={RegisterSelling} />
             <Route path="/profile" component={ProfileHandler} />
             <Route path="/products" component={ProductList} />
+            <Route path="/orders" component={OrderList} />
             <Route path="/customers" component={UsersList} />
             <Route path="/sellers" component={SellersList} />
             <Route path="/category/:type/:id" component={DetailPageHandler} />

@@ -51,7 +51,7 @@ const buyItNow = (props) => {
     );
   }
 
-  console.log("buy it noe", props.cartItems);
+  console.log("buy it now");
 
   var cartitemArr = <div className="text-left ">No cart items</div>;
 
@@ -219,7 +219,7 @@ const buyItNow = (props) => {
                   <h4> Order Total</h4>
                 </div>
                 <div class="float-right ont-weight-bold">
-                  <h4> {totalPrice}</h4>
+                  <h4> ${totalPrice}</h4>
                 </div>
                 <br></br>
                 <br></br>

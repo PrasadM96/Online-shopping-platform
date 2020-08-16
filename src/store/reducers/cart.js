@@ -5,6 +5,9 @@ const initialState = {
   loading: false,
   error: null,
   cart: [],
+  cartSubTotal: 0.0,
+  cartTax: 0.0,
+  cartTotal: 0.0,
   updateCartLaoding: false,
   updatedCart: null,
   updateCartError: null,
@@ -19,6 +22,14 @@ const initialState = {
   removeSingleItemError: null,
 };
 
+const setTotal = (state, action) => {
+  console.log("cartSubTotal", action.cartSubTotal);
+  return updateObject(state, {
+    cartSubTotal: action.cartSubTotal,
+    cartTax: action.cartTax,
+    cartTotal: action.cartSubTotal + action.cartTax,
+  });
+};
 const getCartSuccess = (state, action) => {
   return updateObject(state, {
     loading: false,

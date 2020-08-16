@@ -2,7 +2,7 @@ import React from "react";
 import * as BackendUrl from "../../Shared/BackendUrl";
 
 export default function CartItem(props) {
-  const { _id, title, imageUrls, price } = props.item;
+  const { _id, title, imageUrls, price, count } = props.item;
   const { increment, decrement, removeItem } = props;
   // console.log(cartItemCount);
 
@@ -29,14 +29,14 @@ export default function CartItem(props) {
           <div>
             <span
               className="btn btn-black mx-1"
-              onClick={() => decrement(_id, -1)}
+              onClick={() => decrement(_id, -1, props.count)}
             >
               -
             </span>
             <span className="btn btn-black mx-1">{props.count}</span>
             <span
               className="btn btn-black mx-1"
-              onClick={() => increment(_id, 1)}
+              onClick={() => increment(_id, 1, props.count)}
             >
               +
             </span>

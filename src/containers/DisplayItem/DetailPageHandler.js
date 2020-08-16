@@ -30,7 +30,9 @@ class DetailPageHandler extends Component {
   };
 
   addtoCartHandler = (id) => {
+    console.log(this.props)
     if (!this.props.isAuthenticated) {
+      this.props.history.push({oldUrl:this.props.match.url})
       this.props.onModalState();
       console.log("solve");
     } else {
@@ -38,7 +40,7 @@ class DetailPageHandler extends Component {
 
       //this.props.onAddItemToCart(id);
       const token = localStorage.getItem("token");
-
+      
       this.setState({ loading: true });
       axios
         .post(
