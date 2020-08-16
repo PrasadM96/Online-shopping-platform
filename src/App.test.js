@@ -4,6 +4,7 @@ import App from "./App";
 import store from "./store";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import BuyItNow from "./components/BuyItNow/ButItNow";
 
 test("renders learn react link", () => {
   const { getByText } = render(
