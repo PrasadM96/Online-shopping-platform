@@ -36,7 +36,6 @@ class homepagehandler extends Component {
   componentDidMount = async () => {
     this.setState({ isLoading: true });
     const { isAuthenticated } = this.props;
-    console.log(isAuthenticated);
     //  const {isAdmin,isAuthenticated} = this.props;
 
     //get users for admin page
@@ -109,8 +108,6 @@ class homepagehandler extends Component {
   render() {
     const { isLoading, users2, products2, sellers2,orders,orders2 } = this.state;
     const { isAdmin, isAuthenticated } = this.props;
-    console.log("status", isAuthenticated);
-    console.log(isAdmin);
 
     return isAdmin ? (
       <AdminHomePage

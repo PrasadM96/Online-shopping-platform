@@ -46,11 +46,11 @@ class App extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     admin: PropTypes.object.isRequired,
-    clearErrors: PropTypes.func.isRequired,
-    modalstate: PropTypes.func.isRequired,
-    authCheckState: PropTypes.func.isRequired,
+    //clearErrors: PropTypes.func.isRequired,
+    //modalstate: PropTypes.func.isRequired,
+    //authCheckState: PropTypes.func.isRequired,
     modal: PropTypes.bool,
-    getAdmin: PropTypes.func.isRequired,
+    //getAdmin: PropTypes.func.isRequired,
   };
 
   //state={
@@ -67,13 +67,11 @@ class App extends Component {
   }*/
   componentDidMount() {
     this.props.onAuthCheckState();
-    console.log("heloo");
     const { isAdmin } = this.props.admin;
     // if(this.props.auth.isAuthenticated){
     // this.props.onGetAdmin();
 
     //}
-    console.log("hello");
     //if(this.props.auth.isAuthenticated ){
     // this.props.onGetAdmin();
     // console.log()
@@ -87,21 +85,17 @@ class App extends Component {
   toggle = () => {
     //clear errors
     const { modal } = this.props;
-    console.log(modal);
     this.props.onModatState();
-    console.log(modal);
+  };
+
+  getAdmin = () => {
+    this.props.onGetAdmin();
   };
 
   render() {
     const { isAuthenticated, user, isRegister } = this.props.auth;
     const { isAdmin } = this.props.admin;
-    console.log(this.props.admin.isAdmin, "app");
     const sellerStatus = localStorage.getItem("sellerStatus");
-    if (this.props.auth.isAuthenticated) {
-      this.props.onGetAdmin();
-    }
-
-    console.log(isAuthenticated);
 
     return (
       <div>

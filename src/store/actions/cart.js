@@ -235,3 +235,6 @@ export const deleteSingleItem = (id, itemCount) => {
       });
   };
 };
+export const setTotal=()=>{
+  
+}

@@ -124,7 +124,7 @@ class BuyitNowHandler extends Component {
       items: this.props.cartItemCount.items,
       totalPrice: this.state.totalPrice,
     };
-
+    console.log(order);
     this.props.onPostOrder(order);
   };
 

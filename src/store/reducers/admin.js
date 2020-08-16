@@ -7,8 +7,6 @@ const initialState = {
 export default function (state =initialState, action) {
     switch (action.type) {
     case GET_ADMIN_STATUS:
-        if (action.payload) {
-            console.log(action.payload);}
         //localStorage.setItem("admin",action.payload.status.status)}
       return {
         ...state,
