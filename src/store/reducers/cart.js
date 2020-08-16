@@ -110,6 +110,7 @@ const clearCartSuccess = (state, action) => {
     clearCartItem: action.item,
     clearCartFail: null,
     clearCartLoading: false,
+    cart: [],
   });
 };
 

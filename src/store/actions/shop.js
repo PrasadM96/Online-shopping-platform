@@ -210,6 +210,7 @@ export const postOrderStart = () => {
 };
 
 export const postOrderSuccess = (result) => {
+  console.log(result);
   return {
     type: actionTypes.ORDER_SUCCESS,
     result: result,

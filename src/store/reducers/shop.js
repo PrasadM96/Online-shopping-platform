@@ -246,6 +246,7 @@ const orderSuccess = (state, action) => {
   return updateObject(state, {
     orderLoading: false,
     orderItems: action.result,
+    cart: [],
   });
 };
 const orderFail = (state, action) => {
@@ -297,7 +298,7 @@ const reducer = (state = initialState, action) => {
       return getDetailItemFail(state, action);
     case actionTypes.ORDER_START:
       return orderStart(state, action);
-    case actionTypes.ORDER_START:
+    case actionTypes.ORDER_SUCCESS:
       return orderSuccess(state, action);
     case actionTypes.ORDER_FAIL:
       return orderFail(state, action);

@@ -114,6 +114,10 @@ class Cart extends Component {
     var cartSubTotal = 0;
     var cartTax = 0;
 
+    if (!this.props.state.loading && !this.props.state.error) {
+      cartUi = <EmptyCart />;
+    }
+
     if (this.props.state.cart.length > 0 && !this.props.state.loading) {
       const cartCount = this.props.state.cartItemCount.items;
       var tempArr = [];
@@ -151,20 +155,14 @@ class Cart extends Component {
           <CartTotals
             // state={this.props.state}
             cartSubTotal={cartSubTotal}
+            cartItems={this.props.state.cart}
             cartTax={cartTax}
-            clearCart={this.props.clearCart}
+            clearCart={this.props.onclearCartItems}
             history={this.props.history}
             checkout={this.checkout}
           />
         </section>
       );
-    } else {
-      if (
-        this.props.state.error !== null &&
-        this.props.state.loading === true
-      ) {
-        cartUi = <EmptyCart />;
-      }
     }
     return (
       <div>
@@ -200,6 +198,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.updateCartItem(prodId, amount)),
     onDeleteSingleItem: (id, itemCount) =>
       dispatch(actions.deleteSingleItem(id, itemCount)),
+    onclearCartItems: (cartItems) =>
+      dispatch(actions.clearCartItems(cartItems)),
   };
 };
 
