@@ -61,7 +61,7 @@ const adminhomepage = (props) => {
                         </Card.Title>
                       </Col>
                     </Row>
-                    <Card.Link href="/admin/products">More Details</Card.Link>
+                    <Card.Link href="/products">More Details</Card.Link>
                   </Card.Body>
                 </Card>
               </div>
@@ -85,7 +85,7 @@ const adminhomepage = (props) => {
                         </Card.Title>
                       </Col>
                     </Row>
-                    <Card.Link href="/admin/customers">More Details</Card.Link>
+                    <Card.Link href="/customers">More Details</Card.Link>
                   </Card.Body>
                 </Card>
               </div>
@@ -109,7 +109,7 @@ const adminhomepage = (props) => {
                         </Card.Title>
                       </Col>
                     </Row>
-                    <Card.Link href="/admin/sellers">More Details</Card.Link>
+                    <Card.Link href="/sellers">More Details</Card.Link>
                   </Card.Body>
                 </Card>
               </div>
@@ -207,7 +207,7 @@ const adminhomepage = (props) => {
                 })}
               </tbody>
             </Table>
-            <Card.Link href="/admin/customers">View More Users</Card.Link>
+            <Card.Link href="/customers">View More Users</Card.Link>
           </Card.Body>
         </Card>
       </Container>
@@ -266,7 +266,7 @@ const adminhomepage = (props) => {
                         })}
                       </tbody>
                     </Table>
-                    <Card.Link href="/admin/products">View More Products</Card.Link>
+                    <Card.Link href="/products">View More Products</Card.Link>
                   </Card.Body>
                 </Card>
               </div>
@@ -312,7 +312,7 @@ const adminhomepage = (props) => {
                       </thead>
                      
                       </Table>
-                      <Card.Link href="/admin/orders">View More Orders</Card.Link>
+                      <Card.Link href="/orders">View More Orders</Card.Link>
                     </Card.Body>
                   </Card>
               </div>
@@ -365,7 +365,7 @@ const adminhomepage = (props) => {
                         })}
                       </tbody>
                     </Table>
-                    <Card.Link href="/admin/sellers">View More Sellers</Card.Link>
+                    <Card.Link href="/sellers">View More Sellers</Card.Link>
                   </Card.Body>
                 </Card>
               </div>
