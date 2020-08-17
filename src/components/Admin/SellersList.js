@@ -23,7 +23,20 @@ class sellerlist extends Component {
       isAuthenticated: PropTypes.bool,
       getAdmin:PropTypes.func.isRequired }
 
-      
+      removeSeller(newseller){
+        console.log(newseller._id);
+        if(window.confirm("DO you want to delete this seller permenently?")){
+          const seller_id=newseller._id;
+          const config = {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          };
+          const body = JSON.stringify({  seller_id});
+          axios.post("/admin/remove-sellers",body,config)
+         // window.location.reload();
+        }
+      }
 
     componentDidMount = async () => {
       const {isAdmin,isAuthenticated}=this.props;
@@ -76,6 +89,9 @@ class sellerlist extends Component {
                   <th>
                     <font color="lightseagreen">Country</font>
                   </th>
+                  <th>
+                     <font color="lightseagreen">Edit</font>
+                   </th>
                  
                   
                 </tr>
@@ -91,7 +107,10 @@ class sellerlist extends Component {
                     <td>{newseller.state}</td>
                     <td>{newseller.zip}</td>
                     <td>{newseller.country}</td>
-                    
+                    <td>
+                             <button class="btn btn-info"
+                             onClick ={this.removeSeller.bind(this,newseller)}>Remove</button>
+                           </td>
                     </tr>
                     );
          
@@ -108,7 +127,7 @@ class sellerlist extends Component {
         }}
         const mapStateToProps = (state) => ({
           isAuthenticated: state.auth.isAuthenticated,
-          isAdmin:state.admin.isAdmin
+          isAdmin:state.auth.isAdmin
           
         });
         

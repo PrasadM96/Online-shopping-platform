@@ -57,11 +57,11 @@ const adminhomepage = (props) => {
                       </Col>
                       <Col>
                         <Card.Title>
-                          {localStorage.getItem("product_count")}
+                          {props.productCount}
                         </Card.Title>
                       </Col>
                     </Row>
-                    <Card.Link href="/products">More Details</Card.Link>
+                    <Card.Link href="/admin/products">More Details</Card.Link>
                   </Card.Body>
                 </Card>
               </div>
@@ -81,11 +81,11 @@ const adminhomepage = (props) => {
                       </Col>
                       <Col>
                         <Card.Title>
-                          {localStorage.getItem("user_count")}
+                          {props.userCount}
                         </Card.Title>
                       </Col>
                     </Row>
-                    <Card.Link href="/customers">More Details</Card.Link>
+                    <Card.Link href="/admin/customers">More Details</Card.Link>
                   </Card.Body>
                 </Card>
               </div>
@@ -105,11 +105,11 @@ const adminhomepage = (props) => {
                       </Col>
                       <Col>
                         <Card.Title>
-                          {localStorage.getItem("seller_count")}
+                          {props.sellerCount}
                         </Card.Title>
                       </Col>
                     </Row>
-                    <Card.Link href="/sellers">More Details</Card.Link>
+                    <Card.Link href="/admin/sellers">More Details</Card.Link>
                   </Card.Body>
                 </Card>
               </div>
@@ -129,11 +129,11 @@ const adminhomepage = (props) => {
                       </Col>
                       <Col>
                         <Card.Title>
-                          {localStorage.getItem("orders_count")}
+                          {props.orderCount}
                         </Card.Title>
                       </Col>
                     </Row>
-                    <Card.Link href="#">More Details</Card.Link>
+                    <Card.Link href="/orders">More Details</Card.Link>
                   </Card.Body>
                 </Card>
               </div>
@@ -207,7 +207,7 @@ const adminhomepage = (props) => {
                 })}
               </tbody>
             </Table>
-            <Card.Link href="/customers">View More Users</Card.Link>
+            <Card.Link href="/admin/customers">View More Users</Card.Link>
           </Card.Body>
         </Card>
       </Container>
@@ -266,7 +266,7 @@ const adminhomepage = (props) => {
                         })}
                       </tbody>
                     </Table>
-                    <Card.Link href="/products">View More Products</Card.Link>
+                    <Card.Link href="/admin/products">View More Products</Card.Link>
                   </Card.Body>
                 </Card>
               </div>
@@ -310,22 +310,9 @@ const adminhomepage = (props) => {
                           <th>Username</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        {props.orders2.map((newuser) => {
-                          if (newuser._id != "") {
-                            return (
-                              <tr>
-                                <td>{getParsedDate(newuser.updatedAt)}</td>
-                                <td>{newuser.user.details.firstname}</td>
-                                <td>{newuser.user.details.lastname}</td>
-                                <td><span>{`$`+newuser.totalPrice}</span></td>
-                              </tr>
-                            );
-                          }
-                        })}
-                      </tbody>
+                     
                       </Table>
-                      <Card.Link href="/orders">View More Orders</Card.Link>
+                      <Card.Link href="/admin/orders">View More Orders</Card.Link>
                     </Card.Body>
                   </Card>
               </div>
@@ -378,7 +365,7 @@ const adminhomepage = (props) => {
                         })}
                       </tbody>
                     </Table>
-                    <Card.Link href="/sellers">View More Sellers</Card.Link>
+                    <Card.Link href="/admin/sellers">View More Sellers</Card.Link>
                   </Card.Body>
                 </Card>
               </div>

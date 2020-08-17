@@ -16,6 +16,22 @@ class UsersList extends Component {
         }
     }
 
+    
+    removeUsers(newUser){
+      console.log(newUser._id);
+      if(window.confirm("DO you want to delete this user permenently?")){
+        const user_id=newUser._id;
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+        const body = JSON.stringify({  user_id});
+        axios.post("/admin/remove-users",body,config)
+       // window.location.reload();
+      }
+    }
+
     componentDidMount = async () => {
         
         this.setState({ isLoading: true })
@@ -75,6 +91,9 @@ class UsersList extends Component {
                   <th>
                     <font color="lightseagreen">Zip Code</font>
                   </th>
+                  <th>
+                     <font color="lightseagreen">Edit</font>
+                   </th>
                 </tr>
     
                 <tbody>
@@ -91,6 +110,10 @@ class UsersList extends Component {
                     <td>{newuser.province}</td>
                     <td>{newuser.country}</td>
                     <td>{newuser.zip}</td>
+                    <td>
+                             <button class="btn btn-info"
+                             onClick ={this.removeUsers.bind(this,newuser)}>Remove</button>
+                           </td>
                     </tr>
                     );
          

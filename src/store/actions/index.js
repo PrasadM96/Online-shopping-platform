@@ -25,7 +25,7 @@ export {
 
 export { modalstate } from "./modalActions";
 
-export { authCheckState } from "./authActions";
+export { authCheckState,getAdmin } from "./authActions";
 
 export {
   getCartItem,
@@ -35,4 +35,4 @@ export {
   clearCartItems,
 } from "./cart";
 
-export { getAdmin } from "./admin";
+//export { getAdmin } from "./admin";

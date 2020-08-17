@@ -8,6 +8,7 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_FAIL,
   REGISTER_SUCCESS,
+  GET_ADMIN_STATUS
 } from "./actionTypes";
 
 import axios from "axios";
@@ -90,6 +91,9 @@ export const checkAuthTimeout = (expiresIn) => {
     }, expiresIn * 1000);
   };
 };
+
+
+
 
 //login user
 export const login = ({ email, password }) => (dispatch) => {
@@ -182,5 +186,28 @@ export const authCheckState = () => {
         );
       }
     }
+  };
+};
+
+
+export const getAdmin= () => {
+  const token = localStorage.getItem("token");
+  return (dispatch) => {
+    
+axios
+      .get("/user/checkAdminStatus", {
+        headers: {
+          "x-auth-token": token,
+        },
+      })
+      .then((results) => {
+          dispatch({
+              type: GET_ADMIN_STATUS,
+              payload: results.data,
+            })
+      })
+      .catch((err) => {
+       
+      });
   };
 };
