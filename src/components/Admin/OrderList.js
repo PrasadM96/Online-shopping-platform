@@ -39,7 +39,7 @@ class orderlist extends Component {
     getAdmin: PropTypes.func.isRequired,
   };
 
-  removeOrder(newOrder){
+  /*removeOrder(newOrder){
     console.log(newOrder._id);
     if(window.confirm("DO you want to delete this order permenently?")){
       const order_id=newOrder._id;
@@ -53,7 +53,7 @@ class orderlist extends Component {
      // window.location.reload();
     }
   }
-
+*/
   componentDidMount = async () => {
    // this.setState({ isLoading: true });
     const { isAuthenticated } = this.props;
@@ -61,26 +61,42 @@ class orderlist extends Component {
     //if (isAuthenticated) {
       //this.props.getAdmin();
    // }
- //console.log(isAuthenticated);
- if (this.props.isAdmin) {
-  await axios.get("/admin/get-orders").then((orders) => {
-    this.setState({
-      orders: orders.data.data,
-      //isLoading: false,
-    });
-    console.log(this.state.isLoading)
 
-  });
-} else {
-  await axios.get("/user/getOrders").then((orders) => {
-    this.setState({
-      orders: orders.data.data,
-      isLoading: false,
-    });
-  });
-}
-};
-  
+
+   /* if (isAuthenticated) {
+      this.props.getAdmin();
+    }
+*/
+    const token = localStorage.getItem("token");
+
+    /*if (!this.props.isAdmin) {*/
+      await axios
+        .get("/admin/get-orders", {
+          headers: {
+            "x-auth-token": token,
+          },
+        })
+        .then((orders) => {
+          this.setState({
+            orders: orders.data.data,
+            isLoading: false,
+          });
+        });
+    /*} else {
+      await axios
+        .get("/user/get-orders", {
+          headers: {
+            "x-auth-token": token,
+          },
+        })
+        .then((orders) => {
+          this.setState({
+            orders: orders.data.data,
+            isLoading: false,
+          });
+        });
+    }*/
+  };
 
   render() {
     const { orders, isLoading } = this.state;
@@ -146,9 +162,7 @@ class orderlist extends Component {
               <th>
                 <font color="lightseagreen">Total Price</font>
               </th>
-              <th>
-                <font color="lightseagreen">Edit</font>
-              </th>
+             
             </tr>
 
             <tbody>
@@ -177,10 +191,7 @@ class orderlist extends Component {
                         <span>{`$` + newproduct.totalPrice}</span>
                       </td>
 
-                      <td>
-                        <button class="btn btn-info"
-                        onClick ={this.removeOrder.bind(this,newproduct)}>Remove</button>
-                      </td>
+                     
                     </tr>
                   );
                 }
@@ -199,7 +210,7 @@ class orderlist extends Component {
     return (
      
       <div>
-        {isAdmin ? (
+        
            <Container fluid>
            <div>
              <div>
@@ -297,82 +308,7 @@ class orderlist extends Component {
            </div>
          </Container>
 
-         ): (
-          <Container fluid>
-          <div>
-            <div>
-              <hr />
-              <h4>
-                <strong>
-                  <font color="#40afbf">
-                    &nbsp;&nbsp;&nbsp;Orders of Online Shopping
-                  </font>
-                </strong>
-              </h4>
-              <hr />
-            </div>
-            <div>
-              <Table
-                striped
-                bordered
-                hover
-                size="sm"
-                style={{
-                  marginTop: "2%",
-                  marginBottom: "2%",
-                  marginLeft: "2%",
-                  marginRight: "2%",
-                }}
-              >
-                <tr>
-                  <th>
-                    <font color="lightseagreen">Date</font>
-                  </th>
-                 
-                  <th>
-                    <font color="lightseagreen">Item ID</font>
-                  </th>
-                  <th>
-                    <font color="lightseagreen">Quantity</font>
-                  </th>
-                  <th>
-                    <font color="lightseagreen">Total Price</font>
-                  </th>
-                 
-                </tr>
-    
-                <tbody>
-                  {orders.map((newproduct) => {
-                    if (newproduct._id != "") {
-                      const items = [];
-                      const quantity = [];
-                      newproduct.items.forEach((item) =>
-                        items.push(<div>{item.productId}</div>)
-                      );
-                      newproduct.items.forEach((item) =>
-                        quantity.push(<div>{item.quantity}</div>)
-                      );
-                      return (
-                        <tr>
-                          <td>{this.getParsedDate(newproduct.updatedAt)}</td>
-                          
-                          <td>{items}</td>
-                          <td>{quantity}</td>
-                          <td>
-                            <span>{`$` + newproduct.totalPrice}</span>
-                          </td>
-    
-                         
-                        </tr>
-                      );
-                    }
-                  })}
-                </tbody>
-              </Table>
-            </div>
-          </div>
-        </Container>
-         )}
+        
         
       </div>
     

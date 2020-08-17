@@ -32,7 +32,7 @@ export {
   updateCartItem,
   addItemToCart,
   deleteSingleItem,
-  setTotal,
+  clearCartItems,
 } from "./cart";
 
 //export { getAdmin } from "./admin";

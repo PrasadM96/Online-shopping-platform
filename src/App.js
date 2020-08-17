@@ -38,11 +38,13 @@ import UsersList from "./components/Admin/UsersList";
 import ProductList from "./components/Admin/ProductList";
 import SellersList from "./components/Admin/SellersList";
 import OrderList from "./components/Admin/OrderList";
+import OrderList2 from "./components/Admin/UserOrderlist";
 import { Card, Table, Container,Spinner } from "react-bootstrap";
 
 
 
 import axios from "axios";
+import UserOrderlist from "./components/Admin/UserOrderlist";
 
 class App extends Component {
   static propTypes = {
@@ -56,7 +58,27 @@ class App extends Component {
   };
 
 
+
   //}
+
+  //state={
+  // isAdmin:false
+  // }
+  /*componentWillMount(){
+   console.log("component");
+   const {isAdmin} = this.props.admin
+   const {isAuthenticated} =this.props.auth
+   if(isAuthenticated){
+     this.props.onGetAdmin();
+
+   }
+  }*/
+
+  componentWillMount() {
+    this.props.onGetAdmin();
+  }
+
+
   componentDidMount() {
     this.props.onAuthCheckState();
     //this.props.onGetAdmin();
@@ -100,10 +122,11 @@ class App extends Component {
             <Route path="/selling/:section" component={TabItems} />
             <Route path="/selling" component={RegisterSelling} />
             <Route path="/profile" component={ProfileHandler} />
-            <Route path="/admin/products" component={ProductList} />
+            <Route path="/products" component={ProductList} />
             <Route path="/orders" component={OrderList} />
-            <Route path="/admin/customers" component={UsersList} />
-            <Route path="/admin/sellers" component={SellersList} />
+            <Route path="/customers" component={UsersList} />
+            <Route path="/sellers" component={SellersList} />
+            <Route path="/userorders" component={UserOrderlist} />
             <Route path="/category/:type/:id" component={DetailPageHandler} />
             <Route path="/cart" component={Cart} />
             <Route

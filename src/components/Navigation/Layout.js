@@ -79,13 +79,13 @@ const layout = (props) => {
             </Nav>
           ) : (
             <Nav className="mr-auto">
-              <Nav.Link as={NavLink} to="/admin/products" href="/products">
+              <Nav.Link as={NavLink} to="/products" href="/products">
                 Products
               </Nav.Link>
-              <Nav.Link as={NavLink} to="/admin/customers" href="/customers">
+              <Nav.Link as={NavLink} to="/customers" href="/customers">
                 Customers
               </Nav.Link>
-              <Nav.Link as={NavLink} to="/admin/sellers" href="/sellers">
+              <Nav.Link as={NavLink} to="/sellers" href="/sellers">
                 Sellers
               </Nav.Link>
               <Nav.Link as={NavLink} to="/orders" href="/orders">
@@ -113,7 +113,7 @@ const layout = (props) => {
                   <Nav.Link as={NavLink} to="/profile" href="/profile">
                     Profile
                   </Nav.Link>
-                  <Nav.Link as={NavLink} to="/orders" href="/user-orders">
+                  <Nav.Link as={NavLink} to="/userorders" href="/userorders">
                     Orders
                   </Nav.Link>
                   <NavItem>

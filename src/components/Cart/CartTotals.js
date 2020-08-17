@@ -16,7 +16,7 @@ export default function CartTotals(props) {
               <button
                 className="btn btn-outline-danger text-uppercase mb-3 px-5"
                 type="button"
-                onClick={() => clearCart(cart)}
+                onClick={() => props.clearCart(props.cartItems)}
               >
                 clear cart
               </button>
@@ -40,7 +40,7 @@ export default function CartTotals(props) {
             /> */}
             <Button
               style={{ margin: "2% 0" }}
-              onClick={() => checkout(cartSubTotal , cartTax)}
+              onClick={() => checkout(cartSubTotal, cartTax)}
               variant="primary"
             >
               Go to Checkout

@@ -77,6 +77,10 @@ export default function (state = initialState, action) {
       localStorage.removeItem("token");
       localStorage.removeItem("first_name");
       localStorage.removeItem("expiresIn");
+
+      return{
+        isAdmin:false
+      }
       
     // localStorage.setItem("status",false);
      // localStorage.setItem("status",false);

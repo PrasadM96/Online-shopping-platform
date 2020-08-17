@@ -6,6 +6,8 @@ import * as actions from "../../store/actions/index";
 import { Spinner, Alert } from "react-bootstrap";
 import ReModal from "../../components/UI/ReusableModal";
 import ShippingDetails from "../../components/Forms/ShippingDetails";
+import details from "../../components/Forms/ShippingDetails";
+import { Redirect } from "react-router-dom";
 
 class BuyitNowHandler extends Component {
   state = {
@@ -41,9 +43,9 @@ class BuyitNowHandler extends Component {
     }
     this.props.ongetCartItems();
     this.setState({
-      firstname: localStorage.getItem("first_name"),
-      lastname: localStorage.getItem("last_name"),
-      address1: localStorage.getItem("address"),
+      firstname: localStorage.getItem("firstname"),
+      lastname: localStorage.getItem("lastname"),
+      address1: localStorage.getItem("address1"),
       country: localStorage.getItem("country"),
       zipCode: localStorage.getItem("zip"),
       province: localStorage.getItem("province"),
@@ -86,6 +88,13 @@ class BuyitNowHandler extends Component {
       this.state.zipCode !== null &&
       this.state.teleNumber !== null
     ) {
+      localStorage.setItem("firstname", this.state.firstname);
+      localStorage.setItem("lastname", this.state.lastname);
+      localStorage.setItem("address", this.state.address1);
+      localStorage.setItem("country", this.state.country);
+      localStorage.setItem("province", this.state.province);
+      localStorage.setItem("zipCode", this.state.zipCode);
+      localStorage.setItem("teleNumber", this.state.teleNumber);
     }
   };
 
@@ -109,23 +118,35 @@ class BuyitNowHandler extends Component {
   };
 
   orderHandler = (token) => {
-    const userId = localStorage.getItem("user_id");
+    if (
+      this.state.firstname !== null &&
+      this.state.lastname !== null &&
+      this.state.address1 !== null &&
+      this.state.country !== null &&
+      this.state.province !== null &&
+      this.state.zipCode !== null &&
+      this.state.teleNumber !== null
+    ) {
+      const userId = localStorage.getItem("user_id");
 
-    var order = {
-      stripeToken: token,
-      userId: userId,
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
-      province: this.state.province,
-      address: this.state.address1,
-      country: this.state.country,
-      zipCode: this.state.zipCode,
-      teleNumber: this.state.teleNumber,
-      items: this.props.cartItemCount.items,
-      totalPrice: this.state.totalPrice,
-    };
-    console.log(order);
-    this.props.onPostOrder(order);
+      var order = {
+        stripeToken: token,
+        userId: userId,
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        province: this.state.province,
+        address: this.state.address1,
+        country: this.state.country,
+        zipCode: this.state.zipCode,
+        teleNumber: this.state.teleNumber,
+        items: this.props.cartItemCount.items,
+        totalPrice: this.state.totalPrice,
+      };
+      console.log(order);
+      this.props.onPostOrder(order);
+    } else {
+      window.alert("Before plcae the order update your shipping details!");
+    }
   };
 
   click = () => {
@@ -266,8 +287,24 @@ class BuyitNowHandler extends Component {
         );
       }
     }
+
+    if (this.props.orderLoading) {
+      detail = (
+        <div style={{ width: "100%", margin: "10% 0", textAlign: "center" }}>
+          <Spinner animation="border" variant="primary" />;
+          <h3>Your Order is Processing!!</h3>
+        </div>
+      );
+    }
+    var redirect = null;
+    if (this.props.orderItems) {
+      redirect = <Redirect to="/orders" />;
+    }
+
+    console.log(this.state);
     return (
       <div>
+        {redirect}
         {modal}
         {loading}
         {error}
@@ -285,6 +322,9 @@ const mapStateToProps = (state) => {
     cart: state.cart.cart,
     cartTotal: state.cart.cartTotal,
     cartItemCount: state.cart.cartItemCount,
+    orderLoading: state.shop.orderLoading,
+    orderItems: state.shop.orderItems,
+    orderError: state.shop.orderError,
   };
 };
 

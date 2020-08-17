@@ -1,99 +1,126 @@
 import React from "react";
-import { Jumbotron, Container, Row, Col ,Form,Button} from "react-bootstrap";
-import {Telephone,  Envelope, Twit} from 'react-bootstrap-icons';
-import * as emailjs from 'emailjs-com'
+import { Jumbotron, Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Telephone, Envelope, Twit } from "react-bootstrap-icons";
 
 import "./Footer.css";
 
 const footer = (props) => {
   return (
     <section id="footer">
-		<div className="container">
-			<div className="row text-center text-xs-center text-sm-left text-md-left">
-				<div className="col-xs-12 col-sm-4 col-md-4">
-					<h5>Quick links</h5>
-					<ul class="list-unstyled quick-links">
-						<li><a href="/">Home</a></li>
-						<li><a href="/category/fashion">Fashion</a></li>
-						<li><a href="/category/stationary">Stationary</a></li>
-            <li><a href="/category/health">Health</a></li>
-            <li><a href="/category/electronics">Electronics</a></li>
-						<li><a href="/category/sports">Sports</a></li>
-						<li><a href="/category/home">Home</a></li>
-					</ul>
-				</div>
-				
-				<div className="col-xs-12 col-sm-4 col-md-4">
-					<h5>Contact Us</h5>
-					<ul class="list-unstyled quick-links">
-						<Telephone color="white"  /> <label style= {{color: 'white'}}>0702451804</label>
-						<br></br>
-						<Telephone color="white"  /> <label style= {{color: 'white'}}>0702451804</label>
-            			<hr />
-            			<Envelope color="white" /> <label style= {{color: 'white'}}>shopping@gmail.com</label>
-						<br></br>
-						<Envelope color="white" /> <label style= {{color: 'white'}}>shopping@gmail.com</label>
-            			<hr />
-            			<Envelope color="white"/> <label style= {{color: 'white'}}>0702451804</label>
-						
-					</ul>
-				</div>
+      <div className="container">
+        <div className="row text-center text-xs-center text-sm-left text-md-left">
+          <div className="col-xs-12 col-sm-4 col-md-4">
+            <h5>Quick links</h5>
+            <ul class="list-unstyled quick-links">
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/category/fashion">Fashion</a>
+              </li>
+              <li>
+                <a href="/category/stationary">Stationary</a>
+              </li>
+              <li>
+                <a href="/category/health">Health</a>
+              </li>
+              <li>
+                <a href="/category/electronics">Electronics</a>
+              </li>
+              <li>
+                <a href="/category/sports">Sports</a>
+              </li>
+              <li>
+                <a href="/category/home">Home</a>
+              </li>
+            </ul>
+          </div>
 
-				<div className="col-xs-12 col-sm-4 col-md-4">
-					<h5>Contact Us</h5>
-					<ul class="list-unstyled quick-links">
-					<Form >
-          <Form.Group controlId="formemail">
-              <Form.Label style= {{color: 'white'}}>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="name"
-                  value={props.name}
-                  
-						      className="mb-3"
-					      	onChange={props.handleChange}
-                        />
-            </Form.Group>
-					  <Form.Group controlId="formemail">
-              <Form.Label style= {{color: 'white'}}>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={props.email}
-                  
-						      className="mb-3"
-					      	onChange={props.handleChange}
-                        />
-            </Form.Group>
-					
-           <Form.Group controlId="exampleForm.ControlTextarea1">
-						<Form.Label style= {{color: 'white'}}>Message</Form.Label>
-						  <Form.Control as="textarea" rows="3" 
-              type="text"
-              name="message"
-              value={props.message}
-              
-              className="mb-3"
-              onChange={props.handleChange}/>
-				    	</Form.Group>
-                  	
-					<Form.Group as={Col} controlId="exampleForm.ControlTextarea1">
-					<Button variant="primary" type="submit"
-             onClick={e => {
-              props.handleSubmit(e);
-            }}
-						size="sm"
-						style={({ marginTop: "2rem" }, { borderRadius: "20px" },{width: "80px"})}
-						block
-						>
-					Send
-					</Button>
-					</Form.Group>
-					</Form>
-						
-					</ul>
-				</div>
-			</div>
+
+				
+		
+	
+
+          <div className="col-xs-12 col-sm-4 col-md-4">
+            <h5>Contact Us</h5>
+            <ul class="list-unstyled quick-links">
+              <Telephone color="white" />{" "}
+              <label style={{ color: "white" }}>0702451804</label>
+              <br></br>
+              <Telephone color="white" />{" "}
+              <label style={{ color: "white" }}>0702451804</label>
+              <hr />
+              <Envelope color="white" />{" "}
+              <label style={{ color: "white" }}>shopping@gmail.com</label>
+              <br></br>
+              <Envelope color="white" />{" "}
+              <label style={{ color: "white" }}>shopping@gmail.com</label>
+              <hr />
+              <Envelope color="white" />{" "}
+              <label style={{ color: "white" }}>0702451804</label>
+            </ul>
+          </div>
+
+          <div className="col-xs-12 col-sm-4 col-md-4">
+            <h5>Contact Us</h5>
+            <ul class="list-unstyled quick-links">
+              <Form>
+                <Form.Group controlId="formemail">
+                  <Form.Label style={{ color: "white" }}>Email</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    value={props.name}
+                    className="mb-3"
+                    onChange={props.handleChange}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formemail">
+                  <Form.Label style={{ color: "white" }}>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    value={props.email}
+                    className="mb-3"
+                    onChange={props.handleChange}
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="exampleForm.ControlTextarea1">
+                  <Form.Label style={{ color: "white" }}>Message</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows="3"
+                    type="text"
+                    name="message"
+                    value={props.message}
+                    className="mb-3"
+                    onChange={props.handleChange}
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} controlId="exampleForm.ControlTextarea1">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    onClick={(e) => {
+                      props.handleSubmit(e);
+                    }}
+                    size="sm"
+                    style={
+                      ({ marginTop: "2rem" },
+                      { borderRadius: "20px" },
+                      { width: "80px" })
+                    }
+                    block
+                  >
+                    Send
+                  </Button>
+                </Form.Group>
+              </Form>
+            </ul>
+          </div>
+		  </div>
 			<div className="row">
 				<div className="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
 					<ul className="list-unstyled list-inline social text-center">
@@ -114,7 +141,10 @@ const footer = (props) => {
 				<hr />
 			</div>	
 		</div>
-	</section>
+       
+    
+   
+		</section>
   );
 };
 

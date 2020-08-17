@@ -11,7 +11,7 @@ import * as actions from "../../store/actions/index";
 import { ThemeProvider } from "styled-components";
 import { Spinner, Alert } from "react-bootstrap";
 
-class Cart extends Component {
+export class Cart extends Component {
   componentDidMount = () => {
     // this.props.addTotals();
     this.props.ongetCartItems();
@@ -114,6 +114,10 @@ class Cart extends Component {
     var cartSubTotal = 0;
     var cartTax = 0;
 
+    if (!this.props.state.loading && !this.props.state.error) {
+      cartUi = <EmptyCart />;
+    }
+
     if (this.props.state.cart.length > 0 && !this.props.state.loading) {
       const cartCount = this.props.state.cartItemCount.items;
       var tempArr = [];
@@ -151,20 +155,14 @@ class Cart extends Component {
             // state={this.props.state}
             cart={tempArr}
             cartSubTotal={cartSubTotal}
+            cartItems={this.props.state.cart}
             cartTax={cartTax}
-            clearCart={this.props.onClearCart}
+            clearCart={this.props.onclearCartItems}
             history={this.props.history}
             checkout={this.checkout}
           />
         </section>
       );
-    } else {
-      if (
-        this.props.state.error !== null &&
-        this.props.state.loading === true
-      ) {
-        cartUi = <EmptyCart />;
-      }
     }
     return (
       <div>
@@ -194,12 +192,15 @@ const mapDispatchToProps = (dispatch) => {
     removeItem: (id) => dispatch({ type: actionTypes.REMOVE_ITEM, id: id }),
     increment: (id) => dispatch({ type: actionTypes.INCREMENT, id: id }),
     decrement: (id) => dispatch({ type: actionTypes.DECREMENT, id: id }),
-    setTotal: (cartSubTotal,cartTax) => dispatch(actions.setTotal(cartSubTotal,cartTax)),
+    // setTotal: (cartSubTotal, cartTax) =>
+    //   dispatch(actions.setTotal(cartSubTotal, cartTax)),
     ongetCartItems: () => dispatch(actions.getCartItem()),
     onUpdateCartItem: (prodId, amount) =>
       dispatch(actions.updateCartItem(prodId, amount)),
     onDeleteSingleItem: (id, itemCount) =>
       dispatch(actions.deleteSingleItem(id, itemCount)),
+    onclearCartItems: (cartItems) =>
+      dispatch(actions.clearCartItems(cartItems)),
   };
 };
 
