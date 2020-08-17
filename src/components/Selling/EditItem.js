@@ -12,7 +12,7 @@ const schema = yup.object({
     .string()
     .required()
     .min(2, "Too Short!")
-    .max(500, "Too Long!"),
+    .max(1500, "Too Long!"),
   sellingArea: yup.string().required(),
   quantity: yup.number().required().integer("Must be an integer").min(0),
   price: yup.number().required().min(0),
