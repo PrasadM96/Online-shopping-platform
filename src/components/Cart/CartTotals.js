@@ -40,7 +40,7 @@ export default function CartTotals(props) {
             /> */}
             <Button
               style={{ margin: "2% 0" }}
-              onClick={() => checkout(cartSubTotal , cartTax)}
+              onClick={() => checkout(cartSubTotal, cartTax)}
               variant="primary"
             >
               Go to Checkout
