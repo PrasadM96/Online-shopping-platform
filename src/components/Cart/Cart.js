@@ -90,6 +90,7 @@ export class Cart extends Component {
   };
 
   render() {
+    console.log(this.props);
     var loading = null;
     if (this.props.state.loading) {
       loading = (
@@ -113,8 +114,12 @@ export class Cart extends Component {
     var cartUi = null;
     var cartSubTotal = 0;
     var cartTax = 0;
+    var display = null;
 
-    if (!this.props.state.loading && !this.props.state.error) {
+    if (!this.props.isAuthenticated) {
+      cartUi = <Title name="Please" title="LogIn" />;
+      error = <div></div>;
+    } else if (!this.props.state.loading && !this.props.state.error) {
       cartUi = <EmptyCart />;
     }
 
@@ -137,6 +142,7 @@ export class Cart extends Component {
       });
       cartUi = (
         <section>
+          <Title name="your" title="cart" />
           <CartColumns />
           <CartList
             cart={tempArr}
@@ -164,9 +170,11 @@ export class Cart extends Component {
         </section>
       );
     }
+
+    if (!this.props.isAuthenticated) {
+    }
     return (
       <div>
-        <Title name="your" title="cart" />
         {loading}
         {error}
         {cartUi}
@@ -182,6 +190,7 @@ const mapStateToProps = (state) => {
     updateCartError: state.cart.updateCartError,
     deleteSingleItemError: state.cart.removeSingleItemError,
     deleteSingleItemLoading: state.cart.removeSingleItemLoading,
+    isAuthenticated: state.auth.isAuthenticated,
   };
 };
 

@@ -128,7 +128,7 @@ class App extends Component {
             <Route path="/sellers" component={SellersList} />
             <Route path="/userorders" component={UserOrderlist} />
             <Route path="/category/:type/:id" component={DetailPageHandler} />
-            <Route path="/cart" component={Cart} />
+            <Route path="/cart" component={Cart}/>
             <Route
               path="/category/:type"
               exact

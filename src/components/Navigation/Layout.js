@@ -19,7 +19,7 @@ const layout = (props) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-        {!props.isAdmin ? (
+          {!props.isAdmin ? (
             <Nav className="mr-auto">
               <Nav.Link as={NavLink} to="/features" href="/features">
                 Features
@@ -103,9 +103,7 @@ const layout = (props) => {
                 </Fragment>
               ) : (
                 <Fragment>
-                  <NavItem>
-                    
-                  </NavItem>
+                  <NavItem></NavItem>
                   <Nav.Link as={NavLink} to="/cart" href="/cart">
                     My Cart
                   </Nav.Link>
@@ -124,15 +122,21 @@ const layout = (props) => {
             </Nav>
           ) : (
             <Nav className="ml-auto">
-              <Fragment>
-                <Nav.Link as={NavLink} to="/cart" href="/cart">
-                  My Cart
-                </Nav.Link>
-
+              {props.isAdmin ? (
                 <Nav.Link onClick={props.toggle} href="#">
                   Register
                 </Nav.Link>
-              </Fragment>
+              ) : (
+                <Fragment>
+                  <Nav.Link as={NavLink} to="/cart" href="/cart">
+                    My Cart
+                  </Nav.Link>
+
+                  <Nav.Link onClick={props.toggle} href="#">
+                    Register
+                  </Nav.Link>
+                </Fragment>
+              )}
             </Nav>
           )}
         </Navbar.Collapse>
@@ -143,4 +147,3 @@ const layout = (props) => {
 };
 
 export default layout;
-
