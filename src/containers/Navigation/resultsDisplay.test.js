@@ -8,7 +8,7 @@ configure({ adapter: new Adapter() });
 
 import { createLocation } from "history";
 const mat = {
-  url: "http://localhost:3000/category/nail",
+  url: "http://localhost:3000/search-results/watch",
 };
 
 const location = createLocation(mat.url);
@@ -26,7 +26,7 @@ describe("<ResultsDisplay>", () => {
               "images\bbcc1763_0d95_48cf_bed6_a4a4fe1ad7e9_download (2).jpg",
               "imagescae3e964_dc13_4328_ba74_167d43565bfd_download.jpg",
             ],
-            title: "Fashion 1",
+            title: "watch",
             category: "Fashion",
             subCategory: "Watches",
             condition: "New",

@@ -11,7 +11,7 @@ export class ResultsDisplay extends Component {
         return (
           <DisplayItem
             key={index}
-            image={item.imageUrls[0].toString()}
+            image={item.imageUrls[0]}
             price={item.price}
             shippingFee={item.shippingFee}
             title={item.title}
