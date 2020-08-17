@@ -11,7 +11,7 @@ import * as actions from "../../store/actions/index";
 import { ThemeProvider } from "styled-components";
 import { Spinner, Alert } from "react-bootstrap";
 
-class Cart extends Component {
+export class Cart extends Component {
   componentDidMount = () => {
     // this.props.addTotals();
     this.props.ongetCartItems();
@@ -192,8 +192,8 @@ const mapDispatchToProps = (dispatch) => {
     removeItem: (id) => dispatch({ type: actionTypes.REMOVE_ITEM, id: id }),
     increment: (id) => dispatch({ type: actionTypes.INCREMENT, id: id }),
     decrement: (id) => dispatch({ type: actionTypes.DECREMENT, id: id }),
-    setTotal: (cartSubTotal, cartTax) =>
-      dispatch(actions.setTotal(cartSubTotal, cartTax)),
+    // setTotal: (cartSubTotal, cartTax) =>
+    //   dispatch(actions.setTotal(cartSubTotal, cartTax)),
     ongetCartItems: () => dispatch(actions.getCartItem()),
     onUpdateCartItem: (prodId, amount) =>
       dispatch(actions.updateCartItem(prodId, amount)),

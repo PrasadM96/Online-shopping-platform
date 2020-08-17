@@ -3,10 +3,10 @@ import {logout} from  '../../store/actions/authActions';
 import {connect} from 'react-redux';
 import {Nav} from 'react-bootstrap';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSignOutAlt,
-} from "@fortawesome/fontawesome-free-solid";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   faSignOutAlt,
+// } from "@fortawesome/fontawesome-free-solid";
 import PropTypes from 'prop-types';
 
 

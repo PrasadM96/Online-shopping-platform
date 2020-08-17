@@ -65,6 +65,11 @@ class App extends Component {
 
    }
   }*/
+
+  componentWillMount() {
+    this.props.onGetAdmin();
+  }
+
   componentDidMount() {
     this.props.onAuthCheckState();
     const { isAdmin } = this.props.admin;

@@ -118,23 +118,35 @@ class BuyitNowHandler extends Component {
   };
 
   orderHandler = (token) => {
-    const userId = localStorage.getItem("user_id");
+    if (
+      this.state.firstname !== null &&
+      this.state.lastname !== null &&
+      this.state.address1 !== null &&
+      this.state.country !== null &&
+      this.state.province !== null &&
+      this.state.zipCode !== null &&
+      this.state.teleNumber !== null
+    ) {
+      const userId = localStorage.getItem("user_id");
 
-    var order = {
-      stripeToken: token,
-      userId: userId,
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
-      province: this.state.province,
-      address: this.state.address1,
-      country: this.state.country,
-      zipCode: this.state.zipCode,
-      teleNumber: this.state.teleNumber,
-      items: this.props.cartItemCount.items,
-      totalPrice: this.state.totalPrice,
-    };
-    console.log(order);
-    this.props.onPostOrder(order);
+      var order = {
+        stripeToken: token,
+        userId: userId,
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        province: this.state.province,
+        address: this.state.address1,
+        country: this.state.country,
+        zipCode: this.state.zipCode,
+        teleNumber: this.state.teleNumber,
+        items: this.props.cartItemCount.items,
+        totalPrice: this.state.totalPrice,
+      };
+      console.log(order);
+      this.props.onPostOrder(order);
+    } else {
+      window.alert("Before plcae the order update your shipping details!");
+    }
   };
 
   click = () => {

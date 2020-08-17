@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import DisplayItem from "../../components/DisplayItem/DisplayItem";
 import { connect } from "react-redux";
 import { Spinner } from "react-bootstrap";
-class ResultsDisplay extends Component {
+export class ResultsDisplay extends Component {
   state = {};
   render() {
     var itemArr = null;
@@ -15,7 +15,7 @@ class ResultsDisplay extends Component {
             price={item.price}
             shippingFee={item.shippingFee}
             title={item.title}
-            itemCount={500}
+            itemCount={item.quantity}
             condition={item.condition}
             item={item}
             path={this.props.location.pathname.split("/")[2]}

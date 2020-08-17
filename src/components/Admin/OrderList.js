@@ -47,20 +47,34 @@ class productlist extends Component {
       this.props.getAdmin();
     }
 
+    const token = localStorage.getItem("token");
+
     if (!this.props.isAdmin) {
-      await axios.get("/admin/get-orders").then((orders) => {
-        this.setState({
-          orders: orders.data.data,
-          isLoading: false,
+      await axios
+        .get("/admin/get-orders", {
+          headers: {
+            "x-auth-token": token,
+          },
+        })
+        .then((orders) => {
+          this.setState({
+            orders: orders.data.data,
+            isLoading: false,
+          });
         });
-      });
     } else {
-      await axios.get("/user/get-orders").then((orders) => {
-        this.setState({
-          orders: orders.data.data,
-          isLoading: false,
+      await axios
+        .get("/user/get-orders", {
+          headers: {
+            "x-auth-token": token,
+          },
+        })
+        .then((orders) => {
+          this.setState({
+            orders: orders.data.data,
+            isLoading: false,
+          });
         });
-      });
     }
   };
 
