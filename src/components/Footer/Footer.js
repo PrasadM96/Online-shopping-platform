@@ -44,7 +44,7 @@ const footer = (props) => {
 					<ul class="list-unstyled quick-links">
 					<Form >
           <Form.Group controlId="formemail">
-              <Form.Label style= {{color: 'white'}}>Email</Form.Label>
+              <Form.Label style= {{color: 'white'}}>Name</Form.Label>
                 <Form.Control
                   type="text"
                   name="name"

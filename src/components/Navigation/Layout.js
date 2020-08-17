@@ -19,7 +19,7 @@ const layout = (props) => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          {!props.isAdmin ? (
+        {!props.isAdmin ? (
             <Nav className="mr-auto">
               <Nav.Link as={NavLink} to="/features" href="/features">
                 Features
@@ -79,14 +79,17 @@ const layout = (props) => {
             </Nav>
           ) : (
             <Nav className="mr-auto">
-              <Nav.Link as={NavLink} to="/products" href="/products">
+              <Nav.Link as={NavLink} to="/admin/products" href="/products">
                 Products
               </Nav.Link>
-              <Nav.Link as={NavLink} to="/customers" href="/customers">
+              <Nav.Link as={NavLink} to="/admin/customers" href="/customers">
                 Customers
               </Nav.Link>
-              <Nav.Link as={NavLink} to="/sellers" href="/sellers">
+              <Nav.Link as={NavLink} to="/admin/sellers" href="/sellers">
                 Sellers
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/orders" href="/orders">
+                Orders
               </Nav.Link>
             </Nav>
           )}
@@ -101,11 +104,7 @@ const layout = (props) => {
               ) : (
                 <Fragment>
                   <NavItem>
-                    <span className="navbar-text mr-3">
-                      <strong>
-                        {props.user ? `Welcome ${props.user.first_name}` : ""}
-                      </strong>
-                    </span>
+                    
                   </NavItem>
                   <Nav.Link as={NavLink} to="/cart" href="/cart">
                     My Cart
@@ -144,3 +143,4 @@ const layout = (props) => {
 };
 
 export default layout;
+

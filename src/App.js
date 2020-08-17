@@ -22,6 +22,7 @@ import Profile from "./components/Profile/Profile";
 import DisplayItemHandler from "./containers/DisplayItem/DisplayItemHandler";
 import DetailPageHandler from "./containers/DisplayItem/DetailPageHandler";
 import AddtoCart from "./containers/AddtoCart/AddtoCart";
+import LayoutHandler from "./containers/Navigation/LayoutHandler"
 import BuyitNowHandler from "./containers/BuyitNow/BuyitNowHandler";
 import SearchResults from "./containers/Navigation/ResultsDisplay";
 import { connect } from "react-redux";
@@ -37,8 +38,9 @@ import UsersList from "./components/Admin/UsersList";
 import ProductList from "./components/Admin/ProductList";
 import SellersList from "./components/Admin/SellersList";
 import OrderList from "./components/Admin/OrderList";
+import { Card, Table, Container,Spinner } from "react-bootstrap";
 
-import { getAdmin } from "./store/actions/admin";
+
 
 import axios from "axios";
 
@@ -46,40 +48,21 @@ class App extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
     admin: PropTypes.object.isRequired,
-    //clearErrors: PropTypes.func.isRequired,
-    //modalstate: PropTypes.func.isRequired,
-    //authCheckState: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired,
+    modalstate: PropTypes.func.isRequired,
+    authCheckState: PropTypes.func.isRequired,
     modal: PropTypes.bool,
-    //getAdmin: PropTypes.func.isRequired,
+   getAdmin:PropTypes.func.isRequired,
   };
 
-  //state={
-  // isAdmin:false
-  // }
-  /*componentWillMount(){
-   console.log("component");
-   const {isAdmin} = this.props.admin
-   const {isAuthenticated} =this.props.auth
-   if(isAuthenticated){
-     this.props.onGetAdmin();
 
-   }
-  }*/
+  //}
   componentDidMount() {
     this.props.onAuthCheckState();
-    const { isAdmin } = this.props.admin;
-    // if(this.props.auth.isAuthenticated){
-    // this.props.onGetAdmin();
-
-    //}
-    //if(this.props.auth.isAuthenticated ){
-    // this.props.onGetAdmin();
-    // console.log()
-
-    //}
-
-    //console.log(this.props.admin.isAdmin,"isAdmin");
-    // localStorage.setItem("isAd",isAdmin);
+    //this.props.onGetAdmin();
+    console.log(this.props.auth.isAdmin);
+    
+  
   }
 
   toggle = () => {
@@ -93,21 +76,22 @@ class App extends Component {
   };
 
   render() {
-    const { isAuthenticated, user, isRegister } = this.props.auth;
-    const { isAdmin } = this.props.admin;
+    const { isAuthenticated, user, isRegister,isAdmin } = this.props.auth;
+    
     const sellerStatus = localStorage.getItem("sellerStatus");
-
+  
     return (
+      
       <div>
-        <Layout
-          isAuthenticated={isAuthenticated}
-          user={user}
-          isRegister={isRegister}
-          toggle={this.toggle}
-          sellerStatus={this.sellerStatus}
-          isAdmin={isAdmin}
-          // status={this.status}
-        >
+          <Layout
+      isAuthenticated={isAuthenticated}
+      user={user}
+      isRegister={isRegister}
+      toggle={this.toggle}
+      sellerStatus={this.sellerStatus}
+      isAdmin={isAdmin}
+     
+    >
           <SearchBarHandler />
           <RegisterModal />
           <Switch>
@@ -116,10 +100,10 @@ class App extends Component {
             <Route path="/selling/:section" component={TabItems} />
             <Route path="/selling" component={RegisterSelling} />
             <Route path="/profile" component={ProfileHandler} />
-            <Route path="/products" component={ProductList} />
+            <Route path="/admin/products" component={ProductList} />
             <Route path="/orders" component={OrderList} />
-            <Route path="/customers" component={UsersList} />
-            <Route path="/sellers" component={SellersList} />
+            <Route path="/admin/customers" component={UsersList} />
+            <Route path="/admin/sellers" component={SellersList} />
             <Route path="/category/:type/:id" component={DetailPageHandler} />
             <Route path="/cart" component={Cart} />
             <Route
@@ -139,6 +123,7 @@ class App extends Component {
         </Layout>
       </div>
     );
+    
   }
 }
 
@@ -152,7 +137,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAuthCheckState: () => dispatch(actions.authCheckState()),
     onModatState: () => dispatch(actions.modalstate()),
-    onGetAdmin: () => dispatch(actions.getAdmin()),
+    onGetAdmin:() => dispatch(actions.getAdmin()),
+    
   };
 };
 

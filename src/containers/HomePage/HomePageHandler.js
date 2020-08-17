@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getAdmin } from "../../store/actions/admin";
+
 
 import AdminHomePage from "../../components/Homepage/AdminHomePage";
 import Homepage from "../../components/Homepage/Homepage";
@@ -23,6 +23,11 @@ class homepagehandler extends Component {
       orders:[],
       orders2:[],
       isLoading: false,
+      productCount:0,
+      sellerCount:0,
+      userCount:0,
+      orderCount:0
+
       //status:false
     };
   }
@@ -30,13 +35,39 @@ class homepagehandler extends Component {
   static propTypes = {
     isAdmin: PropTypes.bool,
     isAuthenticated: PropTypes.bool,
-    getAdmin: PropTypes.func.isRequired,
+    
   };
 
   componentDidMount = async () => {
     this.setState({ isLoading: true });
     const { isAuthenticated } = this.props;
-    //  const {isAdmin,isAuthenticated} = this.props;
+
+
+    axios.get("admin/get-productCount").then(productCount=>{
+      this.setState({
+          productCount:productCount.data.data
+      })
+  })
+
+  axios.get("admin/get-sellerCount").then(sellerCount=>{
+    this.setState({
+      sellerCount:sellerCount.data.data
+    })
+})
+
+
+axios.get("admin/get-userCount").then(userCount=>{
+  this.setState({
+    userCount:userCount.data.data
+  })
+})
+
+axios.get("admin/get-orderCount").then(orderCount=>{
+  this.setState({
+    orderCount:orderCount.data.data
+  })
+})
+
 
     //get users for admin page
     await axios.get("/admin/get-users").then((users) => {
@@ -89,6 +120,7 @@ class homepagehandler extends Component {
 
     //get orderss for admin home page
     await axios.get("/admin/get-orders").then((orders) => {
+      console.log(orders);
         this.setState({
           orders: orders.data.data,
         });
@@ -114,8 +146,12 @@ class homepagehandler extends Component {
         users2={this.state.users2}
         products2={this.state.products2}
         sellers2={this.state.sellers2}
-        orders={orders}
-        orders2={orders2}
+        orders={this.state.orders}
+        orders2={this.state.orders2}
+        productCount={this.state.productCount}
+        orderCount={this.state.orderCount}
+        sellerCount={this.state.sellerCount}
+        userCount={this.state.userCount}
       />
     ) : (
       <Homepage />
@@ -123,8 +159,8 @@ class homepagehandler extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  isAdmin: state.admin.isAdmin,
+  isAdmin: state.auth.isAdmin,
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { getAdmin })(homepagehandler);
+export default connect(mapStateToProps)(homepagehandler);

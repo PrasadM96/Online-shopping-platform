@@ -7,6 +7,7 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_FAIL,
   REGISTER_SUCCESS,
+  GET_ADMIN_STATUS
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   isRegister: false,
   isLoading: false,
   user: null,
+  isAdmin:false
   //isAdmin:false
  
 };
@@ -56,7 +58,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         ...action.payload,
-       // isAdmin:action.payload.user.status,
+        isAdmin:action.payload.user.status,
         isAuthenticated: true,
         isLoading: false,
         isRegister: true,
@@ -101,6 +103,14 @@ export default function (state = initialState, action) {
         isLoading: false,
         isAuthenticated: false,
       };
+
+    case GET_ADMIN_STATUS:
+      if(action.payload){
+        console.log(action.payload);
+      }
+      return {
+        isAdmin:action.payload.status,
+      }
 
     default: {
       return state;
