@@ -25,14 +25,14 @@ export {
 
 export { modalstate } from "./modalActions";
 
-export { authCheckState } from "./authActions";
+export { authCheckState,getAdmin } from "./authActions";
 
 export {
   getCartItem,
   updateCartItem,
   addItemToCart,
   deleteSingleItem,
-  setTotal,
+  clearCartItems,
 } from "./cart";
 
-export { getAdmin } from "./admin";
+//export { getAdmin } from "./admin";

@@ -114,6 +114,7 @@ export const getSellingProduct = () => {
         },
       })
       .then((products) => {
+        console.log(products);
         dispatch(getSellingProductSuccess(products.data));
       })
       .catch((err) => {

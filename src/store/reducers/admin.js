@@ -1,4 +1,4 @@
-import {GET_ADMIN_STATUS} from "../actions/actionTypes";
+/*import {GET_ADMIN_STATUS} from "../actions/actionTypes";
 
 const initialState = {
     isAdmin:false
@@ -18,4 +18,4 @@ export default function (state =initialState, action) {
       }
 
     }
-}
+}*/

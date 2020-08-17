@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SellingPage from "./SellingPage";
 import { Route, Switch } from "react-router-dom";
 import AddItemHandler from "../../containers/Selling/AddItemHandler1";
-import Overview from "./Overview";
+import OverviewHandler from "../../containers/Selling/sellingOverviewHandler";
 import MyItems from "../../containers/Selling/MyitemHandler";
 import { connect } from "react-redux";
 import EditItemHandler from "../../containers/Selling/EditItemHandler";
@@ -21,7 +21,11 @@ class TabItem extends Component {
             path="/selling/add-item"
             component={AddItemHandler}
           ></Route>
-          <Route exact path="/selling/overview" component={Overview}></Route>
+          <Route
+            exact
+            path="/selling/overview"
+            component={OverviewHandler}
+          ></Route>
           <Route exact path="/selling/my-items" component={MyItems}></Route>
           <Route
             exact

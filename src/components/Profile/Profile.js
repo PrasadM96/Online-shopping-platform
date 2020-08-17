@@ -168,31 +168,7 @@ const Profile = props =>{
             
 
               
-      <Form.Row>
-      <Form.Group as={Col} controlId="formBasicEmail">
-            <Form.Label>Photo</Form.Label>
-            <Form.Control
-              name="profile" 
-              type="file"
-              accept="image/*" 
-              onChange={handleImageUpload}
-              
-            />
-
-        <div
-        
-        >
-        <img
-          ref={uploadedImage}
-          style={{
-            width: "60px",
-            height: "60px",
-            position: "auto"
-          }}
-        />
-      </div>
-    </Form.Group>
-    </Form.Row>
+      
             
     <Form.Row>
       <Form.Group as={Col} controlId="formBasicEmail">
@@ -310,10 +286,7 @@ const Profile = props =>{
             
          
         </Tab>
-        <Tab eventKey="contact" title="Orders" >
         
-        
-        </Tab>
       </Tabs>
  </Card.Body>
     </Card>

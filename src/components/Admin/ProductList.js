@@ -26,10 +26,10 @@ class productlist extends Component {
     componentDidMount = async () => {
         this.setState({ isLoading: true })
         const {isAuthenticated}=this.props;
-        if(isAuthenticated){
-          this.props.getAdmin();
+       /// if(isAuthenticated){
+         // this.props.getAdmin();
     
-        }
+       // }
 
       await  axios.get("/admin/get-productlist").then(products => {
             this.setState({
@@ -124,7 +124,7 @@ class productlist extends Component {
 
         const mapStateToProps = (state) => ({
           isAuthenticated: state.auth.isAuthenticated,
-          isAdmin:state.admin.isAdmin
+          isAdmin:state.auth.isAdmin
           //modalstate: state.modalstate,
         });
 export default connect(mapStateToProps,{getAdmin})(productlist);

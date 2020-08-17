@@ -16,7 +16,7 @@ export default function CartTotals(props) {
               <button
                 className="btn btn-outline-danger text-uppercase mb-3 px-5"
                 type="button"
-                onClick={() => clearCart(cart)}
+                onClick={() => props.clearCart(props.cartItems)}
               >
                 clear cart
               </button>

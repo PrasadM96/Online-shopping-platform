@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-
+//import { Card, Container, Row, Col, Alert, Spinner } from "react-bootstrap";
 import axios from "axios";
-import { Card, Table, Container } from "react-bootstrap";
+import { Card, Table, Container,Spinner } from "react-bootstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getAdmin } from "../../store/actions/admin";
+import { getAdmin } from "../../store/actions/authActions";
 
-class productlist extends Component {
+class orderlist extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,137 +39,286 @@ class productlist extends Component {
     getAdmin: PropTypes.func.isRequired,
   };
 
+  /*removeOrder(newOrder){
+    console.log(newOrder._id);
+    if(window.confirm("DO you want to delete this order permenently?")){
+      const order_id=newOrder._id;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const body = JSON.stringify({  order_id});
+      axios.post("/admin/remove-orders",body,config)
+     // window.location.reload();
+    }
+  }
+*/
   componentDidMount = async () => {
-    this.setState({ isLoading: true });
+   // this.setState({ isLoading: true });
     const { isAuthenticated } = this.props;
+   //this.props.getAdmin();
+    //if (isAuthenticated) {
+      //this.props.getAdmin();
+   // }
 
-    if (isAuthenticated) {
+
+   /* if (isAuthenticated) {
       this.props.getAdmin();
     }
+*/
+    const token = localStorage.getItem("token");
 
-    if (!this.props.isAdmin) {
-      await axios.get("/admin/get-orders").then((orders) => {
-        this.setState({
-          orders: orders.data.data,
-          isLoading: false,
+    /*if (!this.props.isAdmin) {*/
+      await axios
+        .get("/admin/get-orders", {
+          headers: {
+            "x-auth-token": token,
+          },
+        })
+        .then((orders) => {
+          this.setState({
+            orders: orders.data.data,
+            isLoading: false,
+          });
         });
-      });
-    } else {
-      await axios.get("/user/get-orders").then((orders) => {
-        this.setState({
-          orders: orders.data.data,
-          isLoading: false,
+    /*} else {
+      await axios
+        .get("/user/get-orders", {
+          headers: {
+            "x-auth-token": token,
+          },
+        })
+        .then((orders) => {
+          this.setState({
+            orders: orders.data.data,
+            isLoading: false,
+          });
         });
-      });
-    }
+    }*/
   };
 
   render() {
     const { orders, isLoading } = this.state;
+    
     const { isAdmin } = this.props;
     const { isAuthenticated } = this.props;
+    console.log(isAdmin);
+    var content1 = (
+      <Container fluid>
+      <div>
+        <div>
+          <hr />
+          <h4>
+            <strong>
+              <font color="#40afbf">
+                &nbsp;&nbsp;&nbsp;Orders of Online Shopping
+              </font>
+            </strong>
+          </h4>
+          <hr />
+        </div>
+        <div>
+          <Table
+            striped
+            bordered
+            hover
+            size="sm"
+            style={{
+              marginTop: "2%",
+              marginBottom: "2%",
+              marginLeft: "2%",
+              marginRight: "2%",
+            }}
+          >
+            <tr>
+              <th>
+                <font color="lightseagreen">Date</font>
+              </th>
+              <th>
+                <font color="lightseagreen">First Name</font>
+              </th>
+              <th>
+                <font color="lightseagreen">Last Name</font>
+              </th>
+              <th>
+                <font color="lightseagreen">Country</font>
+              </th>
+              <th>
+                <font color="lightseagreen">Province</font>
+              </th>
+              <th>
+                <font color="lightseagreen">Zip Code</font>
+              </th>
+              <th>
+                <font color="lightseagreen">Telephone</font>
+              </th>
+              <th>
+                <font color="lightseagreen">Item ID</font>
+              </th>
+              <th>
+                <font color="lightseagreen">Quantity</font>
+              </th>
+              <th>
+                <font color="lightseagreen">Total Price</font>
+              </th>
+             
+            </tr>
+
+            <tbody>
+              {orders.map((newproduct) => {
+                if (newproduct._id != "") {
+                  const items = [];
+                  const quantity = [];
+                  newproduct.items.forEach((item) =>
+                    items.push(<div>{item.productId}</div>)
+                  );
+                  newproduct.items.forEach((item) =>
+                    quantity.push(<div>{item.quantity}</div>)
+                  );
+                  return (
+                    <tr>
+                      <td>{this.getParsedDate(newproduct.updatedAt)}</td>
+                      <td>{newproduct.user.details.firstname}</td>
+                      <td>{newproduct.user.details.lastname}</td>
+                      <td>{newproduct.user.details.country}</td>
+                      <td>{newproduct.user.details.province}</td>
+                      <td>{newproduct.user.details.zipCode}</td>
+                      <td>{newproduct.user.details.teleNumber}</td>
+                      <td>{items}</td>
+                      <td>{quantity}</td>
+                      <td>
+                        <span>{`$` + newproduct.totalPrice}</span>
+                      </td>
+
+                     
+                    </tr>
+                  );
+                }
+              })}
+            </tbody>
+          </Table>
+        </div>
+      </div>
+    </Container>
+    );
+
+    
+  
+    
 
     return (
-      <Container fluid>
-        <div>
-          <div>
-            <hr />
-            <h4>
-              <strong>
-                <font color="#40afbf">
-                  &nbsp;&nbsp;&nbsp;Orders of Online Shopping
-                </font>
-              </strong>
-            </h4>
-            <hr />
-          </div>
-          <div>
-            <Table
-              striped
-              bordered
-              hover
-              size="sm"
-              style={{
-                marginTop: "2%",
-                marginBottom: "2%",
-                marginLeft: "2%",
-                marginRight: "2%",
-              }}
-            >
-              <tr>
-                <th>
-                  <font color="lightseagreen">Date</font>
-                </th>
-                <th>
-                  <font color="lightseagreen">First Name</font>
-                </th>
-                <th>
-                  <font color="lightseagreen">Last Name</font>
-                </th>
-                <th>
-                  <font color="lightseagreen">Country</font>
-                </th>
-                <th>
-                  <font color="lightseagreen">Province</font>
-                </th>
-                <th>
-                  <font color="lightseagreen">Zip Code</font>
-                </th>
-                <th>
-                  <font color="lightseagreen">Telephone</font>
-                </th>
-                <th>
-                  <font color="lightseagreen">Item ID</font>
-                </th>
-                <th>
-                  <font color="lightseagreen">Quantity</font>
-                </th>
-                <th>
-                  <font color="lightseagreen">Total Price</font>
-                </th>
-              </tr>
+     
+      <div>
+        
+           <Container fluid>
+           <div>
+             <div>
+               <hr />
+               <h4>
+                 <strong>
+                   <font color="#40afbf">
+                     &nbsp;&nbsp;&nbsp;Orders of Online Shopping
+                   </font>
+                 </strong>
+               </h4>
+               <hr />
+             </div>
+             <div>
+               <Table
+                 striped
+                 bordered
+                 hover
+                 size="sm"
+                 style={{
+                   marginTop: "2%",
+                   marginBottom: "2%",
+                   marginLeft: "2%",
+                   marginRight: "2%",
+                 }}
+               >
+                 <tr>
+                   <th>
+                     <font color="lightseagreen">Date</font>
+                   </th>
+                   <th>
+                     <font color="lightseagreen">First Name</font>
+                   </th>
+                   <th>
+                     <font color="lightseagreen">Last Name</font>
+                   </th>
+                   <th>
+                     <font color="lightseagreen">Country</font>
+                   </th>
+                   <th>
+                     <font color="lightseagreen">Province</font>
+                   </th>
+                   <th>
+                     <font color="lightseagreen">Zip Code</font>
+                   </th>
+                   <th>
+                     <font color="lightseagreen">Telephone</font>
+                   </th>
+                   <th>
+                     <font color="lightseagreen">Item ID</font>
+                   </th>
+                   <th>
+                     <font color="lightseagreen">Quantity</font>
+                   </th>
+                   <th>
+                     <font color="lightseagreen">Total Price</font>
+                   </th>
+                   
+                 </tr>
+     
+                 <tbody>
+                   {orders.map((newproduct) => {
+                     if (newproduct._id != "") {
+                       const items = [];
+                       const quantity = [];
+                       newproduct.items.forEach((item) =>
+                         items.push(<div>{item.productId}</div>)
+                       );
+                       newproduct.items.forEach((item) =>
+                         quantity.push(<div>{item.quantity}</div>)
+                       );
+                       return (
+                         <tr>
+                           <td>{this.getParsedDate(newproduct.updatedAt)}</td>
+                           <td>{newproduct.user.details.firstname}</td>
+                           <td>{newproduct.user.details.lastname}</td>
+                           <td>{newproduct.user.details.country}</td>
+                           <td>{newproduct.user.details.province}</td>
+                           <td>{newproduct.user.details.zipCode}</td>
+                           <td>{newproduct.user.details.teleNumber}</td>
+                           <td>{items}</td>
+                           <td>{quantity}</td>
+                           <td>
+                             <span>{`$` + newproduct.totalPrice}</span>
+                           </td>
+     
+                           
+                         </tr>
+                       );
+                     }
+                   })}
+                 </tbody>
+               </Table>
+             </div>
+           </div>
+         </Container>
 
-              <tbody>
-                {orders.map((newproduct) => {
-                  if (newproduct._id != "") {
-                    const items = [];
-                    const quantity = [];
-                    newproduct.items.forEach((item) =>
-                      items.push(<div>{item.productId}</div>)
-                    );
-                    newproduct.items.forEach((item) =>
-                      quantity.push(<div>{item.quantity}</div>)
-                    );
-                    return (
-                      <tr>
-                        <td>{this.getParsedDate(newproduct.updatedAt)}</td>
-                        <td>{newproduct.user.details.firstname}</td>
-                        <td>{newproduct.user.details.lastname}</td>
-                        <td>{newproduct.user.details.country}</td>
-                        <td>{newproduct.user.details.province}</td>
-                        <td>{newproduct.user.details.zipCode}</td>
-                        <td>{newproduct.user.details.teleNumber}</td>
-                        <td>{items}</td>
-                        <td>{quantity}</td>
-                        <td>
-                          <span>{`$` + newproduct.totalPrice}</span>
-                        </td>
-                      </tr>
-                    );
-                  }
-                })}
-              </tbody>
-            </Table>
-          </div>
-        </div>
-      </Container>
+        
+        
+      </div>
+    
     );
   }
 }
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  isAdmin: state.admin.isAdmin,
+  isAdmin: state.auth.isAdmin,
   //modalstate: state.modalstate,
 });
-export default connect(mapStateToProps, { getAdmin })(productlist);
+export default connect(mapStateToProps, { getAdmin })(orderlist);

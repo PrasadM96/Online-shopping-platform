@@ -10,7 +10,23 @@ import {
 } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
-const overview = () => {
+const overview = (props) => {
+  var total = 0,
+    earning = 0;
+
+  const items = props.items.map((item, index) => {
+    total = total + item.price;
+    earning = earning + item.price * item.quantity;
+    return (
+      <tr>
+        <td>{index + 1}</td>
+        <td>{item.title}</td>
+        <td>${item.price}</td>
+        <td>{item.quantity}</td>
+      </tr>
+    );
+  });
+
   return (
     <div style={{ margin: "2% 4%" }}>
       <Jumbotron>
@@ -18,27 +34,26 @@ const overview = () => {
           <Row>
             <Col sm={true}>
               <div style={{ textAlign: "center" }}>
-                <h3>Active</h3>
-                <p>450</p>
+                <h3>Active Products</h3>
+                <p>{props.items.length}</p>
               </div>
             </Col>
             <Col sm={true}>
               <div style={{ textAlign: "center" }}>
                 <h3>Sold</h3>
-                <p>450</p>
+                <p>{total}</p>
               </div>
             </Col>
             <Col sm={true}>
               <div style={{ textAlign: "center" }}>
                 <h3>unsold</h3>
-                <p>450</p>
+                <p>{150 - total}</p>
               </div>
             </Col>
             <Col xl={6}>
               <div style={{ textAlign: "center" }}>
-                <h1>$0.00</h1>
+                <h1>${earning}</h1>
                 <h5>Total Earnings</h5>
-                <p>Last 30 days</p>
               </div>
             </Col>
           </Row>
@@ -53,26 +68,7 @@ const overview = () => {
             <th>No of item sold</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Larry the Bird</td>
-            <td>Thornton</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
+        <tbody>{items}</tbody>
       </Table>
 
       <div style={{ textAlign: "center" }}>
