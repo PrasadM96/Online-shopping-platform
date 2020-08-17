@@ -17,7 +17,7 @@ const wrapper = mount(
 );
 let container;
 
-describe("Cart", () => {
+describe("Logout", () => {
   beforeEach(() => {
     container = wrapper.find("div");
   });

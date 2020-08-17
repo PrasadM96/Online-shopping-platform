@@ -19,11 +19,11 @@ const wrapper = mount(
   </Provider>
 );
 let button;
-describe("Cart", () => {
+describe("CartTotals", () => {
   beforeEach(() => {
     button = wrapper.find('button[type="button"]');
   });
-  it("should call onSubmit", () => {
+  it("should call clearCart", () => {
     expect(clearSpy).not.toHaveBeenCalled();
   });
 });

@@ -18,14 +18,12 @@ const wrapper = mount(
     </BrowserRouter>
   </Provider>
 );
-let container, Title, TitleProps, CartTotals, CartTotalsProps;
+let container, Title, TitleProps;
 describe("Cart", () => {
   beforeEach(() => {
     container = wrapper.find("div");
     Title = wrapper.find("Title");
     TitleProps = Title.props();
-    CartTotals = wrapper.find("CartTotals");
-    CartTotalsProps = Title.props();
   });
   it("should have a <div>", () => {
     expect(wrapper.find("div")).toHaveLength(5);
