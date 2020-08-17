@@ -127,9 +127,9 @@ axios.get("admin/get-orderCount").then(orderCount=>{
       });
   
       var i = 0;
-      this.state.orders.map((orders) => {
+      this.state.orders.map((order) => {
         if (i < 3) {
-          this.state.orders2.push(orders);
+          this.state.orders2.push(order);
         }
         i = i + 1;
       });

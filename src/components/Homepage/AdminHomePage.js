@@ -56,9 +56,7 @@ const adminhomepage = (props) => {
                         <Card.Title>Products</Card.Title>
                       </Col>
                       <Col>
-                        <Card.Title>
-                          {props.productCount}
-                        </Card.Title>
+                        <Card.Title>{props.productCount}</Card.Title>
                       </Col>
                     </Row>
                     <Card.Link href="/products">More Details</Card.Link>
@@ -80,9 +78,7 @@ const adminhomepage = (props) => {
                         <Card.Title>Customers</Card.Title>
                       </Col>
                       <Col>
-                        <Card.Title>
-                          {props.userCount}
-                        </Card.Title>
+                        <Card.Title>{props.userCount}</Card.Title>
                       </Col>
                     </Row>
                     <Card.Link href="/customers">More Details</Card.Link>
@@ -104,9 +100,7 @@ const adminhomepage = (props) => {
                         <Card.Title>Sellers</Card.Title>
                       </Col>
                       <Col>
-                        <Card.Title>
-                          {props.sellerCount}
-                        </Card.Title>
+                        <Card.Title>{props.sellerCount}</Card.Title>
                       </Col>
                     </Row>
                     <Card.Link href="/sellers">More Details</Card.Link>
@@ -128,9 +122,7 @@ const adminhomepage = (props) => {
                         <Card.Title>Orders</Card.Title>
                       </Col>
                       <Col>
-                        <Card.Title>
-                          {props.orderCount}
-                        </Card.Title>
+                        <Card.Title>{props.orderCount}</Card.Title>
                       </Col>
                     </Row>
                     <Card.Link href="/orders">More Details</Card.Link>
@@ -293,28 +285,54 @@ const adminhomepage = (props) => {
                   className="text-center"
                   style={{ backgroundColor: "#bed3f3" }}
                 >
-                  <Card.Header>Latest Orders</Card.Header>
-                  <Card.Body>
-                    <Table
-                      striped
-                      bordered
-                      hover
-                      size="sm"
-                      style={{ backgroundColor: "white" }}
-                    >
-                      <thead>
+                <Card.Header>Latest Orders</Card.Header>
+                <Card.Body>
+                  <Table
+                    striped
+                    bordered
+                    hover
+                    size="sm"
+                    style={{
+                      marginTop: "2%",
+                      marginBottom: "2%",
+                      marginLeft: "2%",
+                      marginRight: "2%",
+                      backgroundColor: "white",
+                    }}
+                  >
                         <tr>
-                          <th>Date</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Username</th>
+                          <th>
+                            <font color="lightseagreen">Date</font>
+                          </th>
+                          <th>
+                            <font color="lightseagreen">First Name</font>
+                          </th>
+                          <th>
+                            <font color="lightseagreen">Last Name</font>
+                          </th>
+                          <th>
+                            <font color="lightseagreen">Total Price</font>
+                          </th>
                         </tr>
-                      </thead>
-                     
-                      </Table>
-                      <Card.Link href="/orders">View More Orders</Card.Link>
-                    </Card.Body>
-                  </Card>
+                        <tbody>
+                          {props.orders.map((order) => {
+                            if (order._id != "") {
+                              return (
+                                <tr>
+                                  <td>{getParsedDate(order.updatedAt)}</td>
+                                  <td>{order.user.details.firstname}</td>
+                                  <td>{order.user.details.lastname}</td>
+                                  <td>{`$` + order.totalPrice}</td>
+                                </tr>
+                              );
+                            }
+                          })}
+                        </tbody>
+                    
+                    </Table>
+                    <Card.Link href="/orders">View More Orders</Card.Link>
+                  </Card.Body>
+                </Card>
               </div>
             </Col>
 

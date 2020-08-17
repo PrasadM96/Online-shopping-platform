@@ -1,19 +1,34 @@
-import { Cart } from "./Cart";
 import React from "react";
-import { configure, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import EmptyCart from "./EmptyCart";
+import { shallow, configure, mount } from "enzyme";
+import Cart from "./Cart";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "../../store";
 
 configure({ adapter: new Adapter() });
 
-describe("<Cart/>", () => {
-  let wrapper = shallow(
-    <Cart
-      ongetCartItems={() => {}}
-      state={{ loading: false, error: null, cart: [] }}
-    />
-  );
-  it("Should render  <EmptyCart/> when cart lenght = 0 and no Error", () => {
-    expect(wrapper.find(EmptyCart)).toHaveLength(1);
+const clearSpy = jest.fn();
+const clear = clearSpy;
+
+const wrapper = mount(
+  <Provider store={store}>
+    <BrowserRouter>
+      <Cart clear={clearSpy} />
+    </BrowserRouter>
+  </Provider>
+);
+let container, Title, TitleProps;
+describe("Cart", () => {
+  beforeEach(() => {
+    container = wrapper.find("div");
+    Title = wrapper.find("Title");
+    TitleProps = Title.props();
+  });
+  it("should have a <div>", () => {
+    expect(wrapper.find("div")).toHaveLength(5);
+  });
+  it("should have name as prop", () => {
+    expect(TitleProps.name).toEqual("your");
   });
 });
